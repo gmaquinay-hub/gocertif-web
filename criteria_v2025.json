@@ -1,0 +1,1422 @@
+[
+  {
+    "numero": "1.1-01",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.1",
+    "objectif": "Le respect des droits du patient",
+    "titre": "Le patient bénéficie du respect de son intimité et de sa dignité au sein d’un environnement sécurisé L’établissement met en place des mesures qui garantissent, en toute circonstance, le respect de l’intimité et de la dignité du patient, particulièrement dans les situations des chambres à plusieurs lits (disponibilité des sanitaires…), d’attente dans les couloirs, de contention (accessibilité de l’appel malade…), la propreté et l’entretien des locaux... Le patient est traité avec égards et ne souffre pas de propos ou attitudes inappropriés de la part des professionnels (mise du lit en position basse…). Il convient d’être très vigilant pour éviter",
+    "niveau": "Impératif",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Observation"
+    ]
+  },
+  {
+    "numero": "1.1-02",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.1",
+    "objectif": "Le respect des droits du patient",
+    "titre": "Le patient mineur bénéficie d’un environnement adapté",
+    "niveau": "Impératif",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "1.1-03",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.1",
+    "objectif": "Le respect des droits du patient",
+    "titre": "Le patient bénéficie du respect de la confidentialité et du secret professionnel Le respect du secret professionnel est un droit fondamental dont bénéficie tout patient dans le cadre de sa prise en charge. Il garantit la confidentialité des informations personnelles et médicales partagées avec les professionnels de santé. Ce principe permet de protéger la vie privée du patient en interdisant la divulgation non autorisée des données le concernant, sauf en cas d'exception légale. Des contrôles réguliers de ces accès au dossier patient sont opérés, afin d’identifier ceux susceptibles d’être frauduleux ou illégitimes. L’utilisation du mode « bris de glace » est encadrée et réservée aux urgences. Le secret professionnel renforce la relation de confiance",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Observation",
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "1.1-04",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.1",
+    "objectif": "Le respect des droits du patient",
+    "titre": "Le patient est informé de façon adaptée sur son droit à rédiger ses directives anticipées Rédiger ses directives anticipées est un droit. Les professionnels de santé informent les patients de la possibilité de rédiger des directives anticipées et leur expliquent leur utilité, notamment en cas d’incapacité à exprimer leurs choix en matière de soins. Ils peuvent également accompagner le patient dans leur rédaction, en répondant à ses questions sur les différentes options thérapeutiques et en l’aidant à formuler ses volontés de manière claire et précise. Les professionnels de ville jouent un rôle crucial dans la rédaction des directives anticipées, en particulier pour accompagner les patients dans un cadre de proximité et de suivi continu. Les",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "1.1-05",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.1",
+    "objectif": "Le respect des droits du patient",
+    "titre": "Le patient bénéficie de soins visant à anticiper ou à soulager rapidement sa douleur Toute personne prise en charge par un professionnel de santé doit pouvoir bénéficier d'une évaluation régulière et adaptée de sa douleur, qu'elle soit aiguë ou chronique. Le patient est seul capable d’indiquer l’intensité de sa douleur, il est donc essentiel d’adapter l’échelle d’évaluation à la situation du patient (patient en situation de handicap ou en situation de vulnérabilité, participation de l’entourage…). L'anticipation et la gestion efficace de la douleur permettent non seulement de préserver la dignité du patient, mais aussi d'améliorer sa qualité de vie et son rétablissement. Les professionnels de santé ont ainsi l'obligation d'adapter",
+    "niveau": "Impératif",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "1.1-06",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.1",
+    "objectif": "Le respect des droits du patient",
+    "titre": "Le patient bénéficie d'une prise en charge bientraitante La bientraitance est un principe fondamental dans la prise en charge des patients, visant à garantir le respect, la dignité et le bien-être de chaque individu. C’est une culture qui implique tous les acteurs d’un établissement de santé : patients et proches, représentants des usagers, professionnels du soin et équipes d’encadrement, personnel administratif, gouvernance de l’établissement… Une prise en charge bientraitante implique non seulement des soins médicaux de qualité (accueil, prise en charge de la douleur…), mais aussi une attention particulière à la communication (annonce d’un diagnostic…), à la personnalisation de l'accompagnement et",
+    "niveau": "Impératif",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "1.1-07",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.1",
+    "objectif": "Le respect des droits du patient",
+    "titre": "La prise en charge des maltraitances externes est organisée La prise en charge des maltraitances subies par les patients en dehors de l’établissement constitue un impératif dans les établissements de santé. Qu'il s'agisse de maltraitances physiques, psychologiques, verbales ou institutionnelles, les professionnels de santé ont l'obligation d'agir rapidement pour protéger les patients. Les professionnels s’appuient sur les recommandations de bonnes pratiques et des outils de détection des situations de maltraitance (évaluation clinique, grille de repérage, entretien…). Toute suspicion ou tout constat de maltraitance doivent être signalés aux instances compétentes, afin de garantir la sécurité",
+    "niveau": "Standard",
+    "champ": "Tout l'établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "1.1-08",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.1",
+    "objectif": "Le respect des droits du patient",
+    "titre": "Le patient accède à son dossier dans les délais légaux Dans le cadre prévu par la règlementation, le patient ou son représentant légal, ou, si le patient est décédé, ses ayants droit, sont en droit de consulter et d’obtenir copie de son dossier médical. Selon la loi, le patient peut demander l'accès à son dossier, et les établissements de santé sont tenus de le lui fournir dans des délais stricts (8 jours à 2 mois si le dossier a plus de 5 ans). Il appartient aux établissements de santé d’informer les patients de ce droit.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "1.1-09",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.1",
+    "objectif": "Le respect des droits du patient",
+    "titre": "Le décès du patient et l’accompagnement de l’entourage font l’objet d’une prise en charge adaptée Un décès à l'hôpital est un temps délicat qui nécessite une posture adaptée à la charge émotionnelle de l’entourage. Dans ce temps, il convient d’adopter une communication centrée sur les membres de l’entourage en les informant rapidement, en écoutant leurs préoccupations et en répondant à leurs besoins de soutiens psychologiques et pratiques. Par ailleurs, il convient de respecter les volontés et convictions exprimées avant le décès, par exemple dans ses directives anticipées du patient, et de respecter la dignité du corps (présentation à l’entourage, transfert...).",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "1.2-01",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.2",
+    "objectif": "L'information du patient",
+    "titre": "Le patient connaît les informations nécessaires à son séjour Afin de garantir une prise en charge sereine et bien organisée, le patient doit recevoir des informations sur les modalités d'accueil, les règles de fonctionnement, les soins qui lui seront prodigués, ainsi que les professionnels de santé qui interviendront. Les informations concernent également ses droits, tels que l'accès à son dossier médical, les horaires de visite, et les conditions de sortie. Une bonne communication de ces éléments lui permet de mieux comprendre son parcours de soins, de réduire l'anxiété liée à son hospitalisation et de faciliter sa participation active.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "1.2-02",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.2",
+    "objectif": "L'information du patient",
+    "titre": "Le patient connaît les informations nécessaires à sa prise en charge Le patient a droit à une information claire, complète et adaptée sur les éléments essentiels à sa prise en charge. Cela inclut les diagnostics, les traitements proposés, les bénéfices attendus, ainsi que les risques associés. Cette information, délivrée tout au long de son parcours de soins, lui permet de comprendre les différentes étapes de sa prise en charge et de prendre des décisions éclairées en collaboration avec les professionnels de santé. Elle inclut des explications sur les alternatives thérapeutiques, le suivi médical. Le professionnel de santé doit s’assurer de la compréhension des informations délivrées. Il utilise des modes de communication et",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "1.2-03",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.2",
+    "objectif": "L'information du patient",
+    "titre": "Le patient connaît les dispositifs médicaux qui lui sont implantés durant son séjour et reçoit les consignes de suivi appropriées Le patient doit être informé des dispositifs médicaux qui lui sont implantés au cours de son séjour. Cela inclut une explication de la nature du dispositif, de son fonctionnement, des bénéfices attendus et des risques ou complications. Le patient doit également être informé des mesures de suivi à respecter après l’implantation, que ce soit en termes de soins, de contrôles médicaux ou de précautions particulières. La carte d’implant est fournie au patient. Elle mentionne :",
+    "niveau": "Standard",
+    "champ": "Chirurgie et interventionnel",
+    "methodes": []
+  },
+  {
+    "numero": "1.2-04",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.2",
+    "objectif": "L'information du patient",
+    "titre": "Le patient, en prévision de sa sortie, connaît les consignes de suivi pour sa prise en charge En prévision de sa sortie, le patient doit connaître les consignes de suivi nécessaires à la continuité de sa prise en charge. Ces informations doivent couvrir les soins à réaliser à son domicile, les traitements à poursuivre, les rendez-vous médicaux à prévoir ainsi que les signes d'alerte à surveiller. Une explication claire et personnalisée est cruciale pour garantir la sécurité et l’efficacité des soins post-hospitalisation. Le patient doit également être informé des ressources disponibles, comme les professionnels de santé à contacter en cas de besoin ou les dispositifs d’accompagnement à domicile.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "1.2-05",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.2",
+    "objectif": "L'information du patient",
+    "titre": "Le patient est informé sur les représentants des usagers et/ou associations de bénévoles qui peuvent l’accompagner pour son retour à domicile Les patients et leurs proches et/ou aidants peuvent bénéficier de l’appui des représentants des usagers et/ou des associations de patients bénévoles (dans l’établissement ou non). Elles peuvent intervenir dans divers champs : information, accueil, entraide, soutien des personnes concernées, formation des malades, des familles et des professionnels, information et éducation thérapeutiques, accompagnement et accès aux soins et aux",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "1.3-01",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.3",
+    "objectif": "L'engagement du patient dans son projet de soins",
+    "titre": "Le patient exprime son consentement libre et éclairé sur son projet de soins et ses modalités L’implication du patient dans sa prise en charge est gage d’une plus grande efficacité et de réduction des risques liés à celle-ci. Le consentement libre et éclairé, l’adhésion et l’observance du patient à son projet de soins nécessitent sa participation à la définition des objectifs de prise en charge, à sa mise en œuvre et à son suivi. Ce projet de soins est établi après une évaluation globale, en tenant compte des besoins et préférences du patient. Il est un fil conducteur décliné tout au long de la prise en charge et réajusté autant que de besoin en collaboration avec le patient et en veillant à une potentielle dégradation de son état de santé mentale.",
+    "niveau": "Impératif",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "1.3-02",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.3",
+    "objectif": "L'engagement du patient dans son projet de soins",
+    "titre": "Le patient a pu désigner une personne de confiance La règlementation prévoit l’identification dans le dossier du patient d’une personne de confiance. La personne de confiance sert de lien entre le patient et l'équipe médicale. Dans les moments de stress ou d'incertitude, avoir une personne familiarisée avec ses souhaits et ses préférences permet d'assurer une communication claire et efficace. Cela peut faciliter la transmission des informations cruciales concernant l'état de santé, les traitements envisagés ou les décisions médicales à prendre. Le fait de désigner une personne de confiance permet de garantir que les souhaits du patient seront respectés, même dans les situations où il ne peut pas",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "1.3-03",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.3",
+    "objectif": "L'engagement du patient dans son projet de soins",
+    "titre": "Le patient bénéficie d'une prise en charge adaptée à ses besoins Outre son information et son implication dans les décisions thérapeutiques concernant sa prise en charge, la prise en compte de ses attentes, de ses préférences et de son expérience concourt à son implication. Diverses actions (attitude des professionnels, association dans la mise en œuvre de la prise en charge, formation [dont éducation thérapeutique formalisée] ou simplement conseils des professionnels, par exemple l’aide aux premiers allaitements pour les femmes qui le souhaitent) favorisent l’implication et l’association du patient à sa prise en charge.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "1.3-04",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.3",
+    "objectif": "L'engagement du patient dans son projet de soins",
+    "titre": "Le patient vivant avec un handicap bénéficie d’un projet de soins qui vise le maintien de son autonomie Tout patient vivant avec un handicap peut perdre son autonomie dans les activités de base de la vie quotidienne. Cette perte d’autonomie peut être due à plusieurs facteurs intriqués : certains sont liés au patient (sa pathologie et son état de santé avant l’hospitalisation) ; d’autres sont liés aux modalités de soins et à l’environnement hospitalier. L’aptitude du patient fait l’objet d’une évaluation systématique. Des mesures adaptées doivent être mises en œuvre pour préserver l’autonomie des personnes hospitalisées à toutes les étapes de leur prise en",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "1.3-05",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.3",
+    "objectif": "L'engagement du patient dans son projet de soins",
+    "titre": "Le patient en situation de précarité sociale bénéficie d’un accompagnement pour une orientation vers les services sociaux et associations adéquats Le parcours de santé et de soins du patient en situation de précarité sociale est étroitement lié à ses conditions de vie.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "1.3-06",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.3",
+    "objectif": "L'engagement du patient dans son projet de soins",
+    "titre": "Les liens familiaux, sociaux et scolaires du mineur sont préservés tout au long du séjour Préserver les liens familiaux, sociaux et scolaires des mineurs tout au long de leur séjour, notamment de longue durée, est une priorité qui ne doit pas être sous-estimée. Rester en contact avec son environnement familial et amical contribue à mieux supporter les soins, à rompre avec l’isolement potentiel. Garantir la continuité pédagogique permet aussi au jeune de poursuivre son apprentissage et le développement de compétences essentielles pour l’avenir. En leur offrant un environnement où ces connexions peuvent s’épanouir, l’établissement leur donne la possibilité, en complément des soins, de grandir sereinement, de se",
+    "niveau": "Standard",
+    "champ": "Enfants et adolescents",
+    "methodes": []
+  },
+  {
+    "numero": "1.3-07",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.3",
+    "objectif": "L'engagement du patient dans son projet de soins",
+    "titre": "Le patient âgé bénéficie d’un projet de soins qui vise le maintien de son autonomie Tout patient âgé peut perdre son autonomie dans les activités de base de la vie quotidienne. Cette perte d’autonomie peut être due à plusieurs facteurs intriqués : certains sont liés au patient (sa pathologie et son état de santé avant l’hospitalisation) ; d’autres sont liés aux modalités de soins et à l’environnement hospitalier. Des mesures adaptées tenant compte des besoins, préférences, aptitudes et conditions de vie habituelles doivent être mises en œuvre pour préserver l’autonomie des personnes hospitalisées, y compris les mesures d’aide et d’accompagnement à certains gestes (toilette, alimentation…). Le risque de dépendance iatrogène doit",
+    "niveau": "Standard",
+    "champ": "Patient âgé",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "1.3-08",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.3",
+    "objectif": "L'engagement du patient dans son projet de soins",
+    "titre": "En soins de longue durée, le patient bénéficie d’activités lui permettant de maintenir son autonomie et son lien social L’unité de soins de longue durée est un lieu de soins et un véritable lieu de vie de la personne. À ce titre, une attention est portée par les professionnels afin de promouvoir la santé physique, mais aussi le bien-être psychologique et social des individus en tenant compte de leur parcours de vie, de leurs besoins et préférences. En soins de longue durée, le patient bénéficie d’activités lui permettant de maintenir son autonomie et son lien social. Ces activités sont conçues pour stimuler l'esprit, encourager les interactions et",
+    "niveau": "Standard",
+    "champ": "Soins de longue durée",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "1.3-09",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.3",
+    "objectif": "L'engagement du patient dans son projet de soins",
+    "titre": "Le patient présentant des troubles psychiques bénéficie d’un projet de soins qui favorise son inclusion sociale Pour le patient dont l’état de santé le nécessite, son projet de soins intègre des soins de réhabilitation psychosociale pour favoriser son inclusion sociale, son autonomisation et sa qualité de vie (accès à un logement adapté, au monde du travail, à la vie de la cité, aux services publics, aux activités culturelles et sportives, connaissance des groupes d’entraide mutuelle…). Santé mentale et psychiatrie Standard",
+    "niveau": "Standard",
+    "champ": "Santé mentale et psychiatrie",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "1.3-10",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.3",
+    "objectif": "L'engagement du patient dans son projet de soins",
+    "titre": "Le patient bénéficie de messages de prévention afin d’agir pour sa santé En matière de santé, la prévention repose pour partie sur la sensibilisation et l’implication de chaque individu. Pour cela, les professionnels de santé développent des actions, adaptées et personnalisées, avec une approche motivationnelle, de nature à renforcer la capacité du patient à agir pour préserver et/ou améliorer son état de santé (tabac, alcool, autres drogues, activité physique, nutrition, hygiène, sexualité, dépistages…). Il lui est proposé une évaluation de son statut vaccinal.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "1.3-11",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.3",
+    "objectif": "L'engagement du patient dans son projet de soins",
+    "titre": "Avec l’accord du patient, les proches et/ou aidants s’impliquent dans le projet de soins L'implication des proches, qu'il s'agisse de membres de la famille, d'amis ou de professionnels à domicile, se traduit par une meilleure compréhension des besoins du patient, une continuité des soins et une qualité de vie améliorée. En intégrant ces acteurs dans le projet de soins, on favorise une dynamique de soutien émotionnel et physique, essentielle à la guérison, la réhabilitation et à l'adaptation au quotidien. Le projet de soins construit avec le patient et ses proches permet de définir des objectifs clairs et atteignables, tout en prenant en compte le vécu et les attentes de chacun. Cela nécessite également une communication ouverte et sincère entre tous",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "1.3-12",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.3",
+    "objectif": "L'engagement du patient dans son projet de soins",
+    "titre": "Le patient et ses proches et/ou aidants adhèrent aux modalités spécifiques de prise en charge en HAD Dans le cadre d’une hospitalisation à domicile, une collaboration étroite entre les professionnels de santé, le patient et ses proches permet une compréhension mutuelle des objectifs de soins. Chaque patient, en fonction de sa pathologie et de ses besoins, bénéficie de modalités spécifiques de prise en charge. Ainsi, il est important que le patient et ses proches et/ou aidants adhèrent aux modalités spécifiques de prise en charge en HAD. Cette adhésion favorise non seulement l'efficacité des soins, mais également le bien-être général du patient, en lui",
+    "niveau": "Standard",
+    "champ": "Hospitalisation à domicile",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "1.4-01",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.4",
+    "objectif": "L'implication des patients et de leurs représentants dans la vie de l'établissement",
+    "titre": "Le patient est invité à exprimer sa satisfaction et à faire part de son expérience La prise en compte du point de vue du patient, de son ressenti et de ses impressions, permet d’améliorer la qualité de la prise en charge en jouant un rôle dans l'évolution des pratiques hospitalières et des relations entre professionnels de santé et patients. Pour ce faire, un système de recueil et d’analyse de l’expérience du patient et de sa satisfaction est mis en place. C'est dans cette optique que le patient est invité à exprimer sa satisfaction et à faire part de son expérience. En fonction des modes et des durées de prise en charge, les modalités de recueil et d’exploitation de l’expression des patients peuvent prendre des formes différentes allant",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "1.4-02",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.4",
+    "objectif": "L'implication des patients et de leurs représentants dans la vie de l'établissement",
+    "titre": "La satisfaction et l'expérience du patient sont prises en compte Pour définir les orientations de sa politique d’amélioration de la qualité et de la sécurité des soins, et sa déclinaison dans un programme d’actions, l’établissement prend en compte les résultats de la mesure de la satisfaction et de l’expérience des patients. L’analyse des résultats détaillés se fait avec les professionnels et le suivi régulier des résultats permet de s’assurer de l’atteinte des objectifs d’amélioration fixés.",
+    "niveau": "Impératif",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "1.4-03",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.4",
+    "objectif": "L'implication des patients et de leurs représentants dans la vie de l'établissement",
+    "titre": "La gouvernance soutient l’utilisation des questionnaires visant les résultats de soins évalués par les patients Mesurer la qualité des soins est un prérequis pour définir les actions à mettre en œuvre et objectiver les progrès pour améliorer le service rendu aux patients. Cette démarche, depuis longtemps menée par les professionnels, est aujourd’hui enrichie en intégrant la voix des patients dans l'évaluation des soins. Les initiatives utilisant les mesures de la qualité des soins perçue par les patients montrent des améliorations de la qualité des soins, notamment en pratique clinique courante, avec un impact direct pour les patients. Ainsi,",
+    "niveau": "Avancé",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "1.4-04",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.4",
+    "objectif": "L'implication des patients et de leurs représentants dans la vie de l'établissement",
+    "titre": "Les patients partenaires et les associations de patients sont mobilisés dans la construction des parcours de soins La prise en compte des besoins et des attentes des patients, tout en cherchant à améliorer la qualité des soins dispensés, se fait de plus en plus en mobilisant des patients et leurs représentants dans les processus décisionnels qui affectent leur santé. Ainsi, les patients partenaires et les associations de patients apportent non seulement leurs expériences vécues, mais également leur expertise sur les enjeux pratiques et émotionnels liés à la maladie.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "1.4-05",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.4",
+    "objectif": "L'implication des patients et de leurs représentants dans la vie de l'établissement",
+    "titre": "Les représentants des usagers sont impliqués dans la vie de l'établissement Le représentant des usagers est un acteur essentiel pour veiller au respect des droits et à l’amélioration de la qualité et de la sécurité des soins des patients pris en charge dans l’établissement. La contribution active des représentants des usagers aux projets et démarches d’amélioration de la qualité et de la sécurité des soins s’entend aujourd’hui au-delà de la représentation collective des patients dans les instances décisionnelles et consultatives de l’établissement. L’écoute et la prise en compte dans des échanges collectifs et constructifs du point de vue des représentants des usagers dans les différents aspects de la vie quotidienne des patients",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "1.4-06",
+    "chapitre_num": "1",
+    "chapitre": "1 - Le patient",
+    "objectif_num": "1.4",
+    "objectif": "L'implication des patients et de leurs représentants dans la vie de l'établissement",
+    "titre": "Les représentants des usagers disposent des informations utiles à leurs missions Associer les représentants des usagers dans la vie institutionnelle, c’est avant tout partager avec eux les résultats, notamment des enquêtes de satisfaction ou les évènements indésirables afin qu’ils puissent apporter leurs regards.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.1-01",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.1",
+    "objectif": "La coordination des équipes pour la prise en charge du patient",
+    "titre": "Les équipes des secteurs de consultations et soins externes se coordonnent avec les équipes des secteurs d’hospitalisation Simplifier les parcours de soins en facilitant l’accès des patients aux services de soins externes ou de consultations ou en apportant l’aide nécessaire aux patients dans la prise de rendez-vous renforce l’approche centrée sur le patient. Cette approche est également favorisée par l’amélioration de la coordination entre les équipes de consultations et de soins externes, basée sur des échanges d’informations permettant d’assurer une prise en charge plus fluide et personnalisée, tout en garantissant aux patients un suivi adapté à leurs",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.1-02",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.1",
+    "objectif": "La coordination des équipes pour la prise en charge du patient",
+    "titre": "Les équipes de soins ont accès aux informations du patient avec un système d’information adapté La technologie joue un rôle de plus en plus prépondérant dans la coordination de professionnels. Les dossiers des patients électroniques offrent une vision intégrée des traitements dispensés et des interventions réalisées, permettant ainsi à chaque membre de l’équipe d’avoir accès à des informations actualisées et pertinentes. Ainsi, les professionnels de santé doivent pouvoir accéder, de manière sécurisée, aux dossiers des patients (internes et Mon espace santé) dont ils assurent la prise en charge pour prendre des décisions éclairées et",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.1-03",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.1",
+    "objectif": "La coordination des équipes pour la prise en charge du patient",
+    "titre": "Les équipes se coordonnent pour la mise en œuvre du projet de soins L’élaboration et la mise en œuvre du projet de soins adapté aux besoins et préférences du patient reposent sur une communication fluide et régulière entre tous les intervenants de la prise en charge. Pour construire le projet de soins, les professionnels peuvent se référer à des correspondants experts en interne ou externe, en utilisant notamment la télésanté. La coordination pluriprofessionnelle et la coopération avec le patient sont des facteurs de qualité de mise en œuvre du projet de soins, notamment pour des modes de prise en charge ambulatoires, en hospitalisation à domicile.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.1-04",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.1",
+    "objectif": "La coordination des équipes pour la prise en charge du patient",
+    "titre": "Les équipes réalisent la conciliation médicamenteuse pour des populations ciblées La conciliation des traitements médicamenteux est un processus formalisé qui prend en compte, lors d’une nouvelle prescription, tous les médicaments pris et à prendre par le patient dont le profil est à risque. Elle associe le patient et repose sur le partage d’informations et sur une coordination pluriprofessionnelle. Elle prévient ou corrige les erreurs médicamenteuses en favorisant la transmission d’informations complètes et exactes sur les médicaments du patient entre professionnels de santé aux points de transition : admission, sortie et transferts.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.1-05",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.1",
+    "objectif": "La coordination des équipes pour la prise en charge du patient",
+    "titre": "Les équipes se coordonnent pour mettre en œuvre la démarche palliative Dans les services accueillant des patients en fin de vie, ceux-ci bénéficient d’une approche spécifique permettant de renforcer leur accompagnement : prise en charge de la douleur, prise en charge psychologique, soins de support, limitation partielle ou totale des traitements ou des investigations préalablement initiés, sédation profonde et continue. Cette approche est construite en cohérence avec les volontés exprimées par le patient, notamment dans ses directives anticipées, et nécessite l’élaboration d’un projet de soins défini avec toute l’équipe de soins, incluant les professionnels en soins de support. Dans les services non spécialisés dans cette",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.1-06",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.1",
+    "objectif": "La coordination des équipes pour la prise en charge du patient",
+    "titre": "Les équipes se coordonnent pour prévenir les troubles nutritionnels des patients Les troubles nutritionnels peuvent entraîner des répercussions significatives sur la santé physique et mentale des patients, et nécessitent une approche multidisciplinaire : médecins, diététiciens, psychologues, infirmiers, service de restauration. Une collaboration étroite entre ces professionnels permet d'élaborer des plans de soins personnalisés et adaptés aux besoins spécifiques de chaque patient. En favorisant une communication fluide et un partage d'informations, la coordination des équipes de santé contribue à une meilleure évaluation des besoins nutritionnels, à la mise en place de stratégies de prévention et à un suivi régulier des progrès",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.1-07",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.1",
+    "objectif": "La coordination des équipes pour la prise en charge du patient",
+    "titre": "Les équipes des secteurs interventionnels se coordonnent pour la prise en charge des patients Les secteurs interventionnels sont des espaces où les rôles, procédures et tâches pour un acte programmé ou en urgence sont définis et consignés dans un document charte de bloc ou règlement intérieur du secteur. Parmi les documents structurants, on trouve la programmation opératoire qui doit être établie conjointement et tenir compte des urgences et de l’organisation de la salle de surveillance post-interventionnelle (SSPI). La qualité et la sécurité des soins au bloc opératoire, et en secteur interventionnel, sont assurées par un travail en équipe, la communication, la traçabilité des informations, la prise de décision partagée et la coordination",
+    "niveau": "Standard",
+    "champ": "Chirurgie et interventionnel",
+    "methodes": []
+  },
+  {
+    "numero": "2.1-08",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.1",
+    "objectif": "La coordination des équipes pour la prise en charge du patient",
+    "titre": "Les équipes de maternité accompagnent les futurs parents pour l’élaboration d’un projet à la parentalité La période de la grossesse et l'arrivée d'un enfant constituent des étapes majeures dans la vie des futurs parents, marquées par des émotions intenses et de nombreuses interrogations. Les équipes de maternité accompagnent ces familles dans l’élaboration de leur projet de parentalité. Cet accompagnement commence dès le début des démarches de conception et l’orientation éventuelle vers les équipes spécialisées d’aide médicale à la procréation. Il prend ensuite la forme d'un dialogue privilégié entre les professionnels de santé",
+    "niveau": "Standard",
+    "champ": "Maternité",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "2.1-09",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.1",
+    "objectif": "La coordination des équipes pour la prise en charge du patient",
+    "titre": "Les équipes se coordonnent pour la prise en charge du patient au domicile L’équipe de l’HAD coordonne les différents professionnels et organise leur intervention pour assurer la continuité des soins. Le médecin traitant du patient est un acteur de la prise en charge, à ce titre, il est destinataire du protocole de soins établi pour la prise en charge HAD. L’équipe, dans les cas le nécessitant, organise la réhospitalisation des patients en ayant recours si besoin aux services du SAMU. Pour sécuriser le circuit des produits de santé au domicile, l’établissement met en place une démarche personnalisée de gestion des risques au domicile qui tient compte des risques inhérents aux produits de santé, aux situations, aux",
+    "niveau": "Standard",
+    "champ": "Hospitalisation à domicile",
+    "methodes": []
+  },
+  {
+    "numero": "2.1-10",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.1",
+    "objectif": "La coordination des équipes pour la prise en charge du patient",
+    "titre": "En santé mentale et psychiatrie, l'accès aux soins est organisé et suivi L'accès aux soins peut être retardé par divers facteurs. Cependant, pour les pathologies psychiques sévères, le début des symptômes représente une période essentielle où une intervention précoce et multimodale peut influencer positivement l'évolution de la maladie et améliorer les perspectives fonctionnelles et personnelles. Par conséquent, les structures ambulatoires en psychiatrie doivent établir des modalités d'accès aux soins qui prennent en compte rapidement les alertes de l'entourage, réalisent une évaluation rapide des signes d'alerte et de gravité, et offrent un éventail de soins variés et adaptés. Au cours de l’hospitalisation, certains",
+    "niveau": "Standard",
+    "champ": "Santé mentale et psychiatrie",
+    "methodes": []
+  },
+  {
+    "numero": "2.1-11",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.1",
+    "objectif": "La coordination des équipes pour la prise en charge du patient",
+    "titre": "Les équipes de psychiatrie se coordonnent pour prévenir le passage à l’acte suicidaire tout au long de la prise en charge La prévention du suicide est une priorité de santé publique. En population générale, le taux annuel moyen en France est proche de 20 à 25 pour 100 000 habitants pour les hommes et de 5 à 7 pour 100 000 habitants pour les femmes, avec des variations selon l’âge. L’estimation du nombre de tentatives de suicide est de l’ordre de 200 000 par an, faisant de la France un des pays européens les plus touchés par ce fléau. Ce sont dans les hôpitaux psychiatriques qu’ont lieu environ 80% des suicides hospitaliers. Aussi, les professionnels",
+    "niveau": "Standard",
+    "champ": "Santé mentale et psychiatrie",
+    "methodes": []
+  },
+  {
+    "numero": "2.1-12",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.1",
+    "objectif": "La coordination des équipes pour la prise en charge du patient",
+    "titre": "Les équipes réalisent un examen somatique pour tout patient hospitalisé en psychiatrie La prise en charge psychiatrique intègre un examen somatique permettant le diagnostic différentiel des pathologies et l’identification des comorbidités somatiques susceptibles d’interférer avec la prise en charge psychiatrique. Cet examen somatique, réalisé dans les 24 h pour les hospitalisations sans consentement ou plus tôt pour les autres par un médecin autre que celui ayant réalisé l’évaluation mentale, donne lieu à un suivi régulier, en lien avec le médecin traitant et/ou les services spécialisés si nécessaire. Ce suivi est tracé dans la lettre de liaison.",
+    "niveau": "Impératif",
+    "champ": "Santé mentale et psychiatrie",
+    "methodes": []
+  },
+  {
+    "numero": "2.1-13",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.1",
+    "objectif": "La coordination des équipes pour la prise en charge du patient",
+    "titre": "Les équipes se coordonnent pour la réalisation des transports intrahospitaliers des patients Les modalités de transport intrahospitalier (professionnels formés et matériels adaptés) sont adaptées, et les délais sont en adéquation avec une continuité de prise en charge de qualité. La continuité de l’activité est assurée pour les autres patients lorsque le transport est réalisé par un autre membre que le brancardier.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.1-14",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.1",
+    "objectif": "La coordination des équipes pour la prise en charge du patient",
+    "titre": "Une lettre de liaison à la sortie est remise au patient et permet la continuité du parcours de soins La lettre de liaison est un élément clé de la continuité des soins. Elle doit être remise au patient le jour de la sortie et adressée au médecin traitant. Elle résume les conclusions de l’hospitalisation et établit des préconisations de prise en charge après la sortie afin d’assurer une bonne coordination « hôpital/ville ». Par",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.2-01",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.2",
+    "objectif": "La maîtrise des risques liés aux pratiques",
+    "titre": "Les équipes respectent les bonnes pratiques d’identification du patient à toutes les étapes de sa prise en charge L’identitovigilance permet de limiter le risque d’erreurs potentiellement graves liées à une mauvaise identification (erreur de site opératoire, erreur de traitement, erreurs de résultats de laboratoire…). L’identification fiable et unique du patient à chaque venue et à toutes les étapes de sa prise en charge permet de relier l’identité d’une personne à un acte. Depuis le 1er janvier 2021, l’utilisation de l’identité nationale de santé (INS), pour référencer les données de santé, est obligatoire. Cette INS est constituée du numéro",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "2.2-02",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.2",
+    "objectif": "La maîtrise des risques liés aux pratiques",
+    "titre": "Les équipes respectent les bonnes pratiques de prescription des médicaments Le respect des bonnes pratiques de prescription des médicaments par les équipes médicales est essentiel pour assurer la sécurité et l'efficacité des traitements. Cela implique une prescription claire, adaptée et conforme aux recommandations, prenant en compte l’état de santé du patient, ses antécédents médicaux, ses allergies et les interactions possibles avec d’autres traitements. La prescription doit être compréhensible et lisible, afin d’éviter toute confusion lors de l’administration des traitements. Un suivi rigoureux est également essentiel pour ajuster la thérapie en fonction de l’évolution de l’état du patient.",
+    "niveau": "Standard",
+    "champ": "Tout l'établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.2-03",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.2",
+    "objectif": "La maîtrise des risques liés aux pratiques",
+    "titre": "Les équipes respectent les bonnes pratiques de dispensation des médicaments Avant la dispensation, le pharmacien effectue une analyse des prescriptions afin de vérifier leur pertinence, les doses prescrites, les interactions possibles et les contre-indications éventuelles. L’analyse des prescriptions porte sur l’intégralité de la prescription et intègre donc tout médicament pris par le patient durant son hospitalisation. Elle est couplée à une analyse lors de la dispensation des médicaments. Les équipes soignantes veillent ensuite à délivrer chaque médicament en respectant les indications du prescripteur. Ce travail collaboratif, entre médecins, pharmaciens et infirmiers, permet d’éviter les erreurs médicamenteuses et",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.2-04",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.2",
+    "objectif": "La maîtrise des risques liés aux pratiques",
+    "titre": "Les équipes respectent les bonnes pratiques d’approvisionnement des produits de santé Le respect des bonnes pratiques d'approvisionnement des produits de santé (médicaments, dispositifs médicaux stériles et dispositifs médicaux implantables) garantit la disponibilité, la sécurité et la qualité des traitements dispensés aux patients. Les équipes doivent suivre des protocoles rigoureux pour assurer un approvisionnement sécurisé (conteneurs sécurisés, conservation du froid, personnel habilité…), depuis la commande jusqu'à la réception, en passant par le stockage et la distribution des produits de santé (locaux et équipements adaptés, respect des températures de stockage, sécurisation et identification des stockages,",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Observation"
+    ]
+  },
+  {
+    "numero": "2.2-05",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.2",
+    "objectif": "La maîtrise des risques liés aux pratiques",
+    "titre": "Les équipes respectent les bonnes pratiques d’administration des médicaments L’administration du médicament est la dernière étape du circuit du médicament. Toute erreur survenant à cette étape et non récupérée à cette étape peut engendrer une erreur médicamenteuse potentiellement source de dommage au patient. Les équipes soignantes suivent les prescriptions médicales, en vérifiant l’identité du patient, la nature du médicament, la posologie, la voie d’administration et le moment adéquat pour chaque prise (règle des 5B). La préparation médicamenteuse respecte les recommandations de bonnes pratiques (extemporanée, bonnes pratiques d’écrasement selon les recommandations, identification jusqu’à son",
+    "niveau": "Impératif",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.2-06",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.2",
+    "objectif": "La maîtrise des risques liés aux pratiques",
+    "titre": "Les équipes préviennent les risques d’erreur médicamenteuse La prévention des erreurs médicamenteuses repose sur des pratiques rigoureuses et la vigilance des équipes soignantes. La formation continue des professionnels de santé joue un rôle clé, leur permettant de maîtriser les protocoles, d’anticiper les risques d’interactions et de respecter les règles de sécurité. Les médicaments à risque entraînent un risque plus élevé de dommage aux patients et les erreurs dues à ces médicaments sont plus fréquentes. Ils doivent donc être gérés spécifiquement à toutes les étapes du circuit du médicament. Leur liste est évolutive et prend en compte les retours d’expérience et les never events. Les préparations en",
+    "niveau": "Impératif",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.2-07",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.2",
+    "objectif": "La maîtrise des risques liés aux pratiques",
+    "titre": "L’établissement promeut l’auto- administration de ses médicaments par le patient en cours d’hospitalisation (PAAM) Cette démarche permet au patient, sous supervision médicale, de gérer lui-même ses traitements habituels. L'évolution de la règlementation concernant l'administration des médicaments apporte une réponse à l’engagement du patient dans ses soins et en particulier pour l'auto-administration de ses médicaments. Un cadre pour sécuriser cette pratique est proposé par la HAS qui publie une recommandation et une boîte à outils à destination des professionnels de santé. Les enjeux sont multiples :",
+    "niveau": "Avancé",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "2.2-08",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.2",
+    "objectif": "La maîtrise des risques liés aux pratiques",
+    "titre": "Les équipes respectent les précautions standards d’hygiène Les précautions standards constituent le socle indispensable de prévention des infections associées aux soins et s’appliquent toujours pour tous les patients. Elles concernent notamment l’hygiène des mains, le port de protections individuelles (gants, masques, blouses), la gestion des excreta et des déchets, ainsi que l’entretien du matériel et des surfaces. Les équipes soignantes doivent utiliser des solutions hydroalcooliques à des moments clés : avant et après chaque contact avec le patient, avant toute procédure invasive, après un contact avec des surfaces potentiellement contaminées, et après le retrait des gants. L’absence de bijou aux mains et",
+    "niveau": "Impératif",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.2-09",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.2",
+    "objectif": "La maîtrise des risques liés aux pratiques",
+    "titre": "Les équipes respectent les précautions complémentaires d'hygiène Les précautions complémentaires sont indiquées pour maîtriser la diffusion de certains micro-organismes à transmission aérienne ou par gouttelettes, ou à transmission manuportée : bactéries multi-résistantes ou hautement résistantes émergentes. Ces mesures supplémentaires qui visent à limiter la transmission de ces micro-organismes (restrictions de mouvement, le maintien en chambre seul, porte fermée, port de protections barrières…) doivent être justifiées médicalement, expliquées au patient et s’accompagner d’aménagements facilitant leur mise en œuvre et leur acceptabilité. En parallèle, les professionnels appliquent déjà les",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.2-10",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.2",
+    "objectif": "La maîtrise des risques liés aux pratiques",
+    "titre": "Les équipes maîtrisent le risque infectieux lié aux dispositifs invasifs La maîtrise de toutes les étapes du circuit des dispositifs médicaux invasifs permet de prévenir le risque infectieux. Les dispositifs tels que les cathéters, sondes ou drains, bien que nécessaires pour le traitement, représentent un risque élevé d’infections associées aux soins s’ils ne sont pas manipulés avec des précautions rigoureuses. Les équipes doivent respecter des protocoles stricts pour leur pose, leur entretien et leur retrait, incluant l’asepsie, la désinfection des sites d’insertion et une surveillance régulière des signes d’infection. De plus, la formation continue du personnel sur les pratiques de prévention des infections liées à ces dispositifs,",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.2-11",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.2",
+    "objectif": "La maîtrise des risques liés aux pratiques",
+    "titre": "Les équipes maîtrisent les risques liés à la transfusion sanguine Chaque type de transfusion (globules rouges, plaquettes ou plasma) est soumis à des protocoles spécifiques. Toutes les étapes, de la prescription à l'administration, sont encadrées, que la transfusion soit réalisée en urgence ou planifiée, cela inclut la vérification rigoureuse de la compatibilité sanguine, l’identification du patient, et le respect des conditions de conservation et de transport des produits sanguins. L’indication de la transfusion fait systématiquement l’objet d’une analyse bénéfices/risques pour chaque patient. De plus, la traçabilité des produits sanguins est essentielle pour pouvoir réagir rapidement en cas d’évènement",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.2-12",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.2",
+    "objectif": "La maîtrise des risques liés aux pratiques",
+    "titre": "Les équipes maîtrisent la prise en charge des urgences vitales La prise en charge des urgences vitales repose sur une réactivité immédiate et une coordination optimale afin de préserver la vie du patient. Les professionnels de santé doivent être formés en continu aux protocoles d'urgence. Une organisation claire, incluant l'identification rapide de la situation, la communication fluide entre les équipes et la disponibilité immédiate des équipements et médicaments, est essentielle. Les procédures sont régulièrement évaluées et améliorées à travers des exercices de simulation d’urgence.",
+    "niveau": "Impératif",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.2-13",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.2",
+    "objectif": "La maîtrise des risques liés aux pratiques",
+    "titre": "Les équipes maîtrisent les risques liés à l’utilisation des rayonnements ionisants Les risques liés à l’utilisation des rayonnements ionisants concernent particulièrement les secteurs d’imagerie, le bloc opératoire et interventionnel, la radiothérapie et la médecine nucléaire. Les conditions doivent être conformes aux exigences de l’Autorité de sûreté nucléaire pour le patient et les professionnels. Les équipes doivent maîtriser les bonnes pratiques, en veillant à respecter les principes de radioprotection, comme l’optimisation des doses administrées, la justification médicale des examens et la limitation de l'exposition. La formation continue des professionnels sur les techniques de protection, l'entretien régulier des équipements",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.3-01",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Chaque appelant au SAMU pour un problème de santé est orienté et pris en charge grâce à une régulation médicale adaptée à sa situation Chaque appelant au SAMU pour un problème de santé bénéficie d'une évaluation médicale immédiate, réalisée par un régulateur médical. Ce processus de régulation permet d'analyser la gravité de la situation de l'appelant, en tenant compte des symptômes décrits, des antécédents médicaux et du contexte. En fonction de cette évaluation, le patient est orienté vers la réponse la plus appropriée : conseil médical, prise en charge par un médecin de ville, envoi d’une ambulance, ou encore intervention d'une équipe médicale d'urgence",
+    "niveau": "Standard",
+    "champ": "SAMU/SMUR",
+    "methodes": []
+  },
+  {
+    "numero": "2.3-02",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Le dossier médical préhospitalier des SMUR comporte tous les éléments nécessaires à la poursuite de la prise en charge du patient Le dossier médical préhospitalier des services mobiles d'urgence et de réanimation (SMUR) est un outil pour assurer la continuité des soins lors de la prise en charge d'un patient en situation d'urgence. Il doit contenir l'ensemble des informations pertinentes recueillies sur le terrain, telles que l'identité du patient, ses antécédents médicaux, les",
+    "niveau": "Standard",
+    "champ": "SAMU/SMUR",
+    "methodes": []
+  },
+  {
+    "numero": "2.3-03",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "L’équipe des urgences assure au patient une orientation dans les circuits et délais adaptés à sa prise en charge L’équipe des urgences joue un rôle clé dans l’orientation des patients vers les circuits de soins les plus adaptés à leur état de santé. Dès l'arrivée du patient, une évaluation rapide est effectuée pour déterminer la gravité de la situation et définir la priorité de prise en charge, selon des critères d’urgence médicale. Ce processus permet de garantir que chaque patient reçoit les soins nécessaires dans des délais appropriés, qu’il s’agisse de consultations, d’examens complémentaires ou d'une hospitalisation. Les patients vivant avec un handicap ou",
+    "niveau": "Standard",
+    "champ": "Urgences",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "2.3-04",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Les professionnels maîtrisent la prise en charge anesthésique des patients Avant toute anesthésie, une évaluation du risque anesthésique est réalisée, prenant en compte l'état de santé du patient, ses antécédents médicaux et la complexité de l’intervention. Le choix de la technique anesthésique est alors justifié et adapté à chaque situation clinique. Après l’intervention, la surveillance en salle de réveil (SSPI) est assurée par des professionnels formés, avec une vérification systématique du matériel et une surveillance continue des signes vitaux. La sortie de la SSPI n’est autorisée que lorsque le patient répond aux critères de stabilité médicale. L’extubation, moment délicat, est strictement effectuée par des professionnels",
+    "niveau": "Standard",
+    "champ": "Chirurgie et interventionnel",
+    "methodes": []
+  },
+  {
+    "numero": "2.3-05",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Les équipes maîtrisent les bonnes pratiques d’antibioprophylaxie liées aux actes invasifs Les bonnes pratiques d’antibioprophylaxie lors des actes invasifs préviennent les infections post-opératoires et limitent le risque de résistance bactérienne. Les équipes doivent suivre des protocoles afin d’assurer une administration appropriée des antibiotiques. Cela inclut une évaluation préalable des risques infectieux liés à l’intervention, la sélection de l’antibiotique le plus adapté, ainsi que le respect des doses, des délais et de la durée de traitement. L’antibioprophylaxie doit être administrée dans des délais précis avant l’acte invasif pour être efficace. Les équipes sont également formées à la réévaluation de la nécessité du traitement post-",
+    "niveau": "Standard",
+    "champ": "Chirurgie et interventionnel",
+    "methodes": []
+  },
+  {
+    "numero": "2.3-06",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Les équipes des secteurs interventionnels maîtrisent les risques, notamment infectieux, liés aux équipements et aux pratiques professionnelles Dans les secteurs interventionnels, les équipes veillent à la rigueur des pratiques d’hygiène, à la stérilisation du matériel et à l’entretien des locaux, conformément aux normes en vigueur. Les équipements doivent être désinfectés régulièrement, et leur bon fonctionnement vérifié avant chaque intervention. Les professionnels de santé suivent des protocoles stricts pour limiter les risques de contamination, qu’il s’agisse de gestes aseptiques, de gestion des dispositifs invasifs ou de la tenue appropriée. Une attention particulière est portée",
+    "niveau": "Impératif",
+    "champ": "Chirurgie et interventionnel",
+    "methodes": []
+  },
+  {
+    "numero": "2.3-07",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Les équipes maîtrisent le risque infectieux lié au circuit des dispositifs médicaux invasifs réutilisables thermosensibles Les dispositifs médicaux invasif réutilisables thermosensibles doivent suivre un processus de désinfection et de stérilisation spécifique, adapté à leur sensibilité thermique. Voici quelques exemples de dispositifs : • les endoscopes ; • les sondes d’échographie endocavitaires ; • le matériel de microchirurgie ophtalmique.",
+    "niveau": "Standard",
+    "champ": "Chirurgie et interventionnel",
+    "methodes": []
+  },
+  {
+    "numero": "2.3-08",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Les équipes sécurisent le parcours du patient en chirurgie ambulatoire La coordination entre les professionnels permet d’optimiser la prise en charge, tout en assurant la sécurité. Ainsi, lors d’une prise en charge en chirurgie ambulatoire, les équipes s'assurent que chaque étape, de la préparation préopératoire à la sortie, est maîtrisée : • évaluation de l'éligibilité du patient à la chirurgie ambulatoire ; • vérification des conditions médicales et sociales ; • planification anticipée de la sortie.",
+    "niveau": "Standard",
+    "champ": "Chirurgie et interventionnel",
+    "methodes": [
+      "Patient traceur"
+    ]
+  },
+  {
+    "numero": "2.3-09",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Les équipes des secteurs interventionnels améliorent leurs pratiques en analysant les modalités de réalisation de la check-list « Sécurité du patient » La check-list « Sécurité du patient », mise en place pour renforcer la sécurité des interventions chirurgicales, permet de vérifier systématiquement les éléments critiques à chaque étape de la prise en charge : identification du patient,",
+    "niveau": "Impératif",
+    "champ": "Chirurgie et interventionnel",
+    "methodes": []
+  },
+  {
+    "numero": "2.3-10",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Les équipes mettent en œuvre des mesures de prévention des risques obstétricaux majeurs La prévention des risques obstétricaux majeurs constitue un enjeu central dans la prise en charge des femmes enceintes. Les équipes soignantes sont formées à détecter rapidement les complications potentielles, telles que l'hémorragie du post-partum, la prééclampsie ou les accouchements dystociques. Des protocoles stricts sont appliqués pour anticiper ces risques, incluant une surveillance prénatale renforcée pour les patientes à risque et une gestion efficace des urgences obstétricales. La mise en place de simulations d’urgence et une communication fluide entre les différents intervenants permettent de garantir une réactivité optimale. Grâce à",
+    "niveau": "Impératif",
+    "champ": "Maternité",
+    "methodes": []
+  },
+  {
+    "numero": "2.3-11",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Les équipes sécurisent la prise en charge du nouveau-né La sécurisation de la prise en charge du nouveau-né à la naissance améliore sa santé et son bien-être dès les premiers instants de vie. Les équipes soignantes suivent des protocoles pour assurer une identification immédiate du nourrisson, la prévention des infections, ainsi que l’évaluation de ses fonctions vitales (notamment via le score d’Apgar). La surveillance continue permet de détecter rapidement toute anomalie ou complication nécessitant une prise en charge spécialisée. Les soins essentiels, comme le maintien de la température corporelle ou la gestion de l’alimentation, sont systématiquement réalisés. Enfin, une",
+    "niveau": "Impératif",
+    "champ": "Maternité",
+    "methodes": []
+  },
+  {
+    "numero": "2.3-12",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Les équipes des secteurs de soins critiques maîtrisent les risques en lien avec leurs pratiques Dans les secteurs de soins critiques, les équipes pluridisciplinaires (médecins, infirmiers, réanimateurs, anesthésistes) travaillent en étroite collaboration pour prévenir et gérer les complications associées à des soins complexes, comme la ventilation mécanique, les perfusions à haut risque ou la surveillance hémodynamique. Le transport des patients, souvent critique, est encadré par des protocoles pour éviter tout incident pendant les déplacements. La surveillance visuelle et sonore continue, via des dispositifs de",
+    "niveau": "Standard",
+    "champ": "Soins critiques",
+    "methodes": []
+  },
+  {
+    "numero": "2.3-13",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Les activités de prélèvement et de greffe d’organes, tissus ou cellules souches hématopoïétiques, sont évaluées et se traduisent par des plans d’actions d’amélioration dont les effets sont mesurés",
+    "niveau": "Standard",
+    "champ": "Soins critiques",
+    "methodes": []
+  },
+  {
+    "numero": "2.3-14",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Les équipes respectent les bonnes pratiques d'isolement, qu'il soit assorti ou non de contentions, des patients hospitalisés sans consentement L'isolement, éventuellement assorti d’une contention des patients hospitalisés sans consentement, est une pratique encadrée par des règles strictes afin de garantir le respect des droits et de la dignité des personnes concernées. Ces mesures, qui ne doivent être utilisées qu'en dernier recours, visent à prévenir un danger imminent pour le patient ou pour autrui. Les équipes soignantes doivent respecter les bonnes pratiques en",
+    "niveau": "Impératif",
+    "champ": "Santé mentale et psychiatrie",
+    "methodes": []
+  },
+  {
+    "numero": "2.3-15",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Les équipes mettent en œuvre des mesures de prévention des risques liés à l'électroconvulsivothérapie L'électroconvulsivothérapie (ECT), dont l’efficacité est reconnue pour traiter certaines pathologies psychiatriques sévères, nécessite une préparation et un suivi pour minimiser les complications. Les équipes multidisciplinaires, comprenant psychiatres, anesthésistes et infirmiers, mettent en œuvre des protocoles pour évaluer les contre-indications et surveiller les fonctions vitales avant, pendant et après chaque séance. Une évaluation préanesthésique est réalisée systématiquement pour s'assurer de la tolérance à l'anesthésie. De",
+    "niveau": "Standard",
+    "champ": "Tout l'établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.3-16",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.3",
+    "objectif": "La sécurité dans les secteurs à risques majeurs",
+    "titre": "Les équipes maîtrisent les risques liés aux actes de radiothérapie La radiothérapie, utilisée pour traiter les cancers, expose les patients à des rayonnements ionisants nécessitant des protocoles pour prévenir les effets indésirables et optimiser l'efficacité du traitement. Les équipes pluridisciplinaires (oncologues, physiciens médicaux, manipulateurs en radiothérapie) suivent des procédures de planification, de calibrage des appareils et de vérification des doses administrées. Chaque étape, de la simulation initiale à la séance de traitement, est contrôlée pour éviter les erreurs de positionnement ou de dosage. Une surveillance continue des équipements, associée à une formation régulière des",
+    "niveau": "Standard",
+    "champ": "Radiothérapie",
+    "methodes": []
+  },
+  {
+    "numero": "2.4-01",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.4",
+    "objectif": "La culture de la pertinence et de l'évaluation",
+    "titre": "L’équipe s’appuie sur ses protocoles qui intègrent les recommandations de bonnes pratiques Gage de qualité et de sécurité pour les patients, l’utilisation de recommandations de bonnes pratiques actualisées garantit que les prises en charge minimisent les erreurs et les risques pour les patients. L’utilisation de protocoles fondés sur des bonnes pratiques favorise un environnement de travail positif, où transparence et responsabilité sont au cœur des interactions. Cela contribue à l'engagement des professionnels, qui se sentent valorisés et habilités à participer à l'amélioration continue des soins.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "2.4-02",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.4",
+    "objectif": "La culture de la pertinence et de l'évaluation",
+    "titre": "La pertinence des prescriptions d’antibiotiques est argumentée et réévaluée Le respect des recommandations de bonnes pratiques d’antibiothérapie par les équipes est indispensable pour lutter contre l’antibiorésistance, cause de complications graves, de prolongations d'hospitalisation et même de décès. La lutte contre l’antibiorésistance passe notamment par la justification des prescriptions de traitement antibiotique et la réévaluation de l’antibiothérapie entre la 24e heure et la 72e heure. Plus globalement, la lutte contre l’antibiorésistance s’appuie sur des éléments-clés (politique, formations des personnes ressources, ...) intégrant le suivi d’indicateurs tels que le pourcentage d'antibiotiques prescrits en",
+    "niveau": "Impératif",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.4-03",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.4",
+    "objectif": "La culture de la pertinence et de l'évaluation",
+    "titre": "La pertinence du recours à des mesures restrictives de liberté (limitation des contacts, des visites, retrait d’effets personnels) est argumentée et réévaluée En dehors de celles relevant de la sécurité ponctuelle du patient, le recours à des mesures restrictives de liberté relève d’une décision médicale prise sur les éléments cliniques issus d’un examen médical et doit être motivé au sein du dossier du patient. La motivation doit notamment faire apparaître les mesures mises en œuvre au préalable sans succès afin d’établir qu’elle est réellement prise en dernier recours. Elle intègre la réflexion",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.4-04",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.4",
+    "objectif": "La culture de la pertinence et de l'évaluation",
+    "titre": "Les équipes sont engagées dans une réflexion afin d’assurer des soins écoresponsables L'écoresponsabilité en santé ne se limite pas simplement à la gestion des déchets ou à la réduction de l'empreinte carbone. Elle englobe une vision où chaque geste compte. Les équipes unissent leurs efforts pour repenser les pratiques quotidiennes et intégrer des solutions durables dans leurs activités. Cette réflexion collective se manifeste par des stratégies telles que la promotion de l'utilisation de matériaux recyclables, mais aussi par l’évaluation des pratiques à l’aune de leur impact environnemental, favorisant ainsi le développement de traitements plus verts qui tiennent compte de l’efficacité clinique et de la préservation des écosystèmes. Le",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "2.4-05",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.4",
+    "objectif": "La culture de la pertinence et de l'évaluation",
+    "titre": "La pertinence de l’admission et du séjour en SMR est argumentée et réévaluée au sein de l’équipe En SMR (hospitalisation complète, de jour ou HAD), les demandes d’admission sont étudiées en équipe pluriprofessionnelle pour s’assurer que les objectifs de la prise en charge relèvent des missions de l’établissement et que les caractéristiques du patient (pathologie principale, âge, polypathologies éventuelles, conditions de vie…) répondent à la spécialité et aux types de séjour proposés par l’établissement. Après la première phase du séjour, la réévaluation permet de confirmer la pertinence de cette prise en charge. Les modalités de sortie sont préparées et, si besoin, ajustées dans le cadre du dialogue avec le patient, notamment",
+    "niveau": "Standard",
+    "champ": "Soins médicaux et de réadaptation",
+    "methodes": []
+  },
+  {
+    "numero": "2.4-06",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.4",
+    "objectif": "La culture de la pertinence et de l'évaluation",
+    "titre": "Les équipes améliorent leurs pratiques en se fondant sur les résultats d'indicateurs de pratique clinique Les résultats des indicateurs, dont les indicateurs de qualité et de sécurité des soins, constituent une donnée qui permet d’objectiver le niveau de qualité et de sécurité des soins pour un objectif déterminé. L’analyse partagée et le suivi des résultats permettent aux équipes d’identifier les axes de progrès et de concevoir collectivement les actions d’amélioration à mettre en place. Le principe de revues régulières en équipe participe de l’implication de l’ensemble des acteurs dans la démarche d’amélioration continue de la qualité",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "2.4-07",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.4",
+    "objectif": "La culture de la pertinence et de l'évaluation",
+    "titre": "Les équipes des secteurs interventionnels améliorent leurs pratiques en analysant leurs indicateurs L'amélioration continue des pratiques dans les secteurs interventionnels repose sur l'analyse systématique des indicateurs de performance et de qualité. Ces indicateurs, qu'ils concernent la sécurité des patients, les pratiques cliniques ou la gestion des risques, permettent de mesurer l'efficacité des actions menées et d'identifier les axes d'amélioration afin d’optimiser la sécurité et la qualité des soins. Ce processus est renforcé par une culture de partage des retours d'expérience, favorisant une meilleure prise en charge des patients et une réduction des risques.",
+    "niveau": "Standard",
+    "champ": "Chirurgie et interventionnel",
+    "methodes": []
+  },
+  {
+    "numero": "2.4-08",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.4",
+    "objectif": "La culture de la pertinence et de l'évaluation",
+    "titre": "Les équipes des secteurs de soins critiques améliorent leurs pratiques en se fondant notamment sur les modalités de prise en charge de leurs patients Les soins critiques nécessitent une approche multidisciplinaire où chaque membre de l'équipe contribue à une prise en charge globale et personnalisée des patients. Cette collaboration interdisciplinaire permet d’améliorer la qualité des soins et d’adapter les traitements aux besoins spécifiques de chaque patient. Pour améliorer leurs pratiques, ces équipes se basent sur une évaluation constante des modalités de prise en charge, que",
+    "niveau": "Standard",
+    "champ": "Soins critiques",
+    "methodes": []
+  },
+  {
+    "numero": "2.4-09",
+    "chapitre_num": "2",
+    "chapitre": "2 - Les équipes de soins",
+    "objectif_num": "2.4",
+    "objectif": "La culture de la pertinence et de l'évaluation",
+    "titre": "Les équipes améliorent leurs pratiques en analysant la qualité des résultats des examens d'imagerie médicale et biologie La coordination entre les équipes de soins et les équipes de biologie médicale et d’anatomopathologie ou d’imagerie est nécessaire pour améliorer la qualité des résultats des examens. Ces actions permettent que chaque examen réponde à une question clinique, que les prélèvements respectent les bonnes pratiques, que les conditions de réalisation des examens soient conformes au référentiel des sociétés savantes d’imagerie et que les délais de rendu des examens soient adaptés aux besoins du patient.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "3.1-01",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.1",
+    "objectif": "Le management global par la qualité et la sécurité des soins",
+    "titre": "La gouvernance déploie une politique d'amélioration de la qualité et de la sécurité des soins La politique d'amélioration continue de la qualité et de la sécurité des soins fixe des objectifs d’amélioration personnalisés à l’établissement, c’est-à-dire déterminés à partir d’une analyse de l’ensemble des données disponibles : point de vue du patient et des usagers, résultats des indicateurs, risques a priori et a posteriori... Copilotées par la direction et la CME, son élaboration, sa mise en œuvre et son évaluation doivent être participatives et associer l’encadrement, les professionnels, la commission des soins infirmiers, de rééducation et médico-techniques (si elle existe), les représentants des usagers. Ses objectifs sont déclinés dans un",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.1-02",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.1",
+    "objectif": "Le management global par la qualité et la sécurité des soins",
+    "titre": "L’établissement soutient une culture qualité et sécurité auprès de ses professionnels La culture sécurité en santé regroupe l’ensemble des manières de faire et de penser partagées par les acteurs d’une organisation et qui contribuent à la sécurité du patient. Il s’agit du reporting des évènements indésirables associés aux soins (EIAS), du retour d’expérience, de la qualité du travail en équipe et d’une culture « juste » (l’erreur humaine est analysée et non pas condamnée). Elle est construite par l’interaction entre les acteurs et implique l’usager.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.1-03",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.1",
+    "objectif": "Le management global par la qualité et la sécurité des soins",
+    "titre": "Des médecins et des équipes médicales sont accrédités L’accréditation des médecins et des équipes médicales pour les spécialités et activités dites « à risque » est l’un des programmes d’amélioration des pratiques professionnelles et de la sécurité des patients opérationnel depuis plus de 15 ans. La HAS promeut en particulier le programme d’accréditation en équipe (mono ou pluridisciplinaire), modèle particulièrement adapté au travail en établissement de santé, quel que soit son statut. La démarche d’accréditation, volontaire, repose sur des programmes de spécialité, élaborés par des pairs et soutenus par des organismes professionnels agréés par la HAS pour l’accréditation et selon une",
+    "niveau": "Avancé",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.1-04",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.1",
+    "objectif": "Le management global par la qualité et la sécurité des soins",
+    "titre": "L’établissement impulse la culture de la déclaration des évènements indésirables, dont les presqu’accidents Pour insuffler une culture bienveillante où l’erreur humaine est analysée et non pas condamnée, la gouvernance promeut la culture de la déclaration des évènements indésirables et des presqu’accidents. En effet, les évènements indésirables associés aux soins (EIAS dont les presqu’accidents, plaintes, erreurs cliniques, thérapeutiques ou pharmaceutiques…) et la gestion des vigilances sont une opportunité d’analyse des pratiques et de mise en œuvre d’une dynamique collective d’amélioration de la sécurité du patient.",
+    "niveau": "Impératif",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "3.1-05",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.1",
+    "objectif": "Le management global par la qualité et la sécurité des soins",
+    "titre": "La gestion des situations sanitaires exceptionnelles est maîtrisée L’établissement a identifié les menaces susceptibles de provoquer des tensions hospitalières : afflux massif de patients, fragilisation des urgences, crises sanitaires exceptionnelles. Pour y faire face, un plan de gestion graduée a été mis en place, comprenant deux niveaux de mobilisation. • Le niveau 1 : plan de mobilisation interne pour des phénomènes ayant un impact limité sur l’offre de soins (par exemple, une épidémie saisonnière ou une pénurie de carburant). • Le niveau 2, ou plan blanc : évènements ayant un impact majeur sur l’offre de soins. Ce plan",
+    "niveau": "Impératif",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.1-06",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.1",
+    "objectif": "Le management global par la qualité et la sécurité des soins",
+    "titre": "L’établissement promeut et soutient le recours au questionnement éthique par l’ensemble des acteurs Certaines situations cliniques, a fortiori, complexes, peuvent engendrer des conflits de valeurs pouvant prendre la forme de dilemmes éthiques rendant les décisions parfois difficiles par le choix qu’elles imposent aux professionnels dans la recherche de solutions les meilleures pour le patient et ses proches. Ces situations appellent une réflexion collective et interdisciplinaire conduite en temps opportun et fondée sur des modalités structurées et partagées, tant au niveau de l’établissement qu’au plus près du terrain. Ces modalités, adaptées",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.1-07",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.1",
+    "objectif": "Le management global par la qualité et la sécurité des soins",
+    "titre": "Les risques de sécurité numérique sont maîtrisés Pour maîtriser le risque numérique, l’établissement doit pouvoir s’appuyer sur un système d’information sécurisé.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.1-08",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.1",
+    "objectif": "Le management global par la qualité et la sécurité des soins",
+    "titre": "L'identification des utilisateurs et des patients dans le système d'information est sécurisée Pour prévenir l’accès à des données de santé à caractère personnel au sens du RGPD par des personnes non autorisées, il est essentiel que l’établissement définisse des règles d’accès à son système d’information pour l’ensemble des utilisateurs (professionnels, intérimaires, étudiants, stagiaires, patients...). Par ailleurs, pour sécuriser les accès en interne, les professionnels utilisent un identifiant et un mot de passe personnels et uniques et il n’existe pas d’identifiant et mot de passe génériques connus par tous (intérimaires, étudiants…). À distance, l’accès au système d’information doit se faire par une authentification à double facteur",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.1-09",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.1",
+    "objectif": "Le management global par la qualité et la sécurité des soins",
+    "titre": "Les données du patient sont sécurisées L’ouverture de Mon espace santé et les échanges entre les professionnels internes et externes appellent l’indispensable besoin de protéger les données de santé des patients en supprimant les usages non sécurisés des données de santé au profit de l’utilisation du dossier médical partagé de Mon espace santé et de messageries sécurisées de santé.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.2-01",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.2",
+    "objectif": "La maîtrise des ressources professionnelles et des compétences",
+    "titre": "La continuité des soins est assurée pour toutes les unités de soins La disponibilité continue des professionnels médicaux et paramédicaux est fondamentale pour que les patients reçoivent des soins rapides et appropriés tout au long de leur parcours. Elle contribue également à une meilleure gestion des situations d'urgence, à une surveillance continue des patients, et à un soutien adéquat pour les patients et leurs familles. En pratique, elle s’appuie sur des règles de présence, ainsi qu’un système de gardes et astreintes, définies afin d’assurer la permanence des soins 24 h/24.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "3.2-02",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.2",
+    "objectif": "La maîtrise des ressources professionnelles et des compétences",
+    "titre": "L’établissement pilote l’adéquation entre les ressources humaines disponibles et la qualité et la sécurité des prises en charge En France, on distingue des secteurs de soins normés et d’autres non normés. En l’absence de normes, les besoins sont déterminés par un outil de calcul des effectifs : la maquette organisationnelle. Les organisations cibles, décrites dans la maquette organisationnelle, sont communiquées aux instances et aux personnels. Pour piloter l’adéquation entre les ressources humaines disponibles et la qualité et la sécurité des prises en charge, l’établissement évalue les écarts entre les organisations cibles et les organisations réelles,",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.2-03",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.2",
+    "objectif": "La maîtrise des ressources professionnelles et des compétences",
+    "titre": "L’établissement s’assure que les équipes ont les compétences nécessaires pour assurer la qualité et la sécurité des soins La performance des équipes repose en premier lieu sur les compétences des professionnels. Il convient que la gouvernance s’assure que les compétences techniques ou non techniques sont acquises et pérennes. Ainsi, elle s’attache à vérifier : • les titres et compétences des professionnels pour définir leur domaine d’exercice ; • le droit des médecins à exercer la médecine, notamment pour les médecins diplômés hors Union",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.2-04",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.2",
+    "objectif": "La maîtrise des ressources professionnelles et des compétences",
+    "titre": "L’établissement forme ses professionnels à la gestion des risques en utilisant des outils de la simulation en santé Simulation en santé et gestion des risques partagent un certain nombre de valeurs : pluriprofessionnalité, rôle pédagogique, implication des acteurs, culture positive de l’erreur, impact sur la sécurité des patients… En établissement de santé, la gouvernance (direction générale, CME, direction des soins, coordination de la gestion des risques...) doit s’impliquer afin d’impulser une démarche de gestion des risques et inscrire la simulation comme priorité institutionnelle, attribuer les ressources nécessaires et promouvoir les démarches",
+    "niveau": "Avancé",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.2-05",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.2",
+    "objectif": "La maîtrise des ressources professionnelles et des compétences",
+    "titre": "Les responsables d'équipe sont formés et accompagnés dans leur mission Pour développer la culture de la qualité et de la sécurité des soins, le leadership doit se retrouver à tous les niveaux de l’organisation. L’encadrement médical et paramédical est un acteur de la déclinaison de la politique en actions concrètes sur le terrain. Les managers doivent fédérer leur équipe, donner une vision commune, fixer des objectifs pour atteindre les résultats. Ainsi, les managers médicaux et paramédicaux sont formés au management pour acquérir les compétences et la posture nécessaires. Par ailleurs, les managers partagent leur expérience et bénéficient de coaching ou sont soutenus, notamment pour la gestion des conflits et des",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": []
+  },
+  {
+    "numero": "3.2-06",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.2",
+    "objectif": "La maîtrise des ressources professionnelles et des compétences",
+    "titre": "La gouvernance a une politique de santé de ses professionnels Un professionnel en bonne santé est un professionnel présent et en mesure de fournir des soins de qualité. Pour ce faire, l’établissement : • prévoit des dispositifs de soutien psychologique accessibles à tous les professionnels ; • vérifie les vaccinations obligatoires, sensibilise les professionnels à l’intérêt des vaccinations recommandées, donne facilement et gratuitement accès à la vaccination, analyse les taux de couverture vaccinale et met en œuvre les améliorations ;",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.2-07",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.2",
+    "objectif": "La maîtrise des ressources professionnelles et des compétences",
+    "titre": "La gouvernance a une politique de sécurité de ses professionnels La sécurité des professionnels conditionne tout exercice professionnel, a fortiori, toute politique de qualité de vie au travail. Les violences commises à l’encontre des professionnels de santé font de la sécurisation des établissements un enjeu dont l’établissement doit maîtriser les risques en : • recensant, avec les professionnels, dans le document unique d’évaluation des risques professionnels les situations à risque (tapage, agression, intrusion…) ; • disposant d’un plan de sécurisation, adapté aux enjeux et aux ressources, qui définit la politique",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.2-08",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.2",
+    "objectif": "La maîtrise des ressources professionnelles et des compétences",
+    "titre": "L’établissement a une politique de qualité de vie au travail Il est démontré que qualité de vie au travail (QVT) et qualité, sécurité des soins et efficience sont liées. Ainsi, une politique QVT vise à prendre soin des salariés, à concilier l’amélioration des conditions de vie au travail et la performance collective. Il est attendu que l’établissement dispose d’une politique de qualité de vie au travail qui : • est élaborée avec les professionnels et les représentants du personnel ; • est appuyée sur un diagnostic qui émane du terrain et qui prend en compte des données propres",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.2-09",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.2",
+    "objectif": "La maîtrise des ressources professionnelles et des compétences",
+    "titre": "L’établissement a un environnement favorable à la qualité de vie au travail Pour sa mise en œuvre opérationnelle de la politique QVT, l’établissement prévoit : • des organisations permettant de mieux concilier vie personnelle et vie professionnelle ; • un environnement de travail favorable à la qualité de vie au travail ; • des temps pendant lesquels les professionnels peuvent s’exprimer sur leur expérience de leur travail et son organisation, et faire des propositions de solutions et innovations organisationnelles.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.2-10",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.2",
+    "objectif": "La maîtrise des ressources professionnelles et des compétences",
+    "titre": "La gouvernance a une politique de gestion des difficultés interpersonnelles et des conflits Si les difficultés interpersonnelles et les conflits sont inévitables en situation de travail, des mécanismes de prévention et de régulation doivent opérer. Ces dispositifs visent à préserver les relations personnelles et professionnelles et, ce faisant, la cohésion des équipes. Le management, particulièrement le management de proximité, joue ici un rôle essentiel et doit être soutenu. Ces conflits, s’ils ne sont pas prévenus ou traités, peuvent impacter durement le fonctionnement des équipes, altérer la qualité de vie au travail, nuire au travail lui-même et entraîner des répercussions dommageables sur la qualité et la sécurité des soins.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.2-11",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.2",
+    "objectif": "La maîtrise des ressources professionnelles et des compétences",
+    "titre": "L’établissement favorise le travail en équipe L’équipe est la clé de voûte de la qualité et de la sécurité des soins. L'engagement dans un projet commun renforce le sens du travail et favorise la motivation et la reconnaissance des membres de l'équipe. En favorisant les démarches d'amélioration, la collaboration et le partage des connaissances, la gouvernance et l'encadrement sont essentiels pour promouvoir le travail en équipe. Pour favoriser le travail en équipe : • l’établissement soutient des démarches dédiées : mise en situation, team building, CRM santé, repérage des moments de communication critiques… ;",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.3-01",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.3",
+    "objectif": "Le positionnement territorial",
+    "titre": "L’établissement est acteur de la coordination des parcours sur le territoire Pour garantir la continuité des soins sur le territoire et éviter la rupture de prise en charge des patients, l’établissement, dans le cadre du projet régional de santé, est acteur dans la construction et la coordination des parcours de ses patients, en collaboration avec les autres acteurs du territoire (établissements sanitaires, dont HAD, établissements et services sociaux et médico-sociaux, professionnels de ville), et des dispositifs de coordination territoriaux. Il contribue à l’amélioration de la qualité globale des filières de soins sur le territoire.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.3-02",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.3",
+    "objectif": "Le positionnement territorial",
+    "titre": "L’établissement oriente le patient dans un parcours adapté En regard de la population prise en charge et de sa position géographique, l’établissement dispose d’une cartographie de l’offre du territoire et diffuse aux partenaires territoriaux son offre. L’établissement est organisé pour éviter l’errance diagnostique et les pertes de chances par défaut d’orientation ou de prise en charge inadaptée.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.3-03",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.3",
+    "objectif": "Le positionnement territorial",
+    "titre": "L’établissement est acteur du projet territorial de santé mentale (PTSM) Le projet territorial de santé mentale (PTSM) fonde la politique de santé mentale sur le territoire et implique une structuration et une coordination de l’offre de prise en charge sanitaire et d’accompagnement social et médico-social. Le PTSM a pour priorités l’organisation : • des conditions du repérage précoce des troubles psychiques, de l’élaboration d’un diagnostic et de l’accès aux soins et aux accompagnements sociaux ou médico-sociaux ; • du parcours de santé et de vie de qualité et sans rupture, notamment pour les personnes souffrant",
+    "niveau": "Standard",
+    "champ": "Santé mentale et psychiatrie",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.3-04",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.3",
+    "objectif": "Le positionnement territorial",
+    "titre": "L'établissement organise les prises en charge non programmées L’efficacité des filières spécialisées de prise en charge des urgences préhospitalières et astreintes à une mission de permanence des soins (urgences cardiaques, urgences neurovasculaires, traumatologie lourde, réanimation, imagerie spécialisée associée à ces filières…) repose en partie sur l’organisation de modalités de prise en charge rapide et fluide des patients en provenance du service d’accueil des urgences ou des structures extérieures. Pour les établissements concernés, les modalités d’accès direct dans leurs unités spécialisées sont opérationnelles, connues des partenaires adresseurs ainsi que de l’établissement, et",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.3-05",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.3",
+    "objectif": "Le positionnement territorial",
+    "titre": "L’établissement prévient les transferts évitables des personnes âgées Pour limiter les passages évitables des personnes âgées de plus de 75 ans aux urgences générales, l’établissement, en lien avec ses partenaires de ville, médecins traitants, EHPAD, HAD et autres partenaires, a formalisé des circuits courts et/ou a mis en œuvre des réseaux de télémédecine.",
+    "niveau": "Impératif",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.3-06",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.3",
+    "objectif": "Le positionnement territorial",
+    "titre": "L’établissement est aisément joignable tant par les usagers que par les professionnels correspondants L’établissement s’assure que ses modalités de communication sont aisément accessibles pour faciliter l’accès aux soins des usagers et fluidifier les contacts avec les acteurs du territoire. De façon sécurisée, il participe à la communication sur les données des patients avec les autres acteurs de l’offre de soins et médico-sociale en respectant les règles de confidentialité.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.3-07",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.3",
+    "objectif": "Le positionnement territorial",
+    "titre": "L’établissement, investi ou non de missions universitaires, promeut la recherche clinique en son sein ou en lien avec d’autres acteurs du territoire Le développement de la recherche clinique dans les établissements de santé est un levier pour l’amélioration de la qualité des soins. L’expérimentation et l’évaluation de nouveaux modèles de prise en charge diagnostique et thérapeutique, d’organisation et de pratiques des soins participent à la progression de la qualité et de la sécurité des soins. Par le soutien apporté aux professionnels médicaux et paramédicaux désireux de s’investir dans des travaux de recherche et d’évaluation (engagés en son sein ou en partenariat",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.3-08",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.3",
+    "objectif": "Le positionnement territorial",
+    "titre": "L’établissement participe à la mission d’enseignement sur son territoire Le développement de l’enseignement dans les établissements de santé est un levier pour l’amélioration de la qualité des soins. L’établissement décline sa politique de formation de ses personnels en cohérence avec ses missions répondant au projet de son territoire. L’établissement en capacité d’enseigner, formation théorique et/ou formation pratique, partage avec son territoire son offre.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.4-01",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.4",
+    "objectif": "L'adaptation à des soins écoresponsables et aux innovations numériques",
+    "titre": "L'établissement entretient ses locaux et ses équipements La qualité des biens immobiliers et mobiliers est un prérequis de la qualité des soins et des conditions nécessaires à l’exercice des pratiques. La formation des professionnels à l’utilisation des équipements, notamment du fait de leur évolution technologique forte, est le garant de pratiques maîtrisées.",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Observation",
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.4-02",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.4",
+    "objectif": "L'adaptation à des soins écoresponsables et aux innovations numériques",
+    "titre": "L’établissement s’engage dans des soins écoresponsables La démarche de développement durable présente de nombreux intérêts pour un établissement : • développement d’une culture du développement durable et solidaire partagée par l’ensemble des acteurs ; • cadre d’engagement des professionnels ; • implication des usagers ; • développement d’une dynamique partenariale et d’une ouverture sur l’extérieur ;",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.4-03",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.4",
+    "objectif": "L'adaptation à des soins écoresponsables et aux innovations numériques",
+    "titre": "L’établissement agit pour la transition écologique Selon l’Agence de la transition écologique (ADEME), le secteur de la santé représente 2% de la consommation énergétique nationale et pèse pour 8% des émissions de gaz à effet de serre françaises. Tout établissement doit contribuer à réduire l’impact du secteur hospitalier sur l’environnement, agir pour garantir la soutenabilité du système de santé et assurer sa pérennité. Les actions doivent couvrir l’ensemble des champs : médicaments, soins éco-responsables, bâtiments et consommation d’énergie, traitement des déchets, mobilité durable…",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.4-04",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.4",
+    "objectif": "L'adaptation à des soins écoresponsables et aux innovations numériques",
+    "titre": "L’établissement utilise la télésanté pour améliorer le parcours du patient La télésanté est une modalité de prise en charge des patients à distance qui répond aux mêmes exigences que l’exercice en présentiel. La télésanté regroupe la télémédecine (incluant téléconsultation, téléexpertise, télésurveillance médicale, téléassistance et régulation médicale) réalisée par les professionnels médicaux, et le télésoin réalisé par les pharmaciens ou les auxiliaires médicaux. La mise en place d’organisations de télésanté, au sein de l’établissement, peut faciliter l’accès aux soins, notamment en permettant aux patients d’être soignés au plus près de leur lieu de vie et en leur évitant des",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.4-05",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.4",
+    "objectif": "L'adaptation à des soins écoresponsables et aux innovations numériques",
+    "titre": "L’établissement pilote l'usage des dispositifs médicaux numériques à usage professionnel, en particulier ceux faisant appel à l'intelligence artificielle Les dispositifs médicaux numériques (DMN) à usage professionnel sont des outils numériques ayant une finalité médicale, utilisés par des professionnels de santé comme aide au dépistage, aide au diagnostic, aide à la décision médicale et aide à la décision thérapeutique (exemple : aide à l’interprétation de radiographies visant à identifier des fractures osseuses ou nodules pulmonaires, délimitation d’une tumeur en vue d’une radiothérapie, aide à l’interprétation d’ECG pour le diagnostic d’une arythmie, analyse pharmaceutique…). Ces",
+    "niveau": "Standard",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  },
+  {
+    "numero": "3.4-06",
+    "chapitre_num": "3",
+    "chapitre": "3 - L'établissement",
+    "objectif_num": "3.4",
+    "objectif": "L'adaptation à des soins écoresponsables et aux innovations numériques",
+    "titre": "L’établissement utilise des outils technologiques innovants sans finalité médicale pour améliorer son organisation, en particulier ceux faisant appel à l’intelligence artificielle Les innovations dans le champ de l’organisation des soins, des produits de santé (médicaments et dispositifs médicaux) et du numérique sont une opportunité d’amélioration de la prise en charge des patients et contribuent à l’efficience des parcours de santé. Encourager leur développement est une question d’équité entre les patients et les territoires et un enjeu d’efficience. La bonne utilisation est néanmoins conditionnée",
+    "niveau": "Avancé",
+    "champ": "Tout l’établissement",
+    "methodes": [
+      "Audit système"
+    ]
+  }
+]

@@ -1,0 +1,46 @@
+══════════════════════════════════════════════════════
+  GoCertif Web — Grilles d'audit HAS V2025
+══════════════════════════════════════════════════════
+
+PRÉREQUIS
+─────────
+• Python 3.8 ou supérieur (https://www.python.org)
+• Connexion internet au premier lancement (pour installer les dépendances)
+
+DÉMARRAGE
+─────────
+Windows :
+  Double-cliquez sur start.bat
+
+Mac / Linux :
+  chmod +x start.sh
+  ./start.sh
+
+L'application s'ouvre dans votre navigateur sur http://localhost:5050
+
+FONCTIONNALITÉS
+───────────────
+✅ Saisie des réponses (Oui / Non / NA) par critère
+✅ 118 critères HAS V2025 (20 impératifs, 93 standards, 5 avancés)
+✅ Score automatique en temps réel
+✅ Filtres : chapitre, niveau d'exigence, réponse, méthode, recherche texte
+✅ Niveau de décision indicatif avec fiches d'anomalie
+✅ Notes et plan d'actions par critère
+✅ Export Excel (XLSX) et PDF
+✅ Sauvegarde locale automatique (SQLite)
+✅ Multi-évaluations illimitées
+
+DONNÉES
+───────
+Toutes les données sont stockées dans gocertif.db (SQLite).
+Sauvegardez ce fichier pour conserver vos évaluations.
+
+ARRÊT
+─────
+Fermez la fenêtre du terminal / appuyez sur Ctrl+C
+
+──────────────────────────────────────────────────────
+Référentiel : HAS V2025 — Certification des établissements
+de santé pour la qualité des soins (Version 2025)
+© GHT / Direction Qualité — Usage interne uniquement
+══════════════════════════════════════════════════════

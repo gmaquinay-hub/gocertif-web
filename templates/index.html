@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GoCertif Web — HAS V2025</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --has-blue: #1E4FA5;
+    --has-blue-light: #E8F0FD;
+    --green: #00B050;
+    --orange: #FF8C00;
+    --red: #DC2626;
+  }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #F1F5F9; }
+  .sidebar { width: 260px; min-width: 260px; background: var(--has-blue); }
+  .btn-oui  { background: #DCFCE7; color: #15803D; border: 2px solid #86EFAC; }
+  .btn-oui.active  { background: #16A34A; color: white; border-color: #15803D; }
+  .btn-non  { background: #FEE2E2; color: #991B1B; border: 2px solid #FCA5A5; }
+  .btn-non.active  { background: #DC2626; color: white; border-color: #991B1B; }
+  .btn-na   { background: #F3F4F6; color: #6B7280; border: 2px solid #D1D5DB; }
+  .btn-na.active   { background: #6B7280; color: white; border-color: #4B5563; }
+  .critere-row { transition: box-shadow .15s; }
+  .critere-row:hover { box-shadow: 0 0 0 2px #93C5FD; }
+  .badge-imp { background: #FEE2E2; color: #991B1B; }
+  .badge-std { background: #DBEAFE; color: #1D4ED8; }
+  .badge-adv { background: #EDE9FE; color: #6D28D9; }
+  .chap-1 { border-left: 4px solid #3B82F6; }
+  .chap-2 { border-left: 4px solid #22C55E; }
+  .chap-3 { border-left: 4px solid #F97316; }
+  .score-green { color: var(--green); }
+  .score-orange { color: var(--orange); }
+  .score-red  { color: var(--red); }
+  .score-gray  { color: #6B7280; }
+  .sticky-score { position: sticky; top: 0; z-index: 30; }
+  select, input, textarea {
+    border: 1px solid #CBD5E1; border-radius: 6px; padding: 6px 10px;
+    width: 100%; font-size: 14px; background: white;
+  }
+  select:focus, input:focus, textarea:focus { outline: 2px solid var(--has-blue); border-color: var(--has-blue); }
+  .nav-item { padding: 10px 16px; border-radius: 8px; cursor: pointer; color: #CBD5E1;
+              display: flex; align-items: center; gap: 10px; font-size: 14px;
+              transition: background .15s; }
+  .nav-item:hover, .nav-item.active { background: rgba(255,255,255,.15); color: white; }
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 100;
+                   display: flex; align-items: center; justify-content: center; }
+  .modal { background: white; border-radius: 12px; padding: 28px; width: 640px; max-width: 95vw;
+           max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,.3); }
+  .tag { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 12px;
+         font-size: 11px; font-weight: 600; }
+  .critere-notes { display: none; }
+  .critere-notes.open { display: block; }
+  .filter-pill { padding: 4px 12px; border-radius: 20px; font-size: 12px; cursor: pointer;
+                 border: 1px solid #CBD5E1; background: white; transition: all .15s; }
+  .filter-pill.active { background: var(--has-blue); color: white; border-color: var(--has-blue); }
+  .anomalie-card { background: #FEE2E2; border: 1px solid #FCA5A5; border-radius: 6px;
+                   padding: 8px 12px; font-size: 12px; }
+  .progress-bar { height: 12px; border-radius: 6px; background: #E2E8F0; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 6px; transition: width .4s; }
+  [x-cloak] { display: none !important; }
+  .tooltip { position: relative; }
+  .tooltip .tip { display: none; position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%);
+                  background: #1E293B; color: white; padding: 4px 8px; border-radius: 4px;
+                  font-size: 11px; white-space: nowrap; z-index: 50; }
+  .tooltip:hover .tip { display: block; }
+</style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+<!-- ═══════════════════ SIDEBAR ═══════════════════ -->
+<aside class="sidebar flex flex-col h-screen overflow-hidden">
+  <div class="p-5 border-b border-blue-700">
+    <div class="text-white font-bold text-lg leading-tight">GoCertif</div>
+    <div class="text-blue-300 text-xs mt-0.5">Certification HAS V2025</div>
+  </div>
+  <nav class="flex-1 p-3 space-y-1 overflow-y-auto">
+    <div class="nav-item active" onclick="showView('dashboard')" id="nav-dashboard">
+      <span>📊</span> <span>Tableau de bord</span>
+    </div>
+    <div id="nav-eval" class="nav-item hidden" onclick="showView('evaluation')">
+      <span>📋</span> <span id="nav-eval-label">Évaluation</span>
+    </div>
+    <div class="nav-item" onclick="showView('about')">
+      <span>ℹ️</span> <span>À propos</span>
+    </div>
+  </nav>
+  <div class="p-4 border-t border-blue-700">
+    <div class="text-blue-300 text-xs">Référentiel HAS V2025</div>
+    <div class="text-blue-400 text-xs mt-0.5" id="criteria-count">Chargement…</div>
+  </div>
+</aside>
+
+<!-- ═══════════════════ MAIN ═══════════════════ -->
+<main class="flex-1 flex flex-col overflow-hidden">
+
+<!-- ── DASHBOARD ── -->
+<div id="view-dashboard" class="flex-1 overflow-y-auto p-6">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-800">Tableau de bord</h1>
+      <p class="text-gray-500 text-sm mt-0.5">Gestion des grilles d'audit HAS V2025</p>
+    </div>
+    <button onclick="openNewEvalModal()"
+      class="flex items-center gap-2 px-5 py-2.5 rounded-lg text-white font-semibold text-sm shadow-sm hover:opacity-90 transition"
+      style="background:var(--has-blue)">
+      + Nouvelle évaluation
+    </button>
+  </div>
+
+  <!-- Stats cards -->
+  <div class="grid grid-cols-4 gap-4 mb-6" id="stats-cards">
+    <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+      <div class="text-xs text-gray-500 font-medium uppercase tracking-wide">Total évaluations</div>
+      <div class="text-3xl font-bold text-gray-800 mt-1" id="stat-total">—</div>
+    </div>
+    <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+      <div class="text-xs font-medium uppercase tracking-wide" style="color:var(--green)">Conformes</div>
+      <div class="text-3xl font-bold mt-1" style="color:var(--green)" id="stat-green">—</div>
+    </div>
+    <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+      <div class="text-xs font-medium uppercase tracking-wide" style="color:var(--orange)">Partiellement conformes</div>
+      <div class="text-3xl font-bold mt-1" style="color:var(--orange)" id="stat-orange">—</div>
+    </div>
+    <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+      <div class="text-xs font-medium uppercase tracking-wide" style="color:var(--red)">Non conformes</div>
+      <div class="text-3xl font-bold mt-1" style="color:var(--red)" id="stat-red">—</div>
+    </div>
+  </div>
+
+  <!-- Evaluations list -->
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+    <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
+      <h2 class="font-semibold text-gray-700">Évaluations</h2>
+      <input id="search-evals" type="text" placeholder="Rechercher…" style="width:220px;padding:5px 10px;font-size:13px"
+             oninput="filterEvaluations(this.value)"/>
+    </div>
+    <div id="evaluations-list">
+      <div class="p-8 text-center text-gray-400">Chargement…</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── EVALUATION VIEW ── -->
+<div id="view-evaluation" class="flex-1 flex flex-col overflow-hidden hidden">
+
+  <!-- Score bar (sticky) -->
+  <div class="sticky-score bg-white border-b border-gray-200 px-6 py-3 flex items-center gap-6 shadow-sm">
+    <div class="flex-1 min-w-0">
+      <div class="text-xs text-gray-500 font-medium" id="eval-breadcrumb">Évaluation</div>
+      <div class="font-semibold text-gray-800 text-sm truncate" id="eval-title-top">—</div>
+    </div>
+    <div class="flex items-center gap-6 shrink-0">
+      <div class="text-center">
+        <div class="text-xs text-gray-500">Score</div>
+        <div class="text-xl font-bold" id="score-pct-display">—</div>
+      </div>
+      <div class="progress-bar w-32">
+        <div class="progress-fill" id="score-progress" style="width:0;background:var(--green)"></div>
+      </div>
+      <div class="text-center">
+        <div class="text-xs text-gray-500">Oui/Non/NA</div>
+        <div class="text-sm font-semibold text-gray-700">
+          <span class="text-green-600" id="s-oui">0</span> /
+          <span class="text-red-600" id="s-non">0</span> /
+          <span class="text-gray-400" id="s-na">0</span>
+        </div>
+      </div>
+      <div class="text-center">
+        <div class="text-xs text-gray-500">Fiches anomalie</div>
+        <div class="text-xl font-bold text-red-600" id="s-anomalies">0</div>
+      </div>
+      <div id="decision-badge" class="px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap" style="background:#F3F4F6;color:#6B7280">
+        Non évalué
+      </div>
+      <div class="flex gap-2">
+        <button onclick="exportExcel()" class="px-3 py-1.5 bg-green-50 text-green-700 border border-green-200 rounded-lg text-xs font-semibold hover:bg-green-100 transition">
+          📥 Excel
+        </button>
+        <button onclick="exportPDF()" class="px-3 py-1.5 bg-red-50 text-red-700 border border-red-200 rounded-lg text-xs font-semibold hover:bg-red-100 transition">
+          📄 PDF
+        </button>
+        <button onclick="showView('dashboard')" class="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs font-semibold hover:bg-gray-200 transition">
+          ← Retour
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="bg-white border-b border-gray-200 px-6 flex gap-1">
+    <button class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 transition" id="tab-saisie"
+            onclick="showTab('saisie')" style="border-color:var(--has-blue);color:var(--has-blue)">
+      📝 Saisie des critères
+    </button>
+    <button class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-gray-500 transition" id="tab-header"
+            onclick="showTab('header')">
+      📋 Informations
+    </button>
+    <button class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-gray-500 transition" id="tab-results"
+            onclick="showTab('results')">
+      📊 Résultats détaillés
+    </button>
+  </div>
+
+  <!-- Tab content -->
+  <div class="flex-1 overflow-hidden flex flex-col">
+
+    <!-- SAISIE TAB -->
+    <div id="tab-content-saisie" class="flex-1 overflow-hidden flex flex-col">
+      <!-- Filters -->
+      <div class="bg-white border-b border-gray-100 px-6 py-3">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Filtres :</span>
+          <div>
+            <select id="filter-chap" onchange="applyFilters()" style="width:auto;padding:4px 8px;font-size:12px">
+              <option value="">Tous chapitres</option>
+              <option value="1">1 – Le patient</option>
+              <option value="2">2 – Les équipes de soins</option>
+              <option value="3">3 – L'établissement</option>
+            </select>
+          </div>
+          <div>
+            <select id="filter-niveau" onchange="applyFilters()" style="width:auto;padding:4px 8px;font-size:12px">
+              <option value="">Tous niveaux</option>
+              <option value="Impératif">⚠️ Impératif</option>
+              <option value="Standard">Standard</option>
+              <option value="Avancé">Avancé</option>
+            </select>
+          </div>
+          <div>
+            <select id="filter-reponse" onchange="applyFilters()" style="width:auto;padding:4px 8px;font-size:12px">
+              <option value="">Toutes réponses</option>
+              <option value="non_renseigne">Non renseigné</option>
+              <option value="Oui">✅ Oui</option>
+              <option value="Non">❌ Non</option>
+              <option value="NA">— NA</option>
+            </select>
+          </div>
+          <div>
+            <select id="filter-methode" onchange="applyFilters()" style="width:auto;padding:4px 8px;font-size:12px">
+              <option value="">Toutes méthodes</option>
+              <option value="Patient traceur">Patient traceur</option>
+              <option value="Parcours traceur">Parcours traceur</option>
+              <option value="Observation">Observation</option>
+              <option value="Audit système">Audit système</option>
+              <option value="Traceur ciblé">Traceur ciblé</option>
+            </select>
+          </div>
+          <input id="filter-search" type="text" placeholder="Rechercher un critère…"
+                 style="width:200px;padding:4px 8px;font-size:12px" oninput="applyFilters()"/>
+          <button onclick="resetFilters()" class="text-xs text-blue-600 hover:underline">Réinitialiser</button>
+          <span class="ml-auto text-xs text-gray-400" id="filter-count"></span>
+        </div>
+      </div>
+
+      <!-- Criteria list -->
+      <div class="flex-1 overflow-y-auto p-4" id="criteria-container">
+        <div class="text-center text-gray-400 py-12">Chargement des critères…</div>
+      </div>
+    </div>
+
+    <!-- HEADER TAB -->
+    <div id="tab-content-header" class="flex-1 overflow-y-auto p-6 hidden">
+      <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-bold text-gray-800 mb-5 text-lg">Informations de l'évaluation</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="col-span-2">
+            <label class="block text-xs font-semibold text-gray-600 mb-1">Nom de l'évaluation *</label>
+            <input id="h-nom" type="text" placeholder="ex: PT Chirurgie Mars 2026"/>
+          </div>
+          <div class="col-span-2">
+            <label class="block text-xs font-semibold text-gray-600 mb-1">Méthode d'évaluation</label>
+            <select id="h-methode">
+              <option>Parcours traceur</option>
+              <option>Patient traceur</option>
+              <option>Traceur ciblé</option>
+              <option>Observations</option>
+              <option>Audit système</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-600 mb-1">Établissement / Site</label>
+            <input id="h-etablissement" type="text" placeholder="CHU de…"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-600 mb-1">Service(s)</label>
+            <input id="h-service" type="text" placeholder="Chirurgie orthopédique…"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-600 mb-1">Date de l'audit</label>
+            <input id="h-date" type="date"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-600 mb-1">Code Calista</label>
+            <input id="h-calista" type="text"/>
+          </div>
+          <div class="col-span-2">
+            <label class="block text-xs font-semibold text-gray-600 mb-1">Auditeurs (Nom – Fonction – Service)</label>
+            <textarea id="h-auditeurs" rows="2" placeholder="Dr Dupont – Médecin – Chirurgie&#10;Mme Martin – Cadre de santé – Qualité"></textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-600 mb-1">1. Secteur PEC</label>
+            <select id="h-secteur">
+              <option value=""></option>
+              <option>Chirurgie et interventionnel</option>
+              <option>Maternité</option>
+              <option>Médecine</option>
+              <option>Psychiatrie et santé mentale</option>
+              <option>Soins critiques</option>
+              <option>Soins de suite et réadaptation</option>
+              <option>Soins de longue durée</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-600 mb-1">2. Mode PEC</label>
+            <select id="h-mode-pec">
+              <option value=""></option>
+              <option>Ambulatoire</option>
+              <option>Hospitalisation complète</option>
+              <option>HAD</option>
+              <option>HDJ</option>
+              <option>HDS</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-600 mb-1">3. Mode entrée</label>
+            <select id="h-mode-entree">
+              <option value=""></option>
+              <option>Programmé</option>
+              <option>SAMU-SMUR</option>
+              <option>Urgences</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-600 mb-1">4. Âge patient</label>
+            <select id="h-age">
+              <option value=""></option>
+              <option>Adulte</option>
+              <option>Enfant et adolescent</option>
+              <option>Patient âgé (+ 75 ans)</option>
+            </select>
+          </div>
+          <div class="col-span-2">
+            <label class="block text-xs font-semibold text-gray-600 mb-1">5. Caractéristiques patient</label>
+            <select id="h-caract">
+              <option value=""></option>
+              <option>Maladie chronique</option>
+              <option>Pas de situation particulière</option>
+              <option>Patient atteint d'un cancer</option>
+              <option>Patient en situation de handicap</option>
+              <option>Patient en situation de précarité</option>
+            </select>
+          </div>
+          <div class="col-span-2">
+            <label class="block text-xs font-semibold text-gray-600 mb-1">Notes globales</label>
+            <textarea id="h-notes" rows="3" placeholder="Observations générales…"></textarea>
+          </div>
+        </div>
+        <div class="mt-5 flex gap-3">
+          <button onclick="saveHeader()"
+            class="px-6 py-2.5 rounded-lg text-white font-semibold text-sm hover:opacity-90 transition"
+            style="background:var(--has-blue)">
+            💾 Enregistrer
+          </button>
+          <div id="header-save-msg" class="text-sm text-green-600 flex items-center hidden">✓ Enregistré</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS TAB -->
+    <div id="tab-content-results" class="flex-1 overflow-y-auto p-6 hidden">
+      <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 col-span-1">
+          <h3 class="font-semibold text-gray-700 mb-3">Score global</h3>
+          <canvas id="score-chart" height="200"></canvas>
+          <div class="mt-3 text-center">
+            <div class="text-3xl font-bold" id="result-score-pct">—</div>
+            <div class="text-xs text-gray-500 mt-0.5">de conformité</div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+          <h3 class="font-semibold text-gray-700 mb-4">Répartition des réponses</h3>
+          <div class="space-y-3">
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-green-600 font-medium">✅ Oui</span>
+                <span id="res-oui-count" class="font-bold">—</span>
+              </div>
+              <div class="progress-bar"><div id="res-oui-bar" class="progress-fill" style="background:var(--green);width:0"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-red-600 font-medium">❌ Non</span>
+                <span id="res-non-count" class="font-bold">—</span>
+              </div>
+              <div class="progress-bar"><div id="res-non-bar" class="progress-fill" style="background:var(--red);width:0"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-400 font-medium">— NA</span>
+                <span id="res-na-count" class="font-bold">—</span>
+              </div>
+              <div class="progress-bar"><div id="res-na-bar" class="progress-fill" style="background:#9CA3AF;width:0"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-300 font-medium">○ Non renseigné</span>
+                <span id="res-nr-count" class="font-bold">—</span>
+              </div>
+              <div class="progress-bar"><div id="res-nr-bar" class="progress-fill" style="background:#E5E7EB;width:0"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+          <h3 class="font-semibold text-gray-700 mb-4">Niveau de décision</h3>
+          <div id="decision-detail" class="space-y-2"></div>
+          <div class="mt-4 pt-4 border-t border-gray-100">
+            <div class="text-xs text-gray-500 mb-2">Fiches d'anomalie (Non sur critère Impératif)</div>
+            <div id="anomalies-list" class="space-y-1"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Score par objectif -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+        <h3 class="font-semibold text-gray-700 mb-4">Score par objectif</h3>
+        <canvas id="objectif-chart" height="80"></canvas>
+      </div>
+    </div>
+
+  </div><!-- end tab content -->
+</div><!-- end view-evaluation -->
+
+<!-- ── ABOUT VIEW ── -->
+<div id="view-about" class="flex-1 overflow-y-auto p-6 hidden">
+  <div class="max-w-2xl mx-auto">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+      <h1 class="text-2xl font-bold mb-2" style="color:var(--has-blue)">GoCertif Web</h1>
+      <p class="text-gray-600 mb-6">Interface de gestion des grilles d'audit HAS — Version 2025</p>
+      <div class="space-y-4 text-sm text-gray-600">
+        <div class="flex gap-3 p-3 bg-blue-50 rounded-lg">
+          <span class="text-2xl">📋</span>
+          <div><strong>Référentiel V2025</strong> — 118 critères (20 impératifs, 93 standards, 5 avancés) répartis en 12 objectifs et 3 chapitres. Applicable depuis septembre 2025.</div>
+        </div>
+        <div class="flex gap-3 p-3 bg-green-50 rounded-lg">
+          <span class="text-2xl">💡</span>
+          <div><strong>Scoring</strong> — Score = Oui / (Oui + Non) × 100. Les NA sont exclus du calcul. Les «Non» sur critères Impératifs génèrent des fiches d'anomalie.</div>
+        </div>
+        <div class="flex gap-3 p-3 bg-orange-50 rounded-lg">
+          <span class="text-2xl">📊</span>
+          <div><strong>Niveaux de décision</strong> (indicatifs) :
+            <ul class="mt-1 space-y-0.5">
+              <li><span class="font-semibold text-green-600">Conforme</span> : Score ≥ 80% ET 0 fiche d'anomalie</li>
+              <li><span class="font-semibold text-orange-500">Partiel</span> : Score 60-79% OU 1-2 fiches d'anomalie</li>
+              <li><span class="font-semibold text-red-600">Non conforme</span> : Score &lt; 60% OU ≥ 3 fiches d'anomalie</li>
+            </ul>
+          </div>
+        </div>
+        <div class="flex gap-3 p-3 bg-purple-50 rounded-lg">
+          <span class="text-2xl">💾</span>
+          <div><strong>Données</strong> — Toutes les évaluations et réponses sont sauvegardées localement dans une base SQLite (<code>gocertif.db</code>). Pas de connexion internet requise.</div>
+        </div>
+        <div class="flex gap-3 p-3 bg-gray-50 rounded-lg">
+          <span class="text-2xl">📥</span>
+          <div><strong>Export</strong> — Chaque évaluation peut être exportée en Excel (XLSX) ou en PDF avec l'ensemble des critères, réponses, notes et plan d'actions.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main><!-- end main -->
+
+<!-- ═══════════════════ MODAL NOUVELLE ÉVALUATION ═══════════════════ -->
+<div id="modal-new-eval" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="flex items-center justify-between mb-5">
+      <h2 class="text-xl font-bold text-gray-800">Nouvelle évaluation</h2>
+      <button onclick="closeNewEvalModal()" class="text-gray-400 hover:text-gray-600 text-2xl leading-none">&times;</button>
+    </div>
+    <div class="space-y-4">
+      <div>
+        <label class="block text-xs font-semibold text-gray-600 mb-1">Nom de l'évaluation *</label>
+        <input id="new-nom" type="text" placeholder="ex : Patient traceur — Chirurgie — 15/03/2026"/>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-gray-600 mb-1">Méthode d'évaluation</label>
+        <select id="new-methode">
+          <option>Parcours traceur</option>
+          <option>Patient traceur</option>
+          <option>Traceur ciblé</option>
+          <option>Observations</option>
+          <option>Audit système</option>
+        </select>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 mb-1">Établissement / Site</label>
+          <input id="new-etab" type="text" placeholder="CHU de…"/>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 mb-1">Service(s)</label>
+          <input id="new-service" type="text" placeholder="Chirurgie…"/>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 mb-1">Date de l'audit</label>
+          <input id="new-date" type="date"/>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 mb-1">Code Calista</label>
+          <input id="new-calista" type="text"/>
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-gray-600 mb-1">Auditeurs</label>
+        <input id="new-auditeurs" type="text" placeholder="Nom – Fonction – Service"/>
+      </div>
+    </div>
+    <div class="flex gap-3 mt-6">
+      <button onclick="createEvaluation()"
+        class="flex-1 py-2.5 rounded-lg text-white font-semibold hover:opacity-90 transition"
+        style="background:var(--has-blue)">
+        Créer l'évaluation
+      </button>
+      <button onclick="closeNewEvalModal()"
+        class="px-5 py-2.5 rounded-lg border border-gray-200 text-gray-600 font-semibold hover:bg-gray-50 transition">
+        Annuler
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div id="toast" class="fixed bottom-6 right-6 px-4 py-2.5 rounded-lg shadow-lg text-white text-sm font-semibold hidden" style="z-index:200;background:#1E293B;transition:opacity .2s"></div>
+
+<!-- ═══════════════════ JAVASCRIPT ═══════════════════ -->
+<script>
+// ── State ──────────────────────────────────────────────────────────────────
+let currentEvalId = null;
+let currentEvalData = null;
+let allCriteria = [];
+let allEvaluations = [];
+let pendingResponses = {};    // critere_numero -> {reponse, notes, plan_action}
+let saveTimer = null;
+let scoreChartInstance = null;
+let objectifChartInstance = null;
+
+// ── Utilities ───────────────────────────────────────────────────────────────
+const $ = id => document.getElementById(id);
+const API = path => fetch(path).then(r => r.json());
+const POST = (path, body) => fetch(path, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)}).then(r => r.json());
+const PUT  = (path, body) => fetch(path, {method:'PUT',  headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)}).then(r => r.json());
+const DEL  = path => fetch(path, {method:'DELETE'}).then(r => r.json());
+
+function toast(msg, ok=true) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.style.background = ok ? '#16A34A' : '#DC2626';
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), 2500);
+}
+
+// ── Navigation ──────────────────────────────────────────────────────────────
+function showView(view) {
+  ['dashboard','evaluation','about'].forEach(v => {
+    $(`view-${v}`).classList.add('hidden');
+    const n = $(`nav-${v}`);
+    if (n) n.classList.remove('active');
+  });
+  $(`view-${view}`).classList.remove('hidden');
+  const n = $(`nav-${view}`);
+  if (n) n.classList.add('active');
+
+  if (view === 'dashboard') loadDashboard();
+  if (view === 'evaluation' && currentEvalId) loadEvaluation(currentEvalId);
+}
+
+function showTab(tab) {
+  ['saisie','header','results'].forEach(t => {
+    $(`tab-content-${t}`).classList.add('hidden');
+    const btn = $(`tab-${t}`);
+    btn.style.borderColor = 'transparent';
+    btn.style.color = '#6B7280';
+  });
+  $(`tab-content-${tab}`).classList.remove('hidden');
+  const btn = $(`tab-${tab}`);
+  btn.style.borderColor = 'var(--has-blue)';
+  btn.style.color = 'var(--has-blue)';
+  if (tab === 'results') refreshResultsTab();
+}
+
+// ── Dashboard ────────────────────────────────────────────────────────────────
+async function loadDashboard() {
+  const data = await API('/api/evaluations');
+  allEvaluations = data;
+  renderEvaluationsList(data);
+  updateStats(data);
+}
+
+function updateStats(evals) {
+  $('stat-total').textContent  = evals.length;
+  $('stat-green').textContent  = evals.filter(e => e.score?.decision_class === 'green').length;
+  $('stat-orange').textContent = evals.filter(e => e.score?.decision_class === 'orange').length;
+  $('stat-red').textContent    = evals.filter(e => e.score?.decision_class === 'red').length;
+}
+
+function renderEvaluationsList(evals) {
+  const container = $('evaluations-list');
+  if (!evals.length) {
+    container.innerHTML = `<div class="p-12 text-center">
+      <div class="text-5xl mb-3">📋</div>
+      <div class="text-gray-500 font-medium">Aucune évaluation</div>
+      <div class="text-gray-400 text-sm mt-1">Créez votre première évaluation pour commencer</div>
+    </div>`;
+    return;
+  }
+  const dcColors = {green:'text-green-600 bg-green-50',orange:'text-orange-500 bg-orange-50',red:'text-red-600 bg-red-50',gray:'text-gray-400 bg-gray-50'};
+  const dcLabels = {green:'✅ Conforme',orange:'⚠️ Partiel',red:'❌ Non conforme',gray:'○ Non évalué'};
+
+  container.innerHTML = evals.map(e => {
+    const s = e.score || {};
+    const dc = s.decision_class || 'gray';
+    const spct = s.score_pct != null ? `${s.score_pct}%` : '—';
+    const dateStr = e.date_audit ? new Date(e.date_audit).toLocaleDateString('fr-FR') : '—';
+    return `<div class="flex items-center gap-4 px-5 py-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer transition"
+                 onclick="openEvaluation(${e.id})">
+      <div class="w-10 h-10 rounded-lg flex items-center justify-center text-lg"
+           style="background:var(--has-blue-light);color:var(--has-blue)">📋</div>
+      <div class="flex-1 min-w-0">
+        <div class="font-semibold text-gray-800 text-sm truncate">${e.nom}</div>
+        <div class="text-gray-400 text-xs mt-0.5">${e.methode} • ${e.etablissement || '—'} • ${e.service || '—'} • ${dateStr}</div>
+      </div>
+      <div class="text-right shrink-0">
+        <div class="font-bold text-lg ${dc === 'gray' ? 'text-gray-300' : dc === 'green' ? 'text-green-600' : dc === 'orange' ? 'text-orange-500' : 'text-red-600'}">${spct}</div>
+        <div class="text-xs text-gray-400">${s.oui||0}✅ ${s.non||0}❌ ${s.na||0}NA | ${s.nb_anomalies||0} anomalie(s)</div>
+      </div>
+      <div class="shrink-0">
+        <span class="tag ${dcColors[dc]}">${dcLabels[dc]}</span>
+      </div>
+      <button onclick="event.stopPropagation(); deleteEvaluation(${e.id})"
+              class="text-gray-300 hover:text-red-500 transition text-lg leading-none px-1">🗑</button>
+    </div>`;
+  }).join('');
+}
+
+function filterEvaluations(q) {
+  const filtered = q ? allEvaluations.filter(e =>
+    (e.nom||'').toLowerCase().includes(q.toLowerCase()) ||
+    (e.etablissement||'').toLowerCase().includes(q.toLowerCase()) ||
+    (e.service||'').toLowerCase().includes(q.toLowerCase())
+  ) : allEvaluations;
+  renderEvaluationsList(filtered);
+}
+
+// ── Evaluation ──────────────────────────────────────────────────────────────
+async function openEvaluation(id) {
+  currentEvalId = id;
+  $('nav-eval').classList.remove('hidden');
+  showView('evaluation');
+  showTab('saisie');
+}
+
+async function loadEvaluation(id) {
+  const data = await API(`/api/evaluations/${id}`);
+  currentEvalData = data;
+  pendingResponses = {};
+
+  // Fill header fields
+  $('h-nom').value          = data.nom || '';
+  $('h-methode').value      = data.methode || 'Parcours traceur';
+  $('h-etablissement').value= data.etablissement || '';
+  $('h-service').value      = data.service || '';
+  $('h-date').value         = data.date_audit || '';
+  $('h-calista').value      = data.code_calista || '';
+  $('h-auditeurs').value    = data.auditeurs || '';
+  $('h-secteur').value      = data.secteur_pec || '';
+  $('h-mode-pec').value     = data.mode_pec || '';
+  $('h-mode-entree').value  = data.mode_entree || '';
+  $('h-age').value          = data.age_patient || '';
+  $('h-caract').value       = data.caracteristiques || '';
+  $('h-notes').value        = data.notes_globales || '';
+
+  $('eval-title-top').textContent = data.nom;
+  $('eval-breadcrumb').textContent = data.methode;
+  $('nav-eval-label').textContent  = data.nom.substring(0,20);
+
+  updateScoreDisplay(data.score || {});
+  renderCriteriaGrid(data.reponses || {});
+}
+
+// ── Criteria Grid ────────────────────────────────────────────────────────────
+function renderCriteriaGrid(reponses) {
+  const container = $('criteria-container');
+  if (!allCriteria.length) {
+    container.innerHTML = '<div class="text-center text-gray-400 py-8">Chargement…</div>';
+    return;
+  }
+
+  let currentChap = null, currentObj = null;
+  const parts = [];
+
+  for (const crit of allCriteria) {
+    const rep = reponses[crit.numero] || {};
+
+    if (crit.chapitre !== currentChap) {
+      currentChap = crit.chapitre;
+      const chapColors = {'1':'border-blue-400 bg-blue-50','2':'border-green-400 bg-green-50','3':'border-orange-400 bg-orange-50'};
+      parts.push(`<div class="mb-2 mt-4 px-4 py-2 rounded-lg font-bold text-sm ${chapColors[crit.chapitre_num] || ''} border">
+        ${crit.chapitre_num}. ${crit.chapitre}
+      </div>`);
+      currentObj = null;
+    }
+    if (crit.objectif !== currentObj) {
+      currentObj = crit.objectif;
+      parts.push(`<div class="px-4 py-1.5 mb-1 mt-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+        ${crit.objectif_num} — ${crit.objectif}
+      </div>`);
+    }
+
+    const niveauBadge = {
+      'Impératif': 'badge-imp',
+      'Standard':  'badge-std',
+      'Avancé':    'badge-adv'
+    }[crit.niveau] || 'badge-std';
+
+    const rval  = rep.reponse || '';
+    const oAct  = rval === 'Oui'  ? 'active' : '';
+    const nAct  = rval === 'Non'  ? 'active' : '';
+    const naAct = rval === 'NA'   ? 'active' : '';
+    const hasNotes = rep.notes || rep.plan_action;
+    const methTags = (crit.methodes||[]).map(m => `<span class="tag" style="background:#EEF2FF;color:#4338CA;font-size:10px">${m}</span>`).join('');
+
+    parts.push(`
+    <div class="critere-row chap-${crit.chapitre_num} bg-white rounded-lg border border-gray-100 mb-2 overflow-hidden"
+         data-num="${crit.numero}" data-chap="${crit.chapitre_num}" data-obj="${crit.objectif_num}"
+         data-niveau="${crit.niveau}" data-methodes="${(crit.methodes||[]).join(',')}"
+         data-reponse="${rval}">
+      <div class="flex items-start gap-3 px-4 py-3">
+        <!-- Numero -->
+        <div class="shrink-0 w-20 pt-0.5">
+          <div class="font-mono font-bold text-xs text-gray-600">${crit.numero}</div>
+          <span class="tag ${niveauBadge} mt-1">${crit.niveau}</span>
+        </div>
+        <!-- Titre + champ -->
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-gray-800 font-medium leading-snug">${crit.titre}</div>
+          <div class="flex flex-wrap gap-1 mt-1.5 items-center">
+            <span class="text-xs text-gray-400">📍 ${crit.champ}</span>
+            ${methTags}
+          </div>
+        </div>
+        <!-- Buttons -->
+        <div class="shrink-0 flex gap-1.5 items-center">
+          <button class="btn-oui ${oAct} px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer transition hover:opacity-80"
+                  onclick="setReponse('${crit.numero}', 'Oui', this)">✅ Oui</button>
+          <button class="btn-non ${nAct} px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer transition hover:opacity-80"
+                  onclick="setReponse('${crit.numero}', 'Non', this)">❌ Non</button>
+          <button class="btn-na ${naAct} px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer transition hover:opacity-80"
+                  onclick="setReponse('${crit.numero}', 'NA', this)">— NA</button>
+          <button class="ml-1 text-gray-300 hover:text-blue-400 transition text-lg" title="Notes / Plan d'action"
+                  onclick="toggleNotes('${crit.numero}')">📝</button>
+        </div>
+      </div>
+      <!-- Notes panel (collapsible) -->
+      <div class="critere-notes ${hasNotes ? 'open' : ''} border-t border-gray-100" id="notes-${crit.numero.replace('.','_').replace('-','_')}">
+        <div class="px-4 py-3 bg-gray-50 grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-500 mb-1">Notes / Précisions</label>
+            <textarea rows="2" class="text-xs p-2 border border-gray-200 rounded-md w-full resize-none focus:outline-none focus:border-blue-400"
+                      placeholder="Observations terrain…"
+                      onchange="updateNotes('${crit.numero}', 'notes', this.value)"
+                      >${rep.notes || ''}</textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-500 mb-1">Plan d'actions (pilote / échéance)</label>
+            <textarea rows="2" class="text-xs p-2 border border-gray-200 rounded-md w-full resize-none focus:outline-none focus:border-blue-400"
+                      placeholder="Action corrective…"
+                      onchange="updateNotes('${crit.numero}', 'plan_action', this.value)"
+                      >${rep.plan_action || ''}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>`);
+  }
+
+  container.innerHTML = parts.join('');
+  applyFilters();
+}
+
+function toggleNotes(num) {
+  const id = `notes-${num.replace('.','_').replace('-','_')}`;
+  const el = $(id);
+  if (el) el.classList.toggle('open');
+}
+
+// ── Réponses ─────────────────────────────────────────────────────────────────
+function setReponse(num, val, btn) {
+  // Toggle
+  const row = document.querySelector(`[data-num="${num}"]`);
+  const currentActive = row.querySelector('.btn-oui.active, .btn-non.active, .btn-na.active');
+  let newVal = val;
+  if (currentActive === btn) {
+    // Deselect
+    newVal = '';
+  }
+
+  // Update button UI
+  row.querySelectorAll('.btn-oui, .btn-non, .btn-na').forEach(b => b.classList.remove('active'));
+  if (newVal) btn.classList.add('active');
+  row.dataset.reponse = newVal;
+
+  // Store pending
+  if (!pendingResponses[num]) pendingResponses[num] = {};
+  pendingResponses[num].reponse = newVal;
+
+  // Auto-save after 500ms debounce
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveAllPending, 500);
+
+  // Update score locally for instant feedback
+  updateLocalScore();
+}
+
+function updateNotes(num, field, val) {
+  if (!pendingResponses[num]) pendingResponses[num] = {};
+  pendingResponses[num][field] = val;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveAllPending, 800);
+}
+
+async function saveAllPending() {
+  if (!currentEvalId || !Object.keys(pendingResponses).length) return;
+
+  const reponses = Object.entries(pendingResponses).map(([num, data]) => {
+    const row = document.querySelector(`[data-num="${num}"]`);
+    const rep = data.reponse !== undefined ? data.reponse : (row ? row.dataset.reponse : '');
+    return {
+      critere_numero: num,
+      reponse: rep,
+      notes: data.notes !== undefined ? data.notes : '',
+      plan_action: data.plan_action !== undefined ? data.plan_action : '',
+    };
+  });
+
+  try {
+    const result = await POST(`/api/evaluations/${currentEvalId}/reponses/bulk`, {reponses});
+    pendingResponses = {};
+    if (result.score) updateScoreDisplay(result.score);
+  } catch(e) {
+    console.error('Save error', e);
+  }
+}
+
+function updateLocalScore() {
+  // Quick local estimate
+  const rows = document.querySelectorAll('[data-num]');
+  let oui = 0, non = 0, na = 0, nr = 0, anomalies = 0;
+  rows.forEach(row => {
+    if (!row.offsetParent) return; // hidden by filter
+    const r = row.dataset.reponse;
+    if (r === 'Oui') oui++;
+    else if (r === 'Non') {
+      non++;
+      if (row.dataset.niveau === 'Impératif') anomalies++;
+    }
+    else if (r === 'NA') na++;
+    else nr++;
+  });
+  const total = oui + non;
+  const pct = total ? Math.round(oui/total*100*10)/10 : null;
+  updateScoreDisplay({oui, non, na, non_renseigne: nr, total_evalue: total, score_pct: pct,
+                      nb_anomalies: anomalies,
+                      niveau_decision: getNiveauDecision(pct, anomalies),
+                      decision_class: getDecisionClass(pct, anomalies)});
+}
+
+function getNiveauDecision(pct, anomalies) {
+  if (pct === null) return 'Non évalué';
+  if (pct >= 80 && anomalies === 0) return 'Conforme — Certifié';
+  if (pct >= 60 && anomalies <= 2) return 'Partiellement conforme';
+  return 'Non conforme — Risque de non-certification';
+}
+function getDecisionClass(pct, anomalies) {
+  if (pct === null) return 'gray';
+  if (pct >= 80 && anomalies === 0) return 'green';
+  if (pct >= 60 && anomalies <= 2) return 'orange';
+  return 'red';
+}
+
+function updateScoreDisplay(score) {
+  const pct = score.score_pct;
+  const pctStr = pct != null ? `${pct}%` : '—';
+  const clsColor = {green:'score-green',orange:'score-orange',red:'score-red',gray:'score-gray'}[score.decision_class||'gray'];
+
+  $('score-pct-display').textContent  = pctStr;
+  $('score-pct-display').className    = `text-xl font-bold ${clsColor}`;
+  $('s-oui').textContent             = score.oui || 0;
+  $('s-non').textContent             = score.non || 0;
+  $('s-na').textContent              = score.na  || 0;
+  $('s-anomalies').textContent        = score.nb_anomalies || 0;
+
+  const progress = $('score-progress');
+  progress.style.width   = (pct || 0) + '%';
+  progress.style.background = {green:'var(--green)',orange:'var(--orange)',red:'var(--red)',gray:'#CBD5E1'}[score.decision_class||'gray'];
+
+  const badge = $('decision-badge');
+  const bgMap = {green:'#DCFCE7',orange:'#FFF7ED',red:'#FEE2E2',gray:'#F3F4F6'};
+  const clMap = {green:'#16A34A',orange:'#EA580C',red:'#DC2626',gray:'#6B7280'};
+  const dc    = score.decision_class || 'gray';
+  badge.style.background = bgMap[dc];
+  badge.style.color      = clMap[dc];
+  badge.textContent      = score.niveau_decision || 'Non évalué';
+}
+
+// ── Filters ──────────────────────────────────────────────────────────────────
+function applyFilters() {
+  const fChap  = $('filter-chap').value;
+  const fNiv   = $('filter-niveau').value;
+  const fRep   = $('filter-reponse').value;
+  const fMeth  = $('filter-methode').value;
+  const fQ     = ($('filter-search').value || '').toLowerCase();
+
+  let visible = 0;
+  const rows = document.querySelectorAll('[data-num]');
+  rows.forEach(row => {
+    const num    = row.dataset.num;
+    const chap   = row.dataset.chap;
+    const niveau = row.dataset.niveau;
+    const rep    = row.dataset.reponse || '';
+    const meths  = row.dataset.methodes || '';
+    const txt    = row.querySelector('.text-sm')?.textContent?.toLowerCase() || '';
+
+    let show = true;
+    if (fChap  && chap !== fChap) show = false;
+    if (fNiv   && niveau !== fNiv) show = false;
+    if (fMeth  && !meths.includes(fMeth)) show = false;
+    if (fRep) {
+      if (fRep === 'non_renseigne' && rep !== '') show = false;
+      else if (fRep !== 'non_renseigne' && rep !== fRep) show = false;
+    }
+    if (fQ && !txt.includes(fQ) && !num.includes(fQ)) show = false;
+
+    row.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+
+  // Show/hide section headers
+  document.querySelectorAll('[data-num]').forEach(() => {});
+  $('filter-count').textContent = `${visible} critère(s) affiché(s)`;
+}
+
+function resetFilters() {
+  $('filter-chap').value  = '';
+  $('filter-niveau').value = '';
+  $('filter-reponse').value = '';
+  $('filter-methode').value = '';
+  $('filter-search').value = '';
+  applyFilters();
+}
+
+// ── Header save ───────────────────────────────────────────────────────────────
+async function saveHeader() {
+  if (!currentEvalId) return;
+  await PUT(`/api/evaluations/${currentEvalId}`, {
+    nom: $('h-nom').value, methode: $('h-methode').value,
+    etablissement: $('h-etablissement').value, service: $('h-service').value,
+    date_audit: $('h-date').value, auditeurs: $('h-auditeurs').value,
+    code_calista: $('h-calista').value, secteur_pec: $('h-secteur').value,
+    mode_pec: $('h-mode-pec').value, mode_entree: $('h-mode-entree').value,
+    age_patient: $('h-age').value, caracteristiques: $('h-caract').value,
+    notes_globales: $('h-notes').value,
+  });
+  $('eval-title-top').textContent = $('h-nom').value;
+  $('header-save-msg').classList.remove('hidden');
+  setTimeout(() => $('header-save-msg').classList.add('hidden'), 2000);
+  toast('Informations enregistrées');
+}
+
+// ── Results tab ───────────────────────────────────────────────────────────────
+async function refreshResultsTab() {
+  const score = await API(`/api/evaluations/${currentEvalId}/score`);
+  const total = score.total_criteres || 118;
+
+  $('result-score-pct').textContent = score.score_pct != null ? `${score.score_pct}%` : '—';
+
+  // Progress bars
+  const bars = [
+    ['oui', score.oui], ['non', score.non], ['na', score.na], ['nr', score.non_renseigne]
+  ];
+  bars.forEach(([k, v]) => {
+    $(`res-${k}-count`).textContent = v || 0;
+    $(`res-${k}-bar`).style.width = `${Math.round((v||0)/total*100)}%`;
+  });
+
+  // Decision detail
+  const dc = score.decision_class || 'gray';
+  const bgMap = {green:'#DCFCE7',orange:'#FFF7ED',red:'#FEE2E2',gray:'#F3F4F6'};
+  const clMap = {green:'#16A34A',orange:'#EA580C',red:'#DC2626',gray:'#6B7280'};
+  $('decision-detail').innerHTML = `
+    <div class="p-3 rounded-lg text-sm font-semibold" style="background:${bgMap[dc]};color:${clMap[dc]}">
+      ${score.niveau_decision || 'Non évalué'}
+    </div>
+    <div class="text-xs text-gray-500 mt-2">
+      Score : <strong>${score.score_pct != null ? score.score_pct+'%' : 'Non calculé'}</strong>
+      (${score.oui} Oui / ${score.total_evalue} évalués)<br/>
+      Fiches d'anomalie : <strong class="text-red-600">${score.nb_anomalies}</strong>
+    </div>
+    <div class="text-xs text-gray-400 mt-2 border-t pt-2">
+      <em>Seuils indicatifs : ≥80% + 0 anomalie = Conforme | 60-79% ou ≤2 anomalies = Partiel | sinon Non conforme</em>
+    </div>
+  `;
+
+  // Anomalies list
+  if (score.fiches_anomalie && score.fiches_anomalie.length) {
+    $('anomalies-list').innerHTML = score.fiches_anomalie.map(num => {
+      const c = allCriteria.find(x => x.numero === num);
+      return `<div class="anomalie-card"><strong>${num}</strong> — ${c ? c.titre.substring(0,60)+'…' : ''}</div>`;
+    }).join('');
+  } else {
+    $('anomalies-list').innerHTML = '<div class="text-xs text-green-600">✅ Aucune fiche d\'anomalie</div>';
+  }
+
+  // Donut chart
+  if (scoreChartInstance) scoreChartInstance.destroy();
+  const ctx = document.getElementById('score-chart').getContext('2d');
+  scoreChartInstance = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Oui','Non','NA','Non renseigné'],
+      datasets: [{
+        data: [score.oui, score.non, score.na, score.non_renseigne],
+        backgroundColor: ['#22C55E','#DC2626','#9CA3AF','#E5E7EB'],
+        borderWidth: 0,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {legend: {position:'bottom', labels:{font:{size:11},boxWidth:12}}},
+      cutout: '65%',
+    }
+  });
+
+  // Bar chart by objectif
+  const objScores = computeObjectifScores();
+  if (objectifChartInstance) objectifChartInstance.destroy();
+  const ctx2 = document.getElementById('objectif-chart').getContext('2d');
+  objectifChartInstance = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: objScores.map(o => o.label),
+      datasets: [{
+        label: 'Score %',
+        data: objScores.map(o => o.pct),
+        backgroundColor: objScores.map(o => o.pct >= 80 ? '#22C55E' : o.pct >= 60 ? '#F97316' : '#DC2626'),
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {legend:{display:false}},
+      scales: {
+        y: {min:0, max:100, ticks:{callback: v => v+'%'}},
+        x: {ticks:{font:{size:10}}}
+      }
+    }
+  });
+}
+
+function computeObjectifScores() {
+  const rows = document.querySelectorAll('[data-num]');
+  const byObj = {};
+  rows.forEach(row => {
+    const num = row.dataset.num;
+    const obj = row.dataset.obj;
+    if (!byObj[obj]) byObj[obj] = {oui:0,non:0};
+    const r = row.dataset.reponse;
+    if (r === 'Oui') byObj[obj].oui++;
+    if (r === 'Non') byObj[obj].non++;
+  });
+  return Object.entries(byObj).map(([obj, s]) => {
+    const total = s.oui + s.non;
+    const pct   = total ? Math.round(s.oui/total*100) : 0;
+    return {label: obj, pct};
+  });
+}
+
+// ── New Evaluation Modal ──────────────────────────────────────────────────────
+function openNewEvalModal() {
+  $('modal-new-eval').classList.remove('hidden');
+  $('new-date').value = new Date().toISOString().split('T')[0];
+  $('new-nom').focus();
+}
+function closeNewEvalModal() { $('modal-new-eval').classList.add('hidden'); }
+
+async function createEvaluation() {
+  const nom = $('new-nom').value.trim();
+  if (!nom) { $('new-nom').focus(); return; }
+  const result = await POST('/api/evaluations', {
+    nom, methode: $('new-methode').value,
+    etablissement: $('new-etab').value, service: $('new-service').value,
+    date_audit: $('new-date').value, auditeurs: $('new-auditeurs').value,
+    code_calista: $('new-calista').value,
+  });
+  closeNewEvalModal();
+  toast(`Évaluation "${nom}" créée`);
+  openEvaluation(result.id);
+}
+
+// ── Delete ────────────────────────────────────────────────────────────────────
+async function deleteEvaluation(id) {
+  if (!confirm('Supprimer cette évaluation et toutes ses réponses ?')) return;
+  await DEL(`/api/evaluations/${id}`);
+  toast('Évaluation supprimée');
+  loadDashboard();
+}
+
+// ── Export ────────────────────────────────────────────────────────────────────
+function exportExcel() {
+  if (currentEvalId) window.location = `/api/evaluations/${currentEvalId}/export/excel`;
+}
+function exportPDF() {
+  if (currentEvalId) window.location = `/api/evaluations/${currentEvalId}/export/pdf`;
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+async function init() {
+  const meta = await API('/api/criteria/meta');
+  allCriteria = await API('/api/criteria');
+  $('criteria-count').textContent = `${allCriteria.length} critères`;
+  loadDashboard();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeNewEvalModal();
+});
+
+init();
+</script>
+</body>
+</html>
