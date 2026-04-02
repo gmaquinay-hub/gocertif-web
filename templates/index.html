@@ -7,1137 +7,1185 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-  :root {
-    --has-blue: #1E4FA5;
-    --has-blue-light: #E8F0FD;
-    --green: #00B050;
-    --orange: #FF8C00;
-    --red: #DC2626;
-  }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #F1F5F9; }
-  .sidebar { width: 260px; min-width: 260px; background: var(--has-blue); }
-  .btn-oui  { background: #DCFCE7; color: #15803D; border: 2px solid #86EFAC; }
-  .btn-oui.active  { background: #16A34A; color: white; border-color: #15803D; }
-  .btn-non  { background: #FEE2E2; color: #991B1B; border: 2px solid #FCA5A5; }
-  .btn-non.active  { background: #DC2626; color: white; border-color: #991B1B; }
-  .btn-na   { background: #F3F4F6; color: #6B7280; border: 2px solid #D1D5DB; }
-  .btn-na.active   { background: #6B7280; color: white; border-color: #4B5563; }
-  .critere-row { transition: box-shadow .15s; }
-  .critere-row:hover { box-shadow: 0 0 0 2px #93C5FD; }
-  .badge-imp { background: #FEE2E2; color: #991B1B; }
-  .badge-std { background: #DBEAFE; color: #1D4ED8; }
-  .badge-adv { background: #EDE9FE; color: #6D28D9; }
-  .chap-1 { border-left: 4px solid #3B82F6; }
-  .chap-2 { border-left: 4px solid #22C55E; }
-  .chap-3 { border-left: 4px solid #F97316; }
-  .score-green { color: var(--green); }
-  .score-orange { color: var(--orange); }
-  .score-red  { color: var(--red); }
-  .score-gray  { color: #6B7280; }
-  .sticky-score { position: sticky; top: 0; z-index: 30; }
-  select, input, textarea {
-    border: 1px solid #CBD5E1; border-radius: 6px; padding: 6px 10px;
-    width: 100%; font-size: 14px; background: white;
-  }
-  select:focus, input:focus, textarea:focus { outline: 2px solid var(--has-blue); border-color: var(--has-blue); }
-  .nav-item { padding: 10px 16px; border-radius: 8px; cursor: pointer; color: #CBD5E1;
-              display: flex; align-items: center; gap: 10px; font-size: 14px;
-              transition: background .15s; }
-  .nav-item:hover, .nav-item.active { background: rgba(255,255,255,.15); color: white; }
-  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 100;
-                   display: flex; align-items: center; justify-content: center; }
-  .modal { background: white; border-radius: 12px; padding: 28px; width: 640px; max-width: 95vw;
-           max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,.3); }
-  .tag { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 12px;
-         font-size: 11px; font-weight: 600; }
-  .critere-notes { display: none; }
-  .critere-notes.open { display: block; }
-  .filter-pill { padding: 4px 12px; border-radius: 20px; font-size: 12px; cursor: pointer;
-                 border: 1px solid #CBD5E1; background: white; transition: all .15s; }
-  .filter-pill.active { background: var(--has-blue); color: white; border-color: var(--has-blue); }
-  .anomalie-card { background: #FEE2E2; border: 1px solid #FCA5A5; border-radius: 6px;
-                   padding: 8px 12px; font-size: 12px; }
-  .progress-bar { height: 12px; border-radius: 6px; background: #E2E8F0; overflow: hidden; }
-  .progress-fill { height: 100%; border-radius: 6px; transition: width .4s; }
-  [x-cloak] { display: none !important; }
-  .tooltip { position: relative; }
-  .tooltip .tip { display: none; position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%);
-                  background: #1E293B; color: white; padding: 4px 8px; border-radius: 4px;
-                  font-size: 11px; white-space: nowrap; z-index: 50; }
-  .tooltip:hover .tip { display: block; }
+  :root { --blue:#1E4FA5; --green:#16a34a; --orange:#ea580c; --red:#dc2626; }
+  body { font-family: 'Inter', 'Segoe UI', sans-serif; background:#f1f5f9; }
+  .sidebar { background: linear-gradient(180deg,#1E4FA5 0%,#163a7a 100%); }
+  .card { background:#fff; border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,.08); }
+  .btn-primary { background:#1E4FA5; color:#fff; padding:.5rem 1.2rem; border-radius:8px; font-weight:600; cursor:pointer; transition:background .2s; border:none; }
+  .btn-primary:hover { background:#163a7a; }
+  .btn-secondary { background:#f1f5f9; color:#334155; padding:.5rem 1.2rem; border-radius:8px; font-weight:600; cursor:pointer; transition:background .2s; border:1px solid #e2e8f0; }
+  .btn-secondary:hover { background:#e2e8f0; }
+  .btn-danger { background:#fee2e2; color:#dc2626; padding:.4rem 1rem; border-radius:8px; font-weight:600; cursor:pointer; border:none; }
+  .btn-danger:hover { background:#fecaca; }
+  .input-field { width:100%; padding:.5rem .75rem; border:1px solid #e2e8f0; border-radius:8px; font-size:.9rem; outline:none; transition:border .2s; }
+  .input-field:focus { border-color:#1E4FA5; box-shadow:0 0 0 3px rgba(30,79,165,.1); }
+  .badge-imperatif { background:#fee2e2; color:#dc2626; font-size:.7rem; font-weight:700; padding:.1rem .4rem; border-radius:4px; }
+  .badge-standard   { background:#e0f2fe; color:#0369a1; font-size:.7rem; font-weight:700; padding:.1rem .4rem; border-radius:4px; }
+  .badge-avance     { background:#f3e8ff; color:#7e22ce; font-size:.7rem; font-weight:700; padding:.1rem .4rem; border-radius:4px; }
+  .rep-btn { padding:.35rem .9rem; border-radius:6px; font-weight:700; font-size:.8rem; cursor:pointer; border:2px solid transparent; transition:all .15s; }
+  .rep-oui  { border-color:#16a34a; color:#16a34a; }
+  .rep-oui.active  { background:#16a34a; color:#fff; }
+  .rep-non  { border-color:#dc2626; color:#dc2626; }
+  .rep-non.active  { background:#dc2626; color:#fff; }
+  .rep-na   { border-color:#6b7280; color:#6b7280; }
+  .rep-na.active   { background:#6b7280; color:#fff; }
+  .critere-row { border-left:3px solid transparent; transition:background .1s; }
+  .critere-row:hover { background:#f8fafc; }
+  .critere-row.imperatif { border-left-color:#dc2626; }
+  .critere-row.anomalie  { background:#fff5f5; }
+  .tab-btn { padding:.5rem 1.2rem; border-radius:8px; font-weight:600; font-size:.85rem; cursor:pointer; transition:all .15s; color:#64748b; }
+  .tab-btn.active { background:#1E4FA5; color:#fff; }
+  .nav-item { display:flex; align-items:center; gap:.6rem; padding:.6rem 1rem; border-radius:8px; cursor:pointer; color:rgba(255,255,255,.75); font-size:.88rem; transition:all .15s; }
+  .nav-item:hover, .nav-item.active { background:rgba(255,255,255,.15); color:#fff; }
+  .prio-critical { background:#fee2e2; color:#dc2626; }
+  .prio-high     { background:#ffedd5; color:#ea580c; }
+  .prio-medium   { background:#dbeafe; color:#1d4ed8; }
+  .prio-low      { background:#f1f5f9; color:#64748b; }
+  .statut-todo        { background:#f1f5f9; color:#64748b; }
+  .statut-in_progress { background:#fef9c3; color:#a16207; }
+  .statut-done        { background:#dcfce7; color:#16a34a; }
+  .score-green  { color:#16a34a; }
+  .score-orange { color:#ea580c; }
+  .score-red    { color:#dc2626; }
+  .score-gray   { color:#6b7280; }
+  .toast { position:fixed; bottom:1.5rem; right:1.5rem; background:#1e293b; color:#fff; padding:.75rem 1.25rem; border-radius:10px; font-size:.875rem; z-index:9999; opacity:0; transform:translateY(12px); transition:all .3s; pointer-events:none; }
+  .toast.show { opacity:1; transform:translateY(0); }
+  #auth-overlay { position:fixed; inset:0; background:linear-gradient(135deg,#1E4FA5 0%,#163a7a 100%); z-index:100; display:flex; align-items:center; justify-content:center; }
+  .auth-card { background:#fff; border-radius:16px; padding:2.5rem; width:100%; max-width:420px; box-shadow:0 20px 60px rgba(0,0,0,.3); }
+  .save-indicator { font-size:.75rem; color:#94a3b8; transition:color .3s; }
+  .save-indicator.saving { color:#f59e0b; }
+  .save-indicator.saved  { color:#16a34a; }
 </style>
 </head>
-<body class="flex h-screen overflow-hidden">
+<body>
 
-<!-- ═══════════════════ SIDEBAR ═══════════════════ -->
-<aside class="sidebar flex flex-col h-screen overflow-hidden">
-  <div class="p-5 border-b border-blue-700">
-    <div class="text-white font-bold text-lg leading-tight">GoCertif</div>
-    <div class="text-blue-300 text-xs mt-0.5">Certification HAS V2025</div>
-  </div>
-  <nav class="flex-1 p-3 space-y-1 overflow-y-auto">
-    <div class="nav-item active" onclick="showView('dashboard')" id="nav-dashboard">
-      <span>📊</span> <span>Tableau de bord</span>
-    </div>
-    <div id="nav-eval" class="nav-item hidden" onclick="showView('evaluation')">
-      <span>📋</span> <span id="nav-eval-label">Évaluation</span>
-    </div>
-    <div class="nav-item" onclick="showView('about')">
-      <span>ℹ️</span> <span>À propos</span>
-    </div>
-  </nav>
-  <div class="p-4 border-t border-blue-700">
-    <div class="text-blue-300 text-xs">Référentiel HAS V2025</div>
-    <div class="text-blue-400 text-xs mt-0.5" id="criteria-count">Chargement…</div>
-  </div>
-</aside>
-
-<!-- ═══════════════════ MAIN ═══════════════════ -->
-<main class="flex-1 flex flex-col overflow-hidden">
-
-<!-- ── DASHBOARD ── -->
-<div id="view-dashboard" class="flex-1 overflow-y-auto p-6">
-  <div class="flex items-center justify-between mb-6">
-    <div>
-      <h1 class="text-2xl font-bold text-gray-800">Tableau de bord</h1>
-      <p class="text-gray-500 text-sm mt-0.5">Gestion des grilles d'audit HAS V2025</p>
-    </div>
-    <button onclick="openNewEvalModal()"
-      class="flex items-center gap-2 px-5 py-2.5 rounded-lg text-white font-semibold text-sm shadow-sm hover:opacity-90 transition"
-      style="background:var(--has-blue)">
-      + Nouvelle évaluation
-    </button>
-  </div>
-
-  <!-- Stats cards -->
-  <div class="grid grid-cols-4 gap-4 mb-6" id="stats-cards">
-    <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-      <div class="text-xs text-gray-500 font-medium uppercase tracking-wide">Total évaluations</div>
-      <div class="text-3xl font-bold text-gray-800 mt-1" id="stat-total">—</div>
-    </div>
-    <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-      <div class="text-xs font-medium uppercase tracking-wide" style="color:var(--green)">Conformes</div>
-      <div class="text-3xl font-bold mt-1" style="color:var(--green)" id="stat-green">—</div>
-    </div>
-    <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-      <div class="text-xs font-medium uppercase tracking-wide" style="color:var(--orange)">Partiellement conformes</div>
-      <div class="text-3xl font-bold mt-1" style="color:var(--orange)" id="stat-orange">—</div>
-    </div>
-    <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-      <div class="text-xs font-medium uppercase tracking-wide" style="color:var(--red)">Non conformes</div>
-      <div class="text-3xl font-bold mt-1" style="color:var(--red)" id="stat-red">—</div>
-    </div>
-  </div>
-
-  <!-- Evaluations list -->
-  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-    <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
-      <h2 class="font-semibold text-gray-700">Évaluations</h2>
-      <input id="search-evals" type="text" placeholder="Rechercher…" style="width:220px;padding:5px 10px;font-size:13px"
-             oninput="filterEvaluations(this.value)"/>
-    </div>
-    <div id="evaluations-list">
-      <div class="p-8 text-center text-gray-400">Chargement…</div>
-    </div>
-  </div>
-</div>
-
-<!-- ── EVALUATION VIEW ── -->
-<div id="view-evaluation" class="flex-1 flex flex-col overflow-hidden hidden">
-
-  <!-- Score bar (sticky) -->
-  <div class="sticky-score bg-white border-b border-gray-200 px-6 py-3 flex items-center gap-6 shadow-sm">
-    <div class="flex-1 min-w-0">
-      <div class="text-xs text-gray-500 font-medium" id="eval-breadcrumb">Évaluation</div>
-      <div class="font-semibold text-gray-800 text-sm truncate" id="eval-title-top">—</div>
-    </div>
-    <div class="flex items-center gap-6 shrink-0">
-      <div class="text-center">
-        <div class="text-xs text-gray-500">Score</div>
-        <div class="text-xl font-bold" id="score-pct-display">—</div>
+<!-- ═══════════════════════ AUTH OVERLAY ═══════════════════════ -->
+<div id="auth-overlay">
+  <div class="auth-card">
+    <div class="text-center mb-6">
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-full mb-3" style="background:#1E4FA5">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
       </div>
-      <div class="progress-bar w-32">
-        <div class="progress-fill" id="score-progress" style="width:0;background:var(--green)"></div>
-      </div>
-      <div class="text-center">
-        <div class="text-xs text-gray-500">Oui/Non/NA</div>
-        <div class="text-sm font-semibold text-gray-700">
-          <span class="text-green-600" id="s-oui">0</span> /
-          <span class="text-red-600" id="s-non">0</span> /
-          <span class="text-gray-400" id="s-na">0</span>
-        </div>
-      </div>
-      <div class="text-center">
-        <div class="text-xs text-gray-500">Fiches anomalie</div>
-        <div class="text-xl font-bold text-red-600" id="s-anomalies">0</div>
-      </div>
-      <div id="decision-badge" class="px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap" style="background:#F3F4F6;color:#6B7280">
-        Non évalué
-      </div>
-      <div class="flex gap-2">
-        <button onclick="exportExcel()" class="px-3 py-1.5 bg-green-50 text-green-700 border border-green-200 rounded-lg text-xs font-semibold hover:bg-green-100 transition">
-          📥 Excel
-        </button>
-        <button onclick="exportPDF()" class="px-3 py-1.5 bg-red-50 text-red-700 border border-red-200 rounded-lg text-xs font-semibold hover:bg-red-100 transition">
-          📄 PDF
-        </button>
-        <button onclick="showView('dashboard')" class="px-3 py-1.5 bg-gray-100 text-gray-600 rounded-lg text-xs font-semibold hover:bg-gray-200 transition">
-          ← Retour
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Tabs -->
-  <div class="bg-white border-b border-gray-200 px-6 flex gap-1">
-    <button class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 transition" id="tab-saisie"
-            onclick="showTab('saisie')" style="border-color:var(--has-blue);color:var(--has-blue)">
-      📝 Saisie des critères
-    </button>
-    <button class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-gray-500 transition" id="tab-header"
-            onclick="showTab('header')">
-      📋 Informations
-    </button>
-    <button class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 border-transparent text-gray-500 transition" id="tab-results"
-            onclick="showTab('results')">
-      📊 Résultats détaillés
-    </button>
-  </div>
-
-  <!-- Tab content -->
-  <div class="flex-1 overflow-hidden flex flex-col">
-
-    <!-- SAISIE TAB -->
-    <div id="tab-content-saisie" class="flex-1 overflow-hidden flex flex-col">
-      <!-- Filters -->
-      <div class="bg-white border-b border-gray-100 px-6 py-3">
-        <div class="flex flex-wrap items-center gap-3">
-          <span class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Filtres :</span>
-          <div>
-            <select id="filter-chap" onchange="applyFilters()" style="width:auto;padding:4px 8px;font-size:12px">
-              <option value="">Tous chapitres</option>
-              <option value="1">1 – Le patient</option>
-              <option value="2">2 – Les équipes de soins</option>
-              <option value="3">3 – L'établissement</option>
-            </select>
-          </div>
-          <div>
-            <select id="filter-niveau" onchange="applyFilters()" style="width:auto;padding:4px 8px;font-size:12px">
-              <option value="">Tous niveaux</option>
-              <option value="Impératif">⚠️ Impératif</option>
-              <option value="Standard">Standard</option>
-              <option value="Avancé">Avancé</option>
-            </select>
-          </div>
-          <div>
-            <select id="filter-reponse" onchange="applyFilters()" style="width:auto;padding:4px 8px;font-size:12px">
-              <option value="">Toutes réponses</option>
-              <option value="non_renseigne">Non renseigné</option>
-              <option value="Oui">✅ Oui</option>
-              <option value="Non">❌ Non</option>
-              <option value="NA">— NA</option>
-            </select>
-          </div>
-          <div>
-            <select id="filter-methode" onchange="applyFilters()" style="width:auto;padding:4px 8px;font-size:12px">
-              <option value="">Toutes méthodes</option>
-              <option value="Patient traceur">Patient traceur</option>
-              <option value="Parcours traceur">Parcours traceur</option>
-              <option value="Observation">Observation</option>
-              <option value="Audit système">Audit système</option>
-              <option value="Traceur ciblé">Traceur ciblé</option>
-            </select>
-          </div>
-          <input id="filter-search" type="text" placeholder="Rechercher un critère…"
-                 style="width:200px;padding:4px 8px;font-size:12px" oninput="applyFilters()"/>
-          <button onclick="resetFilters()" class="text-xs text-blue-600 hover:underline">Réinitialiser</button>
-          <span class="ml-auto text-xs text-gray-400" id="filter-count"></span>
-        </div>
-      </div>
-
-      <!-- Criteria list -->
-      <div class="flex-1 overflow-y-auto p-4" id="criteria-container">
-        <div class="text-center text-gray-400 py-12">Chargement des critères…</div>
-      </div>
+      <h1 class="text-2xl font-bold text-gray-800">GoCertif Web</h1>
+      <p class="text-sm text-gray-500 mt-1">Grilles d'audit HAS V2025</p>
     </div>
 
-    <!-- HEADER TAB -->
-    <div id="tab-content-header" class="flex-1 overflow-y-auto p-6 hidden">
-      <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-        <h3 class="font-bold text-gray-800 mb-5 text-lg">Informations de l'évaluation</h3>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="col-span-2">
-            <label class="block text-xs font-semibold text-gray-600 mb-1">Nom de l'évaluation *</label>
-            <input id="h-nom" type="text" placeholder="ex: PT Chirurgie Mars 2026"/>
-          </div>
-          <div class="col-span-2">
-            <label class="block text-xs font-semibold text-gray-600 mb-1">Méthode d'évaluation</label>
-            <select id="h-methode">
-              <option>Parcours traceur</option>
-              <option>Patient traceur</option>
-              <option>Traceur ciblé</option>
-              <option>Observations</option>
-              <option>Audit système</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-gray-600 mb-1">Établissement / Site</label>
-            <input id="h-etablissement" type="text" placeholder="CHU de…"/>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-gray-600 mb-1">Service(s)</label>
-            <input id="h-service" type="text" placeholder="Chirurgie orthopédique…"/>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-gray-600 mb-1">Date de l'audit</label>
-            <input id="h-date" type="date"/>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-gray-600 mb-1">Code Calista</label>
-            <input id="h-calista" type="text"/>
-          </div>
-          <div class="col-span-2">
-            <label class="block text-xs font-semibold text-gray-600 mb-1">Auditeurs (Nom – Fonction – Service)</label>
-            <textarea id="h-auditeurs" rows="2" placeholder="Dr Dupont – Médecin – Chirurgie&#10;Mme Martin – Cadre de santé – Qualité"></textarea>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-gray-600 mb-1">1. Secteur PEC</label>
-            <select id="h-secteur">
-              <option value=""></option>
-              <option>Chirurgie et interventionnel</option>
-              <option>Maternité</option>
-              <option>Médecine</option>
-              <option>Psychiatrie et santé mentale</option>
-              <option>Soins critiques</option>
-              <option>Soins de suite et réadaptation</option>
-              <option>Soins de longue durée</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-gray-600 mb-1">2. Mode PEC</label>
-            <select id="h-mode-pec">
-              <option value=""></option>
-              <option>Ambulatoire</option>
-              <option>Hospitalisation complète</option>
-              <option>HAD</option>
-              <option>HDJ</option>
-              <option>HDS</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-gray-600 mb-1">3. Mode entrée</label>
-            <select id="h-mode-entree">
-              <option value=""></option>
-              <option>Programmé</option>
-              <option>SAMU-SMUR</option>
-              <option>Urgences</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-gray-600 mb-1">4. Âge patient</label>
-            <select id="h-age">
-              <option value=""></option>
-              <option>Adulte</option>
-              <option>Enfant et adolescent</option>
-              <option>Patient âgé (+ 75 ans)</option>
-            </select>
-          </div>
-          <div class="col-span-2">
-            <label class="block text-xs font-semibold text-gray-600 mb-1">5. Caractéristiques patient</label>
-            <select id="h-caract">
-              <option value=""></option>
-              <option>Maladie chronique</option>
-              <option>Pas de situation particulière</option>
-              <option>Patient atteint d'un cancer</option>
-              <option>Patient en situation de handicap</option>
-              <option>Patient en situation de précarité</option>
-            </select>
-          </div>
-          <div class="col-span-2">
-            <label class="block text-xs font-semibold text-gray-600 mb-1">Notes globales</label>
-            <textarea id="h-notes" rows="3" placeholder="Observations générales…"></textarea>
-          </div>
-        </div>
-        <div class="mt-5 flex gap-3">
-          <button onclick="saveHeader()"
-            class="px-6 py-2.5 rounded-lg text-white font-semibold text-sm hover:opacity-90 transition"
-            style="background:var(--has-blue)">
-            💾 Enregistrer
-          </button>
-          <div id="header-save-msg" class="text-sm text-green-600 flex items-center hidden">✓ Enregistré</div>
-        </div>
-      </div>
+    <div class="flex gap-2 mb-6 bg-gray-100 p-1 rounded-lg">
+      <button onclick="switchAuthTab('login')" id="tab-login" class="flex-1 py-2 rounded-md text-sm font-semibold transition-all bg-white shadow text-blue-700">Connexion</button>
+      <button onclick="switchAuthTab('register')" id="tab-register" class="flex-1 py-2 rounded-md text-sm font-semibold transition-all text-gray-500">Créer un compte</button>
     </div>
 
-    <!-- RESULTS TAB -->
-    <div id="tab-content-results" class="flex-1 overflow-y-auto p-6 hidden">
-      <div class="grid grid-cols-3 gap-4 mb-6">
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 col-span-1">
-          <h3 class="font-semibold text-gray-700 mb-3">Score global</h3>
-          <canvas id="score-chart" height="200"></canvas>
-          <div class="mt-3 text-center">
-            <div class="text-3xl font-bold" id="result-score-pct">—</div>
-            <div class="text-xs text-gray-500 mt-0.5">de conformité</div>
-          </div>
-        </div>
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-          <h3 class="font-semibold text-gray-700 mb-4">Répartition des réponses</h3>
-          <div class="space-y-3">
-            <div>
-              <div class="flex justify-between text-sm mb-1">
-                <span class="text-green-600 font-medium">✅ Oui</span>
-                <span id="res-oui-count" class="font-bold">—</span>
-              </div>
-              <div class="progress-bar"><div id="res-oui-bar" class="progress-fill" style="background:var(--green);width:0"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between text-sm mb-1">
-                <span class="text-red-600 font-medium">❌ Non</span>
-                <span id="res-non-count" class="font-bold">—</span>
-              </div>
-              <div class="progress-bar"><div id="res-non-bar" class="progress-fill" style="background:var(--red);width:0"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between text-sm mb-1">
-                <span class="text-gray-400 font-medium">— NA</span>
-                <span id="res-na-count" class="font-bold">—</span>
-              </div>
-              <div class="progress-bar"><div id="res-na-bar" class="progress-fill" style="background:#9CA3AF;width:0"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between text-sm mb-1">
-                <span class="text-gray-300 font-medium">○ Non renseigné</span>
-                <span id="res-nr-count" class="font-bold">—</span>
-              </div>
-              <div class="progress-bar"><div id="res-nr-bar" class="progress-fill" style="background:#E5E7EB;width:0"></div></div>
-            </div>
-          </div>
-        </div>
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-          <h3 class="font-semibold text-gray-700 mb-4">Niveau de décision</h3>
-          <div id="decision-detail" class="space-y-2"></div>
-          <div class="mt-4 pt-4 border-t border-gray-100">
-            <div class="text-xs text-gray-500 mb-2">Fiches d'anomalie (Non sur critère Impératif)</div>
-            <div id="anomalies-list" class="space-y-1"></div>
-          </div>
-        </div>
+    <form id="login-form" onsubmit="doLogin(event)">
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+        <input id="login-email" type="email" class="input-field" placeholder="vous@etablissement.fr" required/>
       </div>
-      <!-- Score par objectif -->
-      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-        <h3 class="font-semibold text-gray-700 mb-4">Score par objectif</h3>
-        <canvas id="objectif-chart" height="80"></canvas>
+      <div class="mb-5">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
+        <input id="login-pwd" type="password" class="input-field" placeholder="••••••••" required/>
       </div>
-    </div>
+      <div id="login-error" class="hidden mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-lg"></div>
+      <button type="submit" class="btn-primary w-full py-3">Se connecter</button>
+    </form>
 
-  </div><!-- end tab content -->
-</div><!-- end view-evaluation -->
-
-<!-- ── ABOUT VIEW ── -->
-<div id="view-about" class="flex-1 overflow-y-auto p-6 hidden">
-  <div class="max-w-2xl mx-auto">
-    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
-      <h1 class="text-2xl font-bold mb-2" style="color:var(--has-blue)">GoCertif Web</h1>
-      <p class="text-gray-600 mb-6">Interface de gestion des grilles d'audit HAS — Version 2025</p>
-      <div class="space-y-4 text-sm text-gray-600">
-        <div class="flex gap-3 p-3 bg-blue-50 rounded-lg">
-          <span class="text-2xl">📋</span>
-          <div><strong>Référentiel V2025</strong> — 118 critères (20 impératifs, 93 standards, 5 avancés) répartis en 12 objectifs et 3 chapitres. Applicable depuis septembre 2025.</div>
-        </div>
-        <div class="flex gap-3 p-3 bg-green-50 rounded-lg">
-          <span class="text-2xl">💡</span>
-          <div><strong>Scoring</strong> — Score = Oui / (Oui + Non) × 100. Les NA sont exclus du calcul. Les «Non» sur critères Impératifs génèrent des fiches d'anomalie.</div>
-        </div>
-        <div class="flex gap-3 p-3 bg-orange-50 rounded-lg">
-          <span class="text-2xl">📊</span>
-          <div><strong>Niveaux de décision</strong> (indicatifs) :
-            <ul class="mt-1 space-y-0.5">
-              <li><span class="font-semibold text-green-600">Conforme</span> : Score ≥ 80% ET 0 fiche d'anomalie</li>
-              <li><span class="font-semibold text-orange-500">Partiel</span> : Score 60-79% OU 1-2 fiches d'anomalie</li>
-              <li><span class="font-semibold text-red-600">Non conforme</span> : Score &lt; 60% OU ≥ 3 fiches d'anomalie</li>
-            </ul>
-          </div>
-        </div>
-        <div class="flex gap-3 p-3 bg-purple-50 rounded-lg">
-          <span class="text-2xl">💾</span>
-          <div><strong>Données</strong> — Toutes les évaluations et réponses sont sauvegardées localement dans une base SQLite (<code>gocertif.db</code>). Pas de connexion internet requise.</div>
-        </div>
-        <div class="flex gap-3 p-3 bg-gray-50 rounded-lg">
-          <span class="text-2xl">📥</span>
-          <div><strong>Export</strong> — Chaque évaluation peut être exportée en Excel (XLSX) ou en PDF avec l'ensemble des critères, réponses, notes et plan d'actions.</div>
-        </div>
+    <form id="register-form" class="hidden" onsubmit="doRegister(event)">
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+        <input id="reg-email" type="email" class="input-field" placeholder="vous@etablissement.fr" required/>
       </div>
-    </div>
-  </div>
-</div>
-
-</main><!-- end main -->
-
-<!-- ═══════════════════ MODAL NOUVELLE ÉVALUATION ═══════════════════ -->
-<div id="modal-new-eval" class="modal-overlay hidden">
-  <div class="modal">
-    <div class="flex items-center justify-between mb-5">
-      <h2 class="text-xl font-bold text-gray-800">Nouvelle évaluation</h2>
-      <button onclick="closeNewEvalModal()" class="text-gray-400 hover:text-gray-600 text-2xl leading-none">&times;</button>
-    </div>
-    <div class="space-y-4">
-      <div>
-        <label class="block text-xs font-semibold text-gray-600 mb-1">Nom de l'évaluation *</label>
-        <input id="new-nom" type="text" placeholder="ex : Patient traceur — Chirurgie — 15/03/2026"/>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Mot de passe <span class="text-gray-400">(6 car. min.)</span></label>
+        <input id="reg-pwd" type="password" class="input-field" placeholder="••••••••" required minlength="6"/>
       </div>
-      <div>
-        <label class="block text-xs font-semibold text-gray-600 mb-1">Méthode d'évaluation</label>
-        <select id="new-methode">
-          <option>Parcours traceur</option>
-          <option>Patient traceur</option>
-          <option>Traceur ciblé</option>
-          <option>Observations</option>
-          <option>Audit système</option>
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nom de l'établissement</label>
+        <input id="reg-nom" type="text" class="input-field" placeholder="CHU de Bordeaux"/>
+      </div>
+      <div class="mb-5">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Type de structure</label>
+        <select id="reg-type" class="input-field">
+          <option value="">Sélectionner…</option>
+          <option>CHU / CHR</option><option>CH général</option><option>Clinique privée</option>
+          <option>ESPIC</option><option>HAD</option><option>SSR</option><option>Psychiatrie</option><option>Autre</option>
         </select>
       </div>
-      <div class="grid grid-cols-2 gap-3">
-        <div>
-          <label class="block text-xs font-semibold text-gray-600 mb-1">Établissement / Site</label>
-          <input id="new-etab" type="text" placeholder="CHU de…"/>
+      <div id="reg-error" class="hidden mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-lg"></div>
+      <button type="submit" class="btn-primary w-full py-3">Créer le compte</button>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════ APP SHELL ═══════════════════════ -->
+<div id="app" class="hidden" style="display:none">
+<div class="flex h-screen overflow-hidden">
+
+  <!-- Sidebar -->
+  <aside class="sidebar w-56 flex-shrink-0 flex flex-col py-6 px-3">
+    <div class="px-3 mb-8">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-white bg-opacity-20 flex items-center justify-center">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
         </div>
         <div>
-          <label class="block text-xs font-semibold text-gray-600 mb-1">Service(s)</label>
-          <input id="new-service" type="text" placeholder="Chirurgie…"/>
+          <div class="text-white font-bold text-sm leading-tight">GoCertif</div>
+          <div class="text-blue-300 text-xs">HAS V2025</div>
         </div>
-      </div>
-      <div class="grid grid-cols-2 gap-3">
-        <div>
-          <label class="block text-xs font-semibold text-gray-600 mb-1">Date de l'audit</label>
-          <input id="new-date" type="date"/>
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-gray-600 mb-1">Code Calista</label>
-          <input id="new-calista" type="text"/>
-        </div>
-      </div>
-      <div>
-        <label class="block text-xs font-semibold text-gray-600 mb-1">Auditeurs</label>
-        <input id="new-auditeurs" type="text" placeholder="Nom – Fonction – Service"/>
       </div>
     </div>
-    <div class="flex gap-3 mt-6">
-      <button onclick="createEvaluation()"
-        class="flex-1 py-2.5 rounded-lg text-white font-semibold hover:opacity-90 transition"
-        style="background:var(--has-blue)">
-        Créer l'évaluation
-      </button>
-      <button onclick="closeNewEvalModal()"
-        class="px-5 py-2.5 rounded-lg border border-gray-200 text-gray-600 font-semibold hover:bg-gray-50 transition">
-        Annuler
-      </button>
+
+    <nav class="flex-1 space-y-1">
+      <div class="nav-item active" data-view="dashboard" onclick="showView('dashboard')">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        Tableau de bord
+      </div>
+      <div class="nav-item" data-view="evaluations" onclick="showView('evaluations')">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        Évaluations
+      </div>
+      <div class="nav-item" data-view="actions" onclick="showView('actions')">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+        Plan d'actions
+      </div>
+    </nav>
+
+    <div class="mt-auto space-y-1 border-t border-white border-opacity-10 pt-4">
+      <div class="nav-item" data-view="profile" onclick="showView('profile')">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        <span id="sidebar-user-name" class="truncate">Mon compte</span>
+      </div>
+      <div class="nav-item" onclick="doLogout()">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        Déconnexion
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="flex-1 overflow-y-auto bg-gray-50">
+
+    <!-- ── DASHBOARD ── -->
+    <div id="view-dashboard" class="p-6">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="text-xl font-bold text-gray-800">Tableau de bord</h2>
+          <p id="dash-etab" class="text-sm text-gray-500 mt-0.5"></p>
+        </div>
+        <button onclick="openNewEvalModal()" class="btn-primary flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          Nouvelle évaluation
+        </button>
+      </div>
+
+      <div class="grid grid-cols-4 gap-4 mb-6">
+        <div class="card p-4"><p class="text-xs text-gray-500 font-medium uppercase tracking-wide">Évaluations</p><p id="kpi-total" class="text-3xl font-bold text-gray-800 mt-1">—</p></div>
+        <div class="card p-4"><p class="text-xs text-gray-500 font-medium uppercase tracking-wide">Dernier score</p><p id="kpi-last-score" class="text-3xl font-bold mt-1 score-gray">—</p></div>
+        <div class="card p-4"><p class="text-xs text-gray-500 font-medium uppercase tracking-wide">Actions en cours</p><p id="kpi-actions" class="text-3xl font-bold text-yellow-600 mt-1">—</p></div>
+        <div class="card p-4"><p class="text-xs text-gray-500 font-medium uppercase tracking-wide">Actions critiques</p><p id="kpi-critical" class="text-3xl font-bold text-red-600 mt-1">—</p></div>
+      </div>
+
+      <div class="card p-5 mb-6">
+        <h3 class="font-semibold text-gray-700 mb-4 flex items-center gap-2">
+          <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/></svg>
+          Évolution du score (%)
+        </h3>
+        <div style="height:220px"><canvas id="evolution-chart"></canvas></div>
+        <p id="evolution-empty" class="text-center text-gray-400 text-sm py-8 hidden">Créez au moins 2 évaluations avec des réponses pour voir l'évolution.</p>
+      </div>
+
+      <div class="card p-5">
+        <h3 class="font-semibold text-gray-700 mb-4">Évaluations récentes</h3>
+        <div id="recent-evals"></div>
+      </div>
+    </div>
+
+    <!-- ── EVALUATIONS LIST ── -->
+    <div id="view-evaluations" class="p-6 hidden">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold text-gray-800">Évaluations</h2>
+        <div class="flex gap-2">
+          <label class="btn-secondary flex items-center gap-2 cursor-pointer text-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+            Importer JSON
+            <input type="file" accept=".json" class="hidden" onchange="importJSON(this)"/>
+          </label>
+          <button onclick="openNewEvalModal()" class="btn-primary flex items-center gap-2 text-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            Nouvelle évaluation
+          </button>
+        </div>
+      </div>
+      <div id="eval-list-grid" class="space-y-3"></div>
+    </div>
+
+    <!-- ── EVALUATION DETAIL ── -->
+    <div id="view-eval-detail" class="hidden flex-col h-full" style="display:none">
+      <div class="bg-white border-b border-gray-200 px-6 py-3 flex items-center gap-4 sticky top-0 z-10">
+        <button onclick="backToList()" class="text-gray-500 hover:text-gray-800 flex items-center gap-1 text-sm font-medium">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+          Retour
+        </button>
+        <div class="flex-1 min-w-0">
+          <h2 id="eval-title" class="font-bold text-gray-800 text-lg truncate"></h2>
+          <p id="eval-subtitle" class="text-xs text-gray-500"></p>
+        </div>
+        <span id="save-indicator" class="save-indicator flex-shrink-0">● Sauvegardé</span>
+        <div class="flex gap-2 flex-shrink-0">
+          <button onclick="exportJSON(currentEvalId)" class="btn-secondary text-xs flex items-center gap-1">JSON</button>
+          <button onclick="exportExcel(currentEvalId)" class="btn-secondary text-xs flex items-center gap-1">Excel</button>
+          <button onclick="exportPDF(currentEvalId)" class="btn-primary text-xs flex items-center gap-1">PDF</button>
+        </div>
+      </div>
+
+      <div class="bg-white border-b border-gray-100 px-6 py-2 flex gap-2">
+        <button class="tab-btn active" id="tbtn-saisie" onclick="switchTab('saisie',this)">Saisie</button>
+        <button class="tab-btn" id="tbtn-infos" onclick="switchTab('infos',this)">Informations</button>
+        <button class="tab-btn" id="tbtn-resultats" onclick="switchTab('resultats',this)">Résultats</button>
+        <button class="tab-btn" id="tbtn-actions-eval" onclick="switchTab('actions-eval',this)">Plan d'actions</button>
+      </div>
+
+      <!-- Tab Saisie -->
+      <div id="tab-saisie" class="flex-1 overflow-y-auto p-6">
+        <div class="card p-4 mb-4 flex flex-wrap gap-3 items-end">
+          <div>
+            <label class="block text-xs font-medium text-gray-600 mb-1">Méthode</label>
+            <select id="f-methode" class="input-field text-sm" style="width:200px" onchange="filterCriteria()">
+              <option value="">Toutes</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-gray-600 mb-1">Niveau</label>
+            <select id="f-niveau" class="input-field text-sm" style="width:130px" onchange="filterCriteria()">
+              <option value="">Tous</option>
+              <option>Impératif</option><option>Standard</option><option>Avancé</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-gray-600 mb-1">Réponse</label>
+            <select id="f-reponse" class="input-field text-sm" style="width:140px" onchange="filterCriteria()">
+              <option value="">Toutes</option>
+              <option value="Oui">Oui</option>
+              <option value="Non">Non</option>
+              <option value="NA">NA</option>
+              <option value="NR">Non renseigné</option>
+            </select>
+          </div>
+          <div class="flex-1">
+            <label class="block text-xs font-medium text-gray-600 mb-1">Recherche</label>
+            <input id="f-search" type="text" class="input-field text-sm" placeholder="Numéro ou mots-clés…" oninput="filterCriteria()"/>
+          </div>
+          <div class="text-xs text-gray-500" id="filter-count"></div>
+        </div>
+        <div id="criteria-container" class="space-y-0.5"></div>
+      </div>
+
+      <!-- Tab Infos -->
+      <div id="tab-infos" class="hidden p-6 overflow-y-auto">
+        <div class="card p-6 max-w-2xl">
+          <h3 class="font-semibold text-gray-700 mb-4">Informations du parcours</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Nom de l'évaluation</label><input id="info-nom" class="input-field" onchange="autoSaveInfo()"/></div>
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Méthode d'audit</label>
+              <select id="info-methode" class="input-field" onchange="autoSaveInfo()">
+                <option>Parcours traceur</option><option>Traceur ciblé</option>
+                <option>Observation des pratiques</option><option>Patient traceur</option><option>Audit système</option>
+              </select>
+            </div>
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Établissement</label><input id="info-etablissement" class="input-field" onchange="autoSaveInfo()"/></div>
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Service / Unité</label><input id="info-service" class="input-field" onchange="autoSaveInfo()"/></div>
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Date de l'audit</label><input id="info-date" type="date" class="input-field" onchange="autoSaveInfo()"/></div>
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Auditeurs</label><input id="info-auditeurs" class="input-field" onchange="autoSaveInfo()"/></div>
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Code Calista</label><input id="info-calista" class="input-field" onchange="autoSaveInfo()"/></div>
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Secteur PEC</label><select id="info-secteur" class="input-field" onchange="autoSaveInfo()"><option value="">—</option></select></div>
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Mode PEC</label><select id="info-mode-pec" class="input-field" onchange="autoSaveInfo()"><option value="">—</option></select></div>
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Mode d'entrée</label><select id="info-mode-entree" class="input-field" onchange="autoSaveInfo()"><option value="">—</option></select></div>
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Âge patient</label><select id="info-age" class="input-field" onchange="autoSaveInfo()"><option value="">—</option></select></div>
+            <div><label class="block text-xs font-medium text-gray-600 mb-1">Caractéristiques</label><select id="info-carac" class="input-field" onchange="autoSaveInfo()"><option value="">—</option></select></div>
+          </div>
+          <div class="mt-4"><label class="block text-xs font-medium text-gray-600 mb-1">Notes globales</label><textarea id="info-notes" rows="3" class="input-field" onchange="autoSaveInfo()"></textarea></div>
+        </div>
+      </div>
+
+      <!-- Tab Résultats -->
+      <div id="tab-resultats" class="hidden p-6 overflow-y-auto">
+        <div class="max-w-4xl">
+          <div id="score-banner" class="card p-5 mb-5">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+              <div>
+                <p class="text-sm text-gray-500 font-medium">Score global</p>
+                <p id="score-pct-big" class="text-5xl font-black mt-1 score-gray">—</p>
+                <p id="score-decision" class="text-sm font-semibold mt-1 score-gray"></p>
+              </div>
+              <div class="grid grid-cols-4 gap-4 text-center">
+                <div><p class="text-2xl font-bold text-green-600" id="sc-oui">—</p><p class="text-xs text-gray-500">Oui</p></div>
+                <div><p class="text-2xl font-bold text-red-500"  id="sc-non">—</p><p class="text-xs text-gray-500">Non</p></div>
+                <div><p class="text-2xl font-bold text-gray-400" id="sc-na">—</p><p class="text-xs text-gray-500">NA</p></div>
+                <div><p class="text-2xl font-bold text-yellow-500" id="sc-nr">—</p><p class="text-xs text-gray-500">N/R</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-5 mb-5">
+            <div class="card p-5"><h4 class="font-semibold text-gray-700 mb-3 text-sm">Répartition des réponses</h4><div style="height:200px"><canvas id="donut-chart"></canvas></div></div>
+            <div class="card p-5"><h4 class="font-semibold text-gray-700 mb-3 text-sm">Par chapitre</h4><div style="height:200px"><canvas id="bar-chart"></canvas></div></div>
+          </div>
+          <div id="anomalies-section" class="card p-5">
+            <h4 class="font-semibold text-red-700 mb-3 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+              Fiches d'anomalie — Critères impératifs non conformes
+            </h4>
+            <div id="anomalies-list" class="text-sm text-gray-500">Aucune anomalie.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Actions (per eval) -->
+      <div id="tab-actions-eval" class="hidden p-6 overflow-y-auto">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-semibold text-gray-700">Actions liées à cette évaluation</h3>
+          <button onclick="openActionModal(null, currentEvalId)" class="btn-primary text-sm flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            Ajouter une action
+          </button>
+        </div>
+        <div id="eval-actions-list" class="space-y-2"></div>
+      </div>
+    </div>
+
+    <!-- ── PLAN D'ACTIONS ── -->
+    <div id="view-actions" class="p-6 hidden">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold text-gray-800">Plan d'actions centralisé</h2>
+        <button onclick="openActionModal(null, null)" class="btn-primary flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          Nouvelle action
+        </button>
+      </div>
+      <div class="card p-4 mb-4 flex flex-wrap gap-3 items-end">
+        <div>
+          <label class="block text-xs font-medium text-gray-600 mb-1">Statut</label>
+          <select id="af-statut" class="input-field text-sm" style="width:160px" onchange="loadActions()">
+            <option value="">Tous</option><option value="todo">À faire</option>
+            <option value="in_progress">En cours</option><option value="done">Terminé</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-gray-600 mb-1">Priorité</label>
+          <select id="af-priorite" class="input-field text-sm" style="width:140px" onchange="filterActionsLocal()">
+            <option value="">Toutes</option><option value="critical">Critique</option>
+            <option value="high">Haute</option><option value="medium">Moyenne</option><option value="low">Faible</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid grid-cols-3 gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-3"><span class="w-3 h-3 rounded-full bg-gray-400"></span><span class="font-semibold text-sm text-gray-700">À faire</span><span id="cnt-todo" class="text-xs bg-gray-100 text-gray-500 rounded-full px-2">0</span></div>
+          <div id="col-todo" class="space-y-2 min-h-16"></div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 mb-3"><span class="w-3 h-3 rounded-full bg-yellow-400"></span><span class="font-semibold text-sm text-gray-700">En cours</span><span id="cnt-in_progress" class="text-xs bg-yellow-50 text-yellow-600 rounded-full px-2">0</span></div>
+          <div id="col-in_progress" class="space-y-2 min-h-16"></div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 mb-3"><span class="w-3 h-3 rounded-full bg-green-400"></span><span class="font-semibold text-sm text-gray-700">Terminé</span><span id="cnt-done" class="text-xs bg-green-50 text-green-600 rounded-full px-2">0</span></div>
+          <div id="col-done" class="space-y-2 min-h-16"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PROFIL ── -->
+    <div id="view-profile" class="p-6 hidden">
+      <h2 class="text-xl font-bold text-gray-800 mb-6">Mon compte</h2>
+      <div class="card p-6 max-w-md">
+        <div class="mb-4"><label class="block text-xs font-medium text-gray-600 mb-1">Email</label><input id="prof-email" class="input-field bg-gray-50" disabled/></div>
+        <div class="mb-4"><label class="block text-xs font-medium text-gray-600 mb-1">Nom de l'établissement</label><input id="prof-nom" class="input-field"/></div>
+        <div class="mb-5">
+          <label class="block text-xs font-medium text-gray-600 mb-1">Type de structure</label>
+          <select id="prof-type" class="input-field">
+            <option value="">Sélectionner…</option>
+            <option>CHU / CHR</option><option>CH général</option><option>Clinique privée</option>
+            <option>ESPIC</option><option>HAD</option><option>SSR</option><option>Psychiatrie</option><option>Autre</option>
+          </select>
+        </div>
+        <button onclick="saveProfile()" class="btn-primary w-full">Enregistrer</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+</div>
+
+<!-- ─── MODALS ─────────────────────────────────────────────────────────────── -->
+<div id="modal-new-eval" class="hidden fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-md">
+    <h3 class="font-bold text-gray-800 text-lg mb-4">Nouvelle évaluation</h3>
+    <div class="mb-4"><label class="block text-xs font-medium text-gray-600 mb-1">Nom</label><input id="new-eval-nom" class="input-field" placeholder="Ex : Parcours chirurgie — mars 2025"/></div>
+    <div class="mb-5">
+      <label class="block text-xs font-medium text-gray-600 mb-1">Méthode</label>
+      <select id="new-eval-methode" class="input-field">
+        <option>Parcours traceur</option><option>Traceur ciblé</option>
+        <option>Observation des pratiques</option><option>Patient traceur</option><option>Audit système</option>
+      </select>
+    </div>
+    <div class="flex gap-3 justify-end">
+      <button onclick="closeModal('modal-new-eval')" class="btn-secondary">Annuler</button>
+      <button onclick="createEvaluation()" class="btn-primary">Créer</button>
     </div>
   </div>
 </div>
 
-<!-- Toast notification -->
-<div id="toast" class="fixed bottom-6 right-6 px-4 py-2.5 rounded-lg shadow-lg text-white text-sm font-semibold hidden" style="z-index:200;background:#1E293B;transition:opacity .2s"></div>
+<div id="modal-action" class="hidden fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-lg">
+    <h3 id="modal-action-title" class="font-bold text-gray-800 text-lg mb-4">Nouvelle action</h3>
+    <input type="hidden" id="action-id-hidden"/>
+    <input type="hidden" id="action-eval-hidden"/>
+    <div class="grid grid-cols-2 gap-4 mb-4">
+      <div class="col-span-2"><label class="block text-xs font-medium text-gray-600 mb-1">Titre *</label><input id="action-titre" class="input-field" placeholder="Ex : Mettre en place le protocole de traçabilité"/></div>
+      <div><label class="block text-xs font-medium text-gray-600 mb-1">Critère lié</label><input id="action-critere" class="input-field" placeholder="ex: 1.2.3"/></div>
+      <div><label class="block text-xs font-medium text-gray-600 mb-1">Responsable</label><input id="action-resp" class="input-field" placeholder="Dr. Martin"/></div>
+      <div><label class="block text-xs font-medium text-gray-600 mb-1">Échéance</label><input id="action-echeance" type="date" class="input-field"/></div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Priorité</label>
+        <select id="action-priorite" class="input-field">
+          <option value="low">Faible</option><option value="medium" selected>Moyenne</option>
+          <option value="high">Haute</option><option value="critical">Critique</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-gray-600 mb-1">Statut</label>
+        <select id="action-statut" class="input-field">
+          <option value="todo">À faire</option><option value="in_progress">En cours</option><option value="done">Terminé</option>
+        </select>
+      </div>
+      <div class="col-span-2"><label class="block text-xs font-medium text-gray-600 mb-1">Description</label><textarea id="action-desc" rows="3" class="input-field" placeholder="Détails, contexte, ressources nécessaires…"></textarea></div>
+    </div>
+    <div class="flex gap-3 justify-end">
+      <button onclick="closeModal('modal-action')" class="btn-secondary">Annuler</button>
+      <button onclick="saveAction()" class="btn-primary">Enregistrer</button>
+    </div>
+  </div>
+</div>
 
-<!-- ═══════════════════ JAVASCRIPT ═══════════════════ -->
+<div id="toast" class="toast"></div>
+
+<!-- ─── JS ────────────────────────────────────────────────────────────────── -->
 <script>
-// ── State ──────────────────────────────────────────────────────────────────
-let currentEvalId = null;
-let currentEvalData = null;
-let allCriteria = [];
-let allEvaluations = [];
-let pendingResponses = {};    // critere_numero -> {reponse, notes, plan_action}
-let saveTimer = null;
-let scoreChartInstance = null;
-let objectifChartInstance = null;
+// ─── State ───────────────────────────────────────────────────────────────────
+let currentUser    = null;
+let currentEvalId  = null;
+let allCriteria    = [];
+let evalData       = {};
+let meta           = {};
+let allActions     = [];
+let saveTimer      = null;
+let dirtyReponses  = {};
+let donutChart     = null;
+let barChart       = null;
+let evolutionChart = null;
 
-// ── Utilities ───────────────────────────────────────────────────────────────
-const $ = id => document.getElementById(id);
-const API = path => fetch(path).then(r => r.json());
-const POST = (path, body) => fetch(path, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)}).then(r => r.json());
-const PUT  = (path, body) => fetch(path, {method:'PUT',  headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)}).then(r => r.json());
-const DEL  = path => fetch(path, {method:'DELETE'}).then(r => r.json());
-
-function toast(msg, ok=true) {
-  const t = $('toast');
-  t.textContent = msg;
-  t.style.background = ok ? '#16A34A' : '#DC2626';
-  t.classList.remove('hidden');
-  setTimeout(() => t.classList.add('hidden'), 2500);
-}
-
-// ── Navigation ──────────────────────────────────────────────────────────────
-function showView(view) {
-  ['dashboard','evaluation','about'].forEach(v => {
-    $(`view-${v}`).classList.add('hidden');
-    const n = $(`nav-${v}`);
-    if (n) n.classList.remove('active');
-  });
-  $(`view-${view}`).classList.remove('hidden');
-  const n = $(`nav-${view}`);
-  if (n) n.classList.add('active');
-
-  if (view === 'dashboard') loadDashboard();
-  if (view === 'evaluation' && currentEvalId) loadEvaluation(currentEvalId);
-}
-
-function showTab(tab) {
-  ['saisie','header','results'].forEach(t => {
-    $(`tab-content-${t}`).classList.add('hidden');
-    const btn = $(`tab-${t}`);
-    btn.style.borderColor = 'transparent';
-    btn.style.color = '#6B7280';
-  });
-  $(`tab-content-${tab}`).classList.remove('hidden');
-  const btn = $(`tab-${tab}`);
-  btn.style.borderColor = 'var(--has-blue)';
-  btn.style.color = 'var(--has-blue)';
-  if (tab === 'results') refreshResultsTab();
-}
-
-// ── Dashboard ────────────────────────────────────────────────────────────────
-async function loadDashboard() {
-  const data = await API('/api/evaluations');
-  allEvaluations = data;
-  renderEvaluationsList(data);
-  updateStats(data);
-}
-
-function updateStats(evals) {
-  $('stat-total').textContent  = evals.length;
-  $('stat-green').textContent  = evals.filter(e => e.score?.decision_class === 'green').length;
-  $('stat-orange').textContent = evals.filter(e => e.score?.decision_class === 'orange').length;
-  $('stat-red').textContent    = evals.filter(e => e.score?.decision_class === 'red').length;
-}
-
-function renderEvaluationsList(evals) {
-  const container = $('evaluations-list');
-  if (!evals.length) {
-    container.innerHTML = `<div class="p-12 text-center">
-      <div class="text-5xl mb-3">📋</div>
-      <div class="text-gray-500 font-medium">Aucune évaluation</div>
-      <div class="text-gray-400 text-sm mt-1">Créez votre première évaluation pour commencer</div>
-    </div>`;
-    return;
-  }
-  const dcColors = {green:'text-green-600 bg-green-50',orange:'text-orange-500 bg-orange-50',red:'text-red-600 bg-red-50',gray:'text-gray-400 bg-gray-50'};
-  const dcLabels = {green:'✅ Conforme',orange:'⚠️ Partiel',red:'❌ Non conforme',gray:'○ Non évalué'};
-
-  container.innerHTML = evals.map(e => {
-    const s = e.score || {};
-    const dc = s.decision_class || 'gray';
-    const spct = s.score_pct != null ? `${s.score_pct}%` : '—';
-    const dateStr = e.date_audit ? new Date(e.date_audit).toLocaleDateString('fr-FR') : '—';
-    return `<div class="flex items-center gap-4 px-5 py-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer transition"
-                 onclick="openEvaluation(${e.id})">
-      <div class="w-10 h-10 rounded-lg flex items-center justify-center text-lg"
-           style="background:var(--has-blue-light);color:var(--has-blue)">📋</div>
-      <div class="flex-1 min-w-0">
-        <div class="font-semibold text-gray-800 text-sm truncate">${e.nom}</div>
-        <div class="text-gray-400 text-xs mt-0.5">${e.methode} • ${e.etablissement || '—'} • ${e.service || '—'} • ${dateStr}</div>
-      </div>
-      <div class="text-right shrink-0">
-        <div class="font-bold text-lg ${dc === 'gray' ? 'text-gray-300' : dc === 'green' ? 'text-green-600' : dc === 'orange' ? 'text-orange-500' : 'text-red-600'}">${spct}</div>
-        <div class="text-xs text-gray-400">${s.oui||0}✅ ${s.non||0}❌ ${s.na||0}NA | ${s.nb_anomalies||0} anomalie(s)</div>
-      </div>
-      <div class="shrink-0">
-        <span class="tag ${dcColors[dc]}">${dcLabels[dc]}</span>
-      </div>
-      <button onclick="event.stopPropagation(); deleteEvaluation(${e.id})"
-              class="text-gray-300 hover:text-red-500 transition text-lg leading-none px-1">🗑</button>
-    </div>`;
-  }).join('');
-}
-
-function filterEvaluations(q) {
-  const filtered = q ? allEvaluations.filter(e =>
-    (e.nom||'').toLowerCase().includes(q.toLowerCase()) ||
-    (e.etablissement||'').toLowerCase().includes(q.toLowerCase()) ||
-    (e.service||'').toLowerCase().includes(q.toLowerCase())
-  ) : allEvaluations;
-  renderEvaluationsList(filtered);
-}
-
-// ── Evaluation ──────────────────────────────────────────────────────────────
-async function openEvaluation(id) {
-  currentEvalId = id;
-  $('nav-eval').classList.remove('hidden');
-  showView('evaluation');
-  showTab('saisie');
-}
-
-async function loadEvaluation(id) {
-  const data = await API(`/api/evaluations/${id}`);
-  currentEvalData = data;
-  pendingResponses = {};
-
-  // Fill header fields
-  $('h-nom').value          = data.nom || '';
-  $('h-methode').value      = data.methode || 'Parcours traceur';
-  $('h-etablissement').value= data.etablissement || '';
-  $('h-service').value      = data.service || '';
-  $('h-date').value         = data.date_audit || '';
-  $('h-calista').value      = data.code_calista || '';
-  $('h-auditeurs').value    = data.auditeurs || '';
-  $('h-secteur').value      = data.secteur_pec || '';
-  $('h-mode-pec').value     = data.mode_pec || '';
-  $('h-mode-entree').value  = data.mode_entree || '';
-  $('h-age').value          = data.age_patient || '';
-  $('h-caract').value       = data.caracteristiques || '';
-  $('h-notes').value        = data.notes_globales || '';
-
-  $('eval-title-top').textContent = data.nom;
-  $('eval-breadcrumb').textContent = data.methode;
-  $('nav-eval-label').textContent  = data.nom.substring(0,20);
-
-  updateScoreDisplay(data.score || {});
-  renderCriteriaGrid(data.reponses || {});
-}
-
-// ── Criteria Grid ────────────────────────────────────────────────────────────
-function renderCriteriaGrid(reponses) {
-  const container = $('criteria-container');
-  if (!allCriteria.length) {
-    container.innerHTML = '<div class="text-center text-gray-400 py-8">Chargement…</div>';
-    return;
-  }
-
-  let currentChap = null, currentObj = null;
-  const parts = [];
-
-  for (const crit of allCriteria) {
-    const rep = reponses[crit.numero] || {};
-
-    if (crit.chapitre !== currentChap) {
-      currentChap = crit.chapitre;
-      const chapColors = {'1':'border-blue-400 bg-blue-50','2':'border-green-400 bg-green-50','3':'border-orange-400 bg-orange-50'};
-      parts.push(`<div class="mb-2 mt-4 px-4 py-2 rounded-lg font-bold text-sm ${chapColors[crit.chapitre_num] || ''} border">
-        ${crit.chapitre_num}. ${crit.chapitre}
-      </div>`);
-      currentObj = null;
-    }
-    if (crit.objectif !== currentObj) {
-      currentObj = crit.objectif;
-      parts.push(`<div class="px-4 py-1.5 mb-1 mt-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">
-        ${crit.objectif_num} — ${crit.objectif}
-      </div>`);
-    }
-
-    const niveauBadge = {
-      'Impératif': 'badge-imp',
-      'Standard':  'badge-std',
-      'Avancé':    'badge-adv'
-    }[crit.niveau] || 'badge-std';
-
-    const rval  = rep.reponse || '';
-    const oAct  = rval === 'Oui'  ? 'active' : '';
-    const nAct  = rval === 'Non'  ? 'active' : '';
-    const naAct = rval === 'NA'   ? 'active' : '';
-    const hasNotes = rep.notes || rep.plan_action;
-    const methTags = (crit.methodes||[]).map(m => `<span class="tag" style="background:#EEF2FF;color:#4338CA;font-size:10px">${m}</span>`).join('');
-
-    parts.push(`
-    <div class="critere-row chap-${crit.chapitre_num} bg-white rounded-lg border border-gray-100 mb-2 overflow-hidden"
-         data-num="${crit.numero}" data-chap="${crit.chapitre_num}" data-obj="${crit.objectif_num}"
-         data-niveau="${crit.niveau}" data-methodes="${(crit.methodes||[]).join(',')}"
-         data-reponse="${rval}">
-      <div class="flex items-start gap-3 px-4 py-3">
-        <!-- Numero -->
-        <div class="shrink-0 w-20 pt-0.5">
-          <div class="font-mono font-bold text-xs text-gray-600">${crit.numero}</div>
-          <span class="tag ${niveauBadge} mt-1">${crit.niveau}</span>
-        </div>
-        <!-- Titre + champ -->
-        <div class="flex-1 min-w-0">
-          <div class="text-sm text-gray-800 font-medium leading-snug">${crit.titre}</div>
-          <div class="flex flex-wrap gap-1 mt-1.5 items-center">
-            <span class="text-xs text-gray-400">📍 ${crit.champ}</span>
-            ${methTags}
-          </div>
-        </div>
-        <!-- Buttons -->
-        <div class="shrink-0 flex gap-1.5 items-center">
-          <button class="btn-oui ${oAct} px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer transition hover:opacity-80"
-                  onclick="setReponse('${crit.numero}', 'Oui', this)">✅ Oui</button>
-          <button class="btn-non ${nAct} px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer transition hover:opacity-80"
-                  onclick="setReponse('${crit.numero}', 'Non', this)">❌ Non</button>
-          <button class="btn-na ${naAct} px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer transition hover:opacity-80"
-                  onclick="setReponse('${crit.numero}', 'NA', this)">— NA</button>
-          <button class="ml-1 text-gray-300 hover:text-blue-400 transition text-lg" title="Notes / Plan d'action"
-                  onclick="toggleNotes('${crit.numero}')">📝</button>
-        </div>
-      </div>
-      <!-- Notes panel (collapsible) -->
-      <div class="critere-notes ${hasNotes ? 'open' : ''} border-t border-gray-100" id="notes-${crit.numero.replace('.','_').replace('-','_')}">
-        <div class="px-4 py-3 bg-gray-50 grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-semibold text-gray-500 mb-1">Notes / Précisions</label>
-            <textarea rows="2" class="text-xs p-2 border border-gray-200 rounded-md w-full resize-none focus:outline-none focus:border-blue-400"
-                      placeholder="Observations terrain…"
-                      onchange="updateNotes('${crit.numero}', 'notes', this.value)"
-                      >${rep.notes || ''}</textarea>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-gray-500 mb-1">Plan d'actions (pilote / échéance)</label>
-            <textarea rows="2" class="text-xs p-2 border border-gray-200 rounded-md w-full resize-none focus:outline-none focus:border-blue-400"
-                      placeholder="Action corrective…"
-                      onchange="updateNotes('${crit.numero}', 'plan_action', this.value)"
-                      >${rep.plan_action || ''}</textarea>
-          </div>
-        </div>
-      </div>
-    </div>`);
-  }
-
-  container.innerHTML = parts.join('');
-  applyFilters();
-}
-
-function toggleNotes(num) {
-  const id = `notes-${num.replace('.','_').replace('-','_')}`;
-  const el = $(id);
-  if (el) el.classList.toggle('open');
-}
-
-// ── Réponses ─────────────────────────────────────────────────────────────────
-function setReponse(num, val, btn) {
-  // Toggle
-  const row = document.querySelector(`[data-num="${num}"]`);
-  const currentActive = row.querySelector('.btn-oui.active, .btn-non.active, .btn-na.active');
-  let newVal = val;
-  if (currentActive === btn) {
-    // Deselect
-    newVal = '';
-  }
-
-  // Update button UI
-  row.querySelectorAll('.btn-oui, .btn-non, .btn-na').forEach(b => b.classList.remove('active'));
-  if (newVal) btn.classList.add('active');
-  row.dataset.reponse = newVal;
-
-  // Store pending
-  if (!pendingResponses[num]) pendingResponses[num] = {};
-  pendingResponses[num].reponse = newVal;
-
-  // Auto-save after 500ms debounce
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(saveAllPending, 500);
-
-  // Update score locally for instant feedback
-  updateLocalScore();
-}
-
-function updateNotes(num, field, val) {
-  if (!pendingResponses[num]) pendingResponses[num] = {};
-  pendingResponses[num][field] = val;
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(saveAllPending, 800);
-}
-
-async function saveAllPending() {
-  if (!currentEvalId || !Object.keys(pendingResponses).length) return;
-
-  const reponses = Object.entries(pendingResponses).map(([num, data]) => {
-    const row = document.querySelector(`[data-num="${num}"]`);
-    const rep = data.reponse !== undefined ? data.reponse : (row ? row.dataset.reponse : '');
-    return {
-      critere_numero: num,
-      reponse: rep,
-      notes: data.notes !== undefined ? data.notes : '',
-      plan_action: data.plan_action !== undefined ? data.plan_action : '',
-    };
-  });
-
+// ─── Boot ────────────────────────────────────────────────────────────────────
+(async () => {
   try {
-    const result = await POST(`/api/evaluations/${currentEvalId}/reponses/bulk`, {reponses});
-    pendingResponses = {};
-    if (result.score) updateScoreDisplay(result.score);
-  } catch(e) {
-    console.error('Save error', e);
+    const me = await api('GET', '/auth/me');
+    if (me && me.authenticated) { currentUser = me; await showApp(); }
+  } catch(e) { console.error(e); }
+})();
+
+async function showApp() {
+  document.getElementById('auth-overlay').style.display = 'none';
+  const appEl = document.getElementById('app');
+  appEl.style.display = '';
+  appEl.classList.remove('hidden');
+  document.getElementById('sidebar-user-name').textContent =
+    currentUser.nom_etablissement || currentUser.email.split('@')[0];
+  document.getElementById('dash-etab').textContent =
+    [currentUser.nom_etablissement, currentUser.type_structure].filter(Boolean).join(' · ');
+  document.getElementById('prof-email').value = currentUser.email;
+  document.getElementById('prof-nom').value   = currentUser.nom_etablissement || '';
+  document.getElementById('prof-type').value  = currentUser.type_structure    || '';
+
+  [meta, allCriteria] = await Promise.all([
+    api('GET', '/api/criteria/meta'),
+    api('GET', '/api/criteria')
+  ]);
+  populateMeta();
+  await loadDashboard();
+}
+
+// ─── Auth ─────────────────────────────────────────────────────────────────────
+function switchAuthTab(tab) {
+  document.getElementById('login-form').classList.toggle('hidden', tab !== 'login');
+  document.getElementById('register-form').classList.toggle('hidden', tab !== 'register');
+  const active   = 'flex-1 py-2 rounded-md text-sm font-semibold transition-all bg-white shadow text-blue-700';
+  const inactive = 'flex-1 py-2 rounded-md text-sm font-semibold transition-all text-gray-500';
+  document.getElementById('tab-login').className    = tab === 'login'    ? active : inactive;
+  document.getElementById('tab-register').className = tab === 'register' ? active : inactive;
+}
+
+async function doLogin(e) {
+  e.preventDefault();
+  const errEl = document.getElementById('login-error');
+  errEl.classList.add('hidden');
+  const res = await api('POST', '/auth/login', {
+    email:    document.getElementById('login-email').value,
+    password: document.getElementById('login-pwd').value
+  });
+  if (res.error) { errEl.textContent = res.error; errEl.classList.remove('hidden'); return; }
+  currentUser = res;
+  await showApp();
+}
+
+async function doRegister(e) {
+  e.preventDefault();
+  const errEl = document.getElementById('reg-error');
+  errEl.classList.add('hidden');
+  const res = await api('POST', '/auth/register', {
+    email:             document.getElementById('reg-email').value,
+    password:          document.getElementById('reg-pwd').value,
+    nom_etablissement: document.getElementById('reg-nom').value,
+    type_structure:    document.getElementById('reg-type').value
+  });
+  if (res.error) { errEl.textContent = res.error; errEl.classList.remove('hidden'); return; }
+  currentUser = res;
+  await showApp();
+}
+
+async function doLogout() {
+  await api('POST', '/auth/logout');
+  location.reload();
+}
+
+async function saveProfile() {
+  const nom = document.getElementById('prof-nom').value;
+  const typ = document.getElementById('prof-type').value;
+  const res = await api('PUT', '/auth/me', { nom_etablissement: nom, type_structure: typ });
+  if (!res.error) {
+    currentUser.nom_etablissement = nom;
+    currentUser.type_structure    = typ;
+    document.getElementById('sidebar-user-name').textContent = nom || currentUser.email.split('@')[0];
+    document.getElementById('dash-etab').textContent = [nom, typ].filter(Boolean).join(' · ');
+    showToast('Profil mis à jour');
   }
 }
 
-function updateLocalScore() {
-  // Quick local estimate
-  const rows = document.querySelectorAll('[data-num]');
-  let oui = 0, non = 0, na = 0, nr = 0, anomalies = 0;
-  rows.forEach(row => {
-    if (!row.offsetParent) return; // hidden by filter
-    const r = row.dataset.reponse;
-    if (r === 'Oui') oui++;
-    else if (r === 'Non') {
-      non++;
-      if (row.dataset.niveau === 'Impératif') anomalies++;
-    }
-    else if (r === 'NA') na++;
-    else nr++;
+// ─── Views ────────────────────────────────────────────────────────────────────
+const VIEWS = ['dashboard','evaluations','eval-detail','actions','profile'];
+
+function showView(v) {
+  VIEWS.forEach(id => {
+    const el = document.getElementById('view-' + id);
+    if (el) el.style.display = 'none';
   });
-  const total = oui + non;
-  const pct = total ? Math.round(oui/total*100*10)/10 : null;
-  updateScoreDisplay({oui, non, na, non_renseigne: nr, total_evalue: total, score_pct: pct,
-                      nb_anomalies: anomalies,
-                      niveau_decision: getNiveauDecision(pct, anomalies),
-                      decision_class: getDecisionClass(pct, anomalies)});
+  const target = document.getElementById('view-' + v);
+  if (target) {
+    target.style.display = '';
+    if (v === 'eval-detail') target.style.display = 'flex';
+  }
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const navTarget = document.querySelector(`.nav-item[data-view="${v}"]`);
+  if (navTarget) navTarget.classList.add('active');
+
+  if (v === 'dashboard')   loadDashboard();
+  if (v === 'evaluations') loadEvalList();
+  if (v === 'actions')     loadActions();
 }
 
-function getNiveauDecision(pct, anomalies) {
-  if (pct === null) return 'Non évalué';
-  if (pct >= 80 && anomalies === 0) return 'Conforme — Certifié';
-  if (pct >= 60 && anomalies <= 2) return 'Partiellement conforme';
-  return 'Non conforme — Risque de non-certification';
-}
-function getDecisionClass(pct, anomalies) {
-  if (pct === null) return 'gray';
-  if (pct >= 80 && anomalies === 0) return 'green';
-  if (pct >= 60 && anomalies <= 2) return 'orange';
-  return 'red';
+function backToList() {
+  flushReponses();
+  showView('evaluations');
 }
 
-function updateScoreDisplay(score) {
-  const pct = score.score_pct;
-  const pctStr = pct != null ? `${pct}%` : '—';
-  const clsColor = {green:'score-green',orange:'score-orange',red:'score-red',gray:'score-gray'}[score.decision_class||'gray'];
+// ─── Dashboard ────────────────────────────────────────────────────────────────
+async function loadDashboard() {
+  const [evals, history, actions] = await Promise.all([
+    api('GET', '/api/evaluations'),
+    api('GET', '/api/score/history'),
+    api('GET', '/api/actions')
+  ]);
 
-  $('score-pct-display').textContent  = pctStr;
-  $('score-pct-display').className    = `text-xl font-bold ${clsColor}`;
-  $('s-oui').textContent             = score.oui || 0;
-  $('s-non').textContent             = score.non || 0;
-  $('s-na').textContent              = score.na  || 0;
-  $('s-anomalies').textContent        = score.nb_anomalies || 0;
+  document.getElementById('kpi-total').textContent    = evals.length;
+  document.getElementById('kpi-actions').textContent  = actions.filter(a => a.statut === 'in_progress').length;
+  document.getElementById('kpi-critical').textContent = actions.filter(a => a.priorite === 'critical' && a.statut !== 'done').length;
 
-  const progress = $('score-progress');
-  progress.style.width   = (pct || 0) + '%';
-  progress.style.background = {green:'var(--green)',orange:'var(--orange)',red:'var(--red)',gray:'#CBD5E1'}[score.decision_class||'gray'];
+  if (evals.length > 0) {
+    const s  = evals[0].score;
+    const el = document.getElementById('kpi-last-score');
+    el.textContent = s.score_pct !== null ? s.score_pct + '%' : '—';
+    el.className   = `text-3xl font-bold mt-1 score-${s.decision_class}`;
+  }
 
-  const badge = $('decision-badge');
-  const bgMap = {green:'#DCFCE7',orange:'#FFF7ED',red:'#FEE2E2',gray:'#F3F4F6'};
-  const clMap = {green:'#16A34A',orange:'#EA580C',red:'#DC2626',gray:'#6B7280'};
-  const dc    = score.decision_class || 'gray';
-  badge.style.background = bgMap[dc];
-  badge.style.color      = clMap[dc];
-  badge.textContent      = score.niveau_decision || 'Non évalué';
-}
-
-// ── Filters ──────────────────────────────────────────────────────────────────
-function applyFilters() {
-  const fChap  = $('filter-chap').value;
-  const fNiv   = $('filter-niveau').value;
-  const fRep   = $('filter-reponse').value;
-  const fMeth  = $('filter-methode').value;
-  const fQ     = ($('filter-search').value || '').toLowerCase();
-
-  let visible = 0;
-  const rows = document.querySelectorAll('[data-num]');
-  rows.forEach(row => {
-    const num    = row.dataset.num;
-    const chap   = row.dataset.chap;
-    const niveau = row.dataset.niveau;
-    const rep    = row.dataset.reponse || '';
-    const meths  = row.dataset.methodes || '';
-    const txt    = row.querySelector('.text-sm')?.textContent?.toLowerCase() || '';
-
-    let show = true;
-    if (fChap  && chap !== fChap) show = false;
-    if (fNiv   && niveau !== fNiv) show = false;
-    if (fMeth  && !meths.includes(fMeth)) show = false;
-    if (fRep) {
-      if (fRep === 'non_renseigne' && rep !== '') show = false;
-      else if (fRep !== 'non_renseigne' && rep !== fRep) show = false;
-    }
-    if (fQ && !txt.includes(fQ) && !num.includes(fQ)) show = false;
-
-    row.style.display = show ? '' : 'none';
-    if (show) visible++;
-  });
-
-  // Show/hide section headers
-  document.querySelectorAll('[data-num]').forEach(() => {});
-  $('filter-count').textContent = `${visible} critère(s) affiché(s)`;
-}
-
-function resetFilters() {
-  $('filter-chap').value  = '';
-  $('filter-niveau').value = '';
-  $('filter-reponse').value = '';
-  $('filter-methode').value = '';
-  $('filter-search').value = '';
-  applyFilters();
-}
-
-// ── Header save ───────────────────────────────────────────────────────────────
-async function saveHeader() {
-  if (!currentEvalId) return;
-  await PUT(`/api/evaluations/${currentEvalId}`, {
-    nom: $('h-nom').value, methode: $('h-methode').value,
-    etablissement: $('h-etablissement').value, service: $('h-service').value,
-    date_audit: $('h-date').value, auditeurs: $('h-auditeurs').value,
-    code_calista: $('h-calista').value, secteur_pec: $('h-secteur').value,
-    mode_pec: $('h-mode-pec').value, mode_entree: $('h-mode-entree').value,
-    age_patient: $('h-age').value, caracteristiques: $('h-caract').value,
-    notes_globales: $('h-notes').value,
-  });
-  $('eval-title-top').textContent = $('h-nom').value;
-  $('header-save-msg').classList.remove('hidden');
-  setTimeout(() => $('header-save-msg').classList.add('hidden'), 2000);
-  toast('Informations enregistrées');
-}
-
-// ── Results tab ───────────────────────────────────────────────────────────────
-async function refreshResultsTab() {
-  const score = await API(`/api/evaluations/${currentEvalId}/score`);
-  const total = score.total_criteres || 118;
-
-  $('result-score-pct').textContent = score.score_pct != null ? `${score.score_pct}%` : '—';
-
-  // Progress bars
-  const bars = [
-    ['oui', score.oui], ['non', score.non], ['na', score.na], ['nr', score.non_renseigne]
-  ];
-  bars.forEach(([k, v]) => {
-    $(`res-${k}-count`).textContent = v || 0;
-    $(`res-${k}-bar`).style.width = `${Math.round((v||0)/total*100)}%`;
-  });
-
-  // Decision detail
-  const dc = score.decision_class || 'gray';
-  const bgMap = {green:'#DCFCE7',orange:'#FFF7ED',red:'#FEE2E2',gray:'#F3F4F6'};
-  const clMap = {green:'#16A34A',orange:'#EA580C',red:'#DC2626',gray:'#6B7280'};
-  $('decision-detail').innerHTML = `
-    <div class="p-3 rounded-lg text-sm font-semibold" style="background:${bgMap[dc]};color:${clMap[dc]}">
-      ${score.niveau_decision || 'Non évalué'}
-    </div>
-    <div class="text-xs text-gray-500 mt-2">
-      Score : <strong>${score.score_pct != null ? score.score_pct+'%' : 'Non calculé'}</strong>
-      (${score.oui} Oui / ${score.total_evalue} évalués)<br/>
-      Fiches d'anomalie : <strong class="text-red-600">${score.nb_anomalies}</strong>
-    </div>
-    <div class="text-xs text-gray-400 mt-2 border-t pt-2">
-      <em>Seuils indicatifs : ≥80% + 0 anomalie = Conforme | 60-79% ou ≤2 anomalies = Partiel | sinon Non conforme</em>
-    </div>
-  `;
-
-  // Anomalies list
-  if (score.fiches_anomalie && score.fiches_anomalie.length) {
-    $('anomalies-list').innerHTML = score.fiches_anomalie.map(num => {
-      const c = allCriteria.find(x => x.numero === num);
-      return `<div class="anomalie-card"><strong>${num}</strong> — ${c ? c.titre.substring(0,60)+'…' : ''}</div>`;
-    }).join('');
+  const withScore = history.filter(h => h.score_pct !== null);
+  const emptyEl   = document.getElementById('evolution-empty');
+  const canvas    = document.getElementById('evolution-chart');
+  if (withScore.length >= 2) {
+    emptyEl.classList.add('hidden');
+    canvas.style.display = '';
+    renderEvolutionChart(withScore);
   } else {
-    $('anomalies-list').innerHTML = '<div class="text-xs text-green-600">✅ Aucune fiche d\'anomalie</div>';
+    emptyEl.classList.remove('hidden');
+    canvas.style.display = 'none';
+    if (evolutionChart) { evolutionChart.destroy(); evolutionChart = null; }
   }
 
-  // Donut chart
-  if (scoreChartInstance) scoreChartInstance.destroy();
-  const ctx = document.getElementById('score-chart').getContext('2d');
-  scoreChartInstance = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Oui','Non','NA','Non renseigné'],
-      datasets: [{
-        data: [score.oui, score.non, score.na, score.non_renseigne],
-        backgroundColor: ['#22C55E','#DC2626','#9CA3AF','#E5E7EB'],
-        borderWidth: 0,
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {legend: {position:'bottom', labels:{font:{size:11},boxWidth:12}}},
-      cutout: '65%',
-    }
-  });
+  const cont = document.getElementById('recent-evals');
+  if (evals.length === 0) {
+    cont.innerHTML = '<p class="text-sm text-gray-400 text-center py-6">Aucune évaluation. Cliquez sur "+ Nouvelle évaluation" pour commencer.</p>';
+  } else {
+    cont.innerHTML = evals.slice(0,5).map(e => evalCard(e, false)).join('');
+  }
+}
 
-  // Bar chart by objectif
-  const objScores = computeObjectifScores();
-  if (objectifChartInstance) objectifChartInstance.destroy();
-  const ctx2 = document.getElementById('objectif-chart').getContext('2d');
-  objectifChartInstance = new Chart(ctx2, {
-    type: 'bar',
+function renderEvolutionChart(data) {
+  if (evolutionChart) { evolutionChart.destroy(); evolutionChart = null; }
+  evolutionChart = new Chart(document.getElementById('evolution-chart'), {
+    type: 'line',
     data: {
-      labels: objScores.map(o => o.label),
+      labels: data.map(d => d.nom.length > 22 ? d.nom.slice(0,20)+'…' : d.nom),
       datasets: [{
-        label: 'Score %',
-        data: objScores.map(o => o.pct),
-        backgroundColor: objScores.map(o => o.pct >= 80 ? '#22C55E' : o.pct >= 60 ? '#F97316' : '#DC2626'),
-        borderRadius: 4,
+        label: 'Score (%)',
+        data: data.map(d => d.score_pct),
+        borderColor: '#1E4FA5',
+        backgroundColor: 'rgba(30,79,165,.07)',
+        borderWidth: 2.5,
+        pointRadius: 5,
+        pointBackgroundColor: data.map(d =>
+          d.decision_class === 'green' ? '#16a34a' :
+          d.decision_class === 'orange' ? '#ea580c' : '#dc2626'),
+        tension: 0.35,
+        fill: true
       }]
     },
     options: {
-      responsive: true,
-      plugins: {legend:{display:false}},
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
       scales: {
-        y: {min:0, max:100, ticks:{callback: v => v+'%'}},
-        x: {ticks:{font:{size:10}}}
+        y: { min:0, max:100, ticks:{ callback: v => v+'%' }, grid:{ color:'#f1f5f9' } },
+        x: { grid:{ display:false } }
       }
     }
   });
 }
 
-function computeObjectifScores() {
-  const rows = document.querySelectorAll('[data-num]');
-  const byObj = {};
-  rows.forEach(row => {
-    const num = row.dataset.num;
-    const obj = row.dataset.obj;
-    if (!byObj[obj]) byObj[obj] = {oui:0,non:0};
-    const r = row.dataset.reponse;
-    if (r === 'Oui') byObj[obj].oui++;
-    if (r === 'Non') byObj[obj].non++;
+// ─── Eval List ────────────────────────────────────────────────────────────────
+async function loadEvalList() {
+  const evals = await api('GET', '/api/evaluations');
+  const cont  = document.getElementById('eval-list-grid');
+  if (evals.length === 0) {
+    cont.innerHTML = '<p class="text-sm text-gray-400 text-center py-8">Aucune évaluation.</p>';
+    return;
+  }
+  cont.innerHTML = evals.map(e => evalCard(e, true)).join('');
+}
+
+function evalCard(e, withDelete) {
+  const s   = e.score;
+  const pct = s.score_pct !== null ? s.score_pct + '%' : '—';
+  const clr = s.decision_class === 'green' ? '#16a34a' :
+              s.decision_class === 'orange' ? '#ea580c' :
+              s.decision_class === 'red'    ? '#dc2626' : '#6b7280';
+  const prog = s.score_pct || 0;
+  return `<div class="card p-4 flex items-center gap-4 hover:shadow-md transition-shadow cursor-pointer" onclick="openEvaluation(${e.id})">
+    <div class="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 font-black text-sm" style="background:${clr}22;color:${clr}">${pct}</div>
+    <div class="flex-1 min-w-0">
+      <p class="font-semibold text-gray-800 truncate">${esc(e.nom)}</p>
+      <p class="text-xs text-gray-500 mt-0.5">${esc(e.methode)} · ${e.date_audit || e.created_at.slice(0,10)}</p>
+      <div class="mt-2 flex items-center gap-2">
+        <div class="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+          <div class="h-full rounded-full" style="width:${prog}%;background:${clr}"></div>
+        </div>
+        <span class="text-xs text-gray-400">${s.oui}✓ ${s.non}✗ ${s.na} NA</span>
+      </div>
+    </div>
+    ${s.nb_anomalies > 0 ? `<span class="text-xs bg-red-50 text-red-600 font-semibold px-2 py-1 rounded-full flex-shrink-0">${s.nb_anomalies} anomalie${s.nb_anomalies>1?'s':''}</span>` : ''}
+    ${withDelete ? `<button onclick="event.stopPropagation();deleteEval(${e.id})" class="btn-danger text-xs flex-shrink-0">Suppr.</button>` : ''}
+  </div>`;
+}
+
+async function deleteEval(id) {
+  if (!confirm('Supprimer cette évaluation et toutes ses réponses ?')) return;
+  await api('DELETE', `/api/evaluations/${id}`);
+  showToast('Évaluation supprimée');
+  loadEvalList();
+}
+
+// ─── Open Evaluation ──────────────────────────────────────────────────────────
+async function openEvaluation(evalId) {
+  currentEvalId = evalId;
+  dirtyReponses = {};
+
+  // Show eval-detail view
+  VIEWS.forEach(id => {
+    const el = document.getElementById('view-' + id);
+    if (el) el.style.display = 'none';
   });
-  return Object.entries(byObj).map(([obj, s]) => {
-    const total = s.oui + s.non;
-    const pct   = total ? Math.round(s.oui/total*100) : 0;
-    return {label: obj, pct};
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const det = document.getElementById('view-eval-detail');
+  det.style.display = 'flex';
+  det.classList.remove('hidden');
+
+  const data = await api('GET', `/api/evaluations/${evalId}`);
+  evalData = data;
+
+  document.getElementById('eval-title').textContent    = data.nom;
+  document.getElementById('eval-subtitle').textContent = data.methode + (data.service ? ' · ' + data.service : '');
+  fillInfoTab(data);
+
+  // Reset to saisie tab
+  ['saisie','infos','resultats','actions-eval'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = 'none';
+    document.getElementById('tab-' + t).classList.add('hidden');
+  });
+  document.getElementById('tab-saisie').style.display = '';
+  document.getElementById('tab-saisie').classList.remove('hidden');
+  document.querySelectorAll('#view-eval-detail .tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tbtn-saisie').classList.add('active');
+
+  filterCriteria();
+  updateScore(data.score);
+}
+
+function fillInfoTab(d) {
+  const fields = {
+    'info-nom': d.nom, 'info-methode': d.methode,
+    'info-etablissement': d.etablissement, 'info-service': d.service,
+    'info-date': d.date_audit, 'info-auditeurs': d.auditeurs,
+    'info-calista': d.code_calista, 'info-secteur': d.secteur_pec,
+    'info-mode-pec': d.mode_pec, 'info-mode-entree': d.mode_entree,
+    'info-age': d.age_patient, 'info-carac': d.caracteristiques,
+    'info-notes': d.notes_globales
+  };
+  Object.entries(fields).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.value = val || '';
   });
 }
 
-// ── New Evaluation Modal ──────────────────────────────────────────────────────
-function openNewEvalModal() {
-  $('modal-new-eval').classList.remove('hidden');
-  $('new-date').value = new Date().toISOString().split('T')[0];
-  $('new-nom').focus();
+function populateMeta() {
+  if (!meta.secteurs_pec) return;
+  [
+    ['info-secteur',    meta.secteurs_pec],
+    ['info-mode-pec',   meta.modes_pec],
+    ['info-mode-entree',meta.modes_entree],
+    ['info-age',        meta.ages_patient],
+    ['info-carac',      meta.caracteristiques],
+    ['f-methode',       meta.methodes]
+  ].forEach(([id, opts]) => {
+    const sel = document.getElementById(id);
+    if (!sel) return;
+    while (sel.options.length > 1) sel.remove(1);
+    (opts || []).forEach(v => sel.appendChild(new Option(v, v)));
+  });
 }
-function closeNewEvalModal() { $('modal-new-eval').classList.add('hidden'); }
+
+// ─── Criteria ─────────────────────────────────────────────────────────────────
+function getReponse(num) {
+  if (dirtyReponses[num] !== undefined && dirtyReponses[num].reponse !== undefined)
+    return dirtyReponses[num].reponse;
+  return evalData.reponses?.[num]?.reponse || '';
+}
+function getNotes(num) {
+  if (dirtyReponses[num]?.notes !== undefined) return dirtyReponses[num].notes;
+  return evalData.reponses?.[num]?.notes || '';
+}
+
+function filterCriteria() {
+  const methode = document.getElementById('f-methode')?.value || '';
+  const niveau  = document.getElementById('f-niveau')?.value  || '';
+  const repF    = document.getElementById('f-reponse')?.value || '';
+  const search  = (document.getElementById('f-search')?.value || '').toLowerCase();
+
+  let filtered = allCriteria;
+  if (methode) filtered = filtered.filter(c => c.methodes?.includes(methode));
+  if (niveau)  filtered = filtered.filter(c => c.niveau === niveau);
+  if (search)  filtered = filtered.filter(c =>
+    c.numero.toLowerCase().includes(search) ||
+    c.titre.toLowerCase().includes(search) ||
+    (c.objectif||'').toLowerCase().includes(search));
+  if (repF === 'NR') filtered = filtered.filter(c => !getReponse(c.numero));
+  else if (repF)     filtered = filtered.filter(c => getReponse(c.numero) === repF);
+
+  const cnt = document.getElementById('filter-count');
+  if (cnt) cnt.textContent = `${filtered.length} critère${filtered.length !== 1 ? 's' : ''}`;
+
+  const cont = document.getElementById('criteria-container');
+  if (cont) cont.innerHTML = filtered.map(renderCritereRow).join('');
+}
+
+function renderCritereRow(c) {
+  const rep       = getReponse(c.numero);
+  const note      = getNotes(c.numero);
+  const isAnomalie= rep === 'Non' && c.niveau === 'Impératif';
+  const bCls = c.niveau === 'Impératif' ? 'badge-imperatif' : c.niveau === 'Avancé' ? 'badge-avance' : 'badge-standard';
+  return `<div class="critere-row ${c.niveau==='Impératif'?'imperatif':''} ${isAnomalie?'anomalie':''} p-3 rounded-lg" id="row-${c.numero}">
+    <div class="flex items-start gap-3">
+      <div class="flex-shrink-0 text-center" style="min-width:3rem">
+        <span class="font-black text-blue-700 text-sm">${esc(c.numero)}</span>
+        <div class="mt-1"><span class="${bCls}">${c.niveau[0]}</span></div>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-gray-800 leading-snug">${esc(c.titre)}</p>
+        <p class="text-xs text-gray-400 mt-0.5 truncate">${esc(c.chapitre)} · ${esc(c.objectif)}</p>
+        <div class="mt-2 flex items-center gap-2 flex-wrap">
+          <button onclick="setReponse('${c.numero}','Oui')" class="rep-btn rep-oui ${rep==='Oui'?'active':''}">Oui</button>
+          <button onclick="setReponse('${c.numero}','Non')" class="rep-btn rep-non ${rep==='Non'?'active':''}">Non</button>
+          <button onclick="setReponse('${c.numero}','NA')"  class="rep-btn rep-na  ${rep==='NA'?'active':''}">NA</button>
+          ${isAnomalie ? '<span class="text-xs text-red-600 font-semibold">⚠ Fiche anomalie</span>' : ''}
+        </div>
+        <input type="text" placeholder="Note…" class="w-full text-xs border-b border-dashed border-gray-200 bg-transparent outline-none text-gray-600 pb-0.5 mt-1.5 focus:border-blue-400"
+          value="${esc(note)}"
+          onchange="setNotes('${c.numero}', this.value)"
+          onclick="event.stopPropagation()"/>
+      </div>
+    </div>
+  </div>`;
+}
+
+function setReponse(num, rep) {
+  if (!dirtyReponses[num]) dirtyReponses[num] = {};
+  const prev = getReponse(num);
+  dirtyReponses[num].reponse = rep === prev ? '' : rep;
+  const crit = allCriteria.find(c => c.numero === num);
+  if (crit) {
+    const row = document.getElementById('row-' + num);
+    if (row) row.outerHTML = renderCritereRow(crit);
+  }
+  indicateSaving();
+  scheduleSave();
+}
+
+function setNotes(num, val) {
+  if (!dirtyReponses[num]) dirtyReponses[num] = {};
+  dirtyReponses[num].notes = val;
+  indicateSaving();
+  scheduleSave();
+}
+
+function indicateSaving() {
+  const el = document.getElementById('save-indicator');
+  if (el) { el.textContent = '● Enregistrement…'; el.className = 'save-indicator saving'; }
+}
+function indicateSaved() {
+  const el = document.getElementById('save-indicator');
+  if (el) {
+    el.textContent = '● Sauvegardé'; el.className = 'save-indicator saved';
+    setTimeout(() => { if (el) el.className = 'save-indicator'; }, 2500);
+  }
+}
+
+function scheduleSave() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(flushReponses, 800);
+}
+
+async function flushReponses() {
+  if (!currentEvalId || Object.keys(dirtyReponses).length === 0) return;
+  const reponses = Object.entries(dirtyReponses).map(([num, v]) => ({
+    critere_numero: num,
+    reponse:    v.reponse    !== undefined ? v.reponse    : getReponse(num),
+    notes:      v.notes      !== undefined ? v.notes      : getNotes(num),
+    plan_action: ''
+  }));
+  const res = await api('POST', `/api/evaluations/${currentEvalId}/reponses/bulk`, { reponses });
+  reponses.forEach(r => {
+    if (!evalData.reponses) evalData.reponses = {};
+    if (!evalData.reponses[r.critere_numero]) evalData.reponses[r.critere_numero] = {};
+    Object.assign(evalData.reponses[r.critere_numero], r);
+    delete dirtyReponses[r.critere_numero];
+  });
+  if (res.score) updateScore(res.score);
+  indicateSaved();
+}
+
+// ─── Score ─────────────────────────────────────────────────────────────────────
+function updateScore(s) {
+  const pct = s.score_pct !== null ? s.score_pct + '%' : '—';
+  const clr = s.decision_class;
+  const big = document.getElementById('score-pct-big');
+  if (big) { big.textContent = pct; big.className = `text-5xl font-black mt-1 score-${clr}`; }
+  const dec = document.getElementById('score-decision');
+  if (dec) { dec.textContent = s.niveau_decision; dec.className = `text-sm font-semibold mt-1 score-${clr}`; }
+  ['oui','non','na'].forEach(k => {
+    const el = document.getElementById('sc-'+k); if (el) el.textContent = s[k];
+  });
+  const nr = document.getElementById('sc-nr'); if (nr) nr.textContent = s.non_renseigne;
+  renderResultCharts(s);
+  renderAnomalies(s);
+}
+
+function renderResultCharts(s) {
+  const dc = document.getElementById('donut-chart');
+  const bc = document.getElementById('bar-chart');
+  if (!dc || !bc) return;
+
+  if (donutChart) { donutChart.destroy(); donutChart = null; }
+  donutChart = new Chart(dc, {
+    type: 'doughnut',
+    data: { labels:['Oui','Non','NA','Non renseigné'],
+      datasets:[{ data:[s.oui,s.non,s.na,s.non_renseigne],
+        backgroundColor:['#16a34a','#dc2626','#6b7280','#e2e8f0'],
+        borderWidth:2, borderColor:'#fff' }] },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ position:'bottom', labels:{ boxWidth:12, font:{size:11} } } } }
+  });
+
+  const chapitres = {};
+  allCriteria.forEach(c => {
+    if (!chapitres[c.chapitre_num]) chapitres[c.chapitre_num] = { oui:0, non:0 };
+    const r = getReponse(c.numero);
+    if (r === 'Oui') chapitres[c.chapitre_num].oui++;
+    else if (r === 'Non') chapitres[c.chapitre_num].non++;
+  });
+  const nums = Object.keys(chapitres).sort();
+  if (barChart) { barChart.destroy(); barChart = null; }
+  barChart = new Chart(bc, {
+    type: 'bar',
+    data: { labels: nums.map(n=>'Ch. '+n),
+      datasets: [
+        { label:'Oui', data:nums.map(n=>chapitres[n].oui), backgroundColor:'#16a34a88', borderRadius:4 },
+        { label:'Non', data:nums.map(n=>chapitres[n].non), backgroundColor:'#dc262688', borderRadius:4 }
+      ]
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ position:'bottom', labels:{ boxWidth:12, font:{size:11} } } },
+      scales:{ x:{ grid:{display:false} }, y:{ beginAtZero:true, grid:{color:'#f1f5f9'} } } }
+  });
+}
+
+function renderAnomalies(s) {
+  const el = document.getElementById('anomalies-list');
+  if (!el) return;
+  if (!s.fiches_anomalie?.length) {
+    el.innerHTML = '<p class="text-sm text-green-600 font-medium">✓ Aucune anomalie sur les critères impératifs.</p>';
+    return;
+  }
+  el.innerHTML = s.fiches_anomalie.map(num => {
+    const c = allCriteria.find(x => x.numero === num);
+    return `<div class="flex items-start gap-3 py-2 border-b border-red-50 last:border-0">
+      <span class="font-bold text-red-600 text-sm" style="min-width:3rem">${num}</span>
+      <span class="text-sm text-gray-700">${c ? esc(c.titre) : ''}</span>
+    </div>`;
+  }).join('');
+}
+
+// ─── Info auto-save ───────────────────────────────────────────────────────────
+async function autoSaveInfo() {
+  if (!currentEvalId) return;
+  const payload = {
+    nom:             document.getElementById('info-nom')?.value,
+    methode:         document.getElementById('info-methode')?.value,
+    etablissement:   document.getElementById('info-etablissement')?.value,
+    service:         document.getElementById('info-service')?.value,
+    date_audit:      document.getElementById('info-date')?.value,
+    auditeurs:       document.getElementById('info-auditeurs')?.value,
+    code_calista:    document.getElementById('info-calista')?.value,
+    secteur_pec:     document.getElementById('info-secteur')?.value,
+    mode_pec:        document.getElementById('info-mode-pec')?.value,
+    mode_entree:     document.getElementById('info-mode-entree')?.value,
+    age_patient:     document.getElementById('info-age')?.value,
+    caracteristiques:document.getElementById('info-carac')?.value,
+    notes_globales:  document.getElementById('info-notes')?.value
+  };
+  await api('PUT', `/api/evaluations/${currentEvalId}`, payload);
+  const titleEl = document.getElementById('eval-title');
+  if (titleEl) titleEl.textContent = payload.nom;
+  indicateSaved();
+}
+
+// ─── Tabs ─────────────────────────────────────────────────────────────────────
+function switchTab(tab, btn) {
+  ['saisie','infos','resultats','actions-eval'].forEach(t => {
+    const el = document.getElementById('tab-' + t);
+    if (el) { el.style.display = 'none'; el.classList.add('hidden'); }
+  });
+  const tabEl = document.getElementById('tab-' + tab);
+  if (tabEl) { tabEl.style.display = ''; tabEl.classList.remove('hidden'); }
+  document.querySelectorAll('#view-eval-detail .tab-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  if (tab === 'resultats')    api('GET', `/api/evaluations/${currentEvalId}/score`).then(updateScore);
+  if (tab === 'actions-eval') loadEvalActions(currentEvalId);
+}
+
+// ─── Actions ──────────────────────────────────────────────────────────────────
+async function loadActions() {
+  const statut = document.getElementById('af-statut')?.value || '';
+  allActions   = await api('GET', '/api/actions' + (statut ? '?statut='+statut : ''));
+  filterActionsLocal();
+}
+
+function filterActionsLocal() {
+  const prio     = document.getElementById('af-priorite')?.value || '';
+  const filtered = prio ? allActions.filter(a => a.priorite === prio) : allActions;
+  const cols     = { todo:[], in_progress:[], done:[] };
+  filtered.forEach(a => { if (cols[a.statut]) cols[a.statut].push(a); });
+  ['todo','in_progress','done'].forEach(s => {
+    const col = document.getElementById('col-' + s);
+    const cnt = document.getElementById('cnt-' + s);
+    if (col) col.innerHTML = cols[s].length
+      ? cols[s].map(actionCard).join('')
+      : '<p class="text-xs text-gray-400 text-center py-4">Aucune action</p>';
+    if (cnt) cnt.textContent = cols[s].length;
+  });
+}
+
+const PRIO_LABEL   = { critical:'Critique', high:'Haute', medium:'Moyenne', low:'Faible' };
+const STATUT_LABEL = { todo:'À faire', in_progress:'En cours', done:'Terminé' };
+
+function actionCard(a) {
+  const safeA = JSON.stringify(a).replace(/'/g,"\\'").replace(/"/g,'&quot;');
+  return `<div class="card p-3 text-sm">
+    <div class="flex items-start justify-between gap-2 mb-1.5">
+      <p class="font-medium text-gray-800 leading-tight flex-1">${esc(a.titre)}</p>
+      <span class="flex-shrink-0 text-xs font-semibold px-2 py-0.5 rounded-full prio-${a.priorite}">${PRIO_LABEL[a.priorite]||a.priorite}</span>
+    </div>
+    ${a.critere_num ? `<p class="text-xs text-blue-600 font-medium mb-1">Critère ${esc(a.critere_num)}</p>` : ''}
+    ${a.responsable ? `<p class="text-xs text-gray-500">👤 ${esc(a.responsable)}</p>` : ''}
+    ${a.echeance    ? `<p class="text-xs text-gray-500">📅 ${a.echeance}</p>` : ''}
+    <div class="flex gap-3 mt-2">
+      <button onclick='editAction(${a.id})' class="text-xs text-blue-600 hover:underline">Modifier</button>
+      <button onclick="deleteAction(${a.id})" class="text-xs text-red-500 hover:underline">Suppr.</button>
+    </div>
+  </div>`;
+}
+
+async function editAction(id) {
+  const a = allActions.find(x => x.id === id);
+  if (a) openActionModal(a, null);
+  else {
+    // fetch from eval actions
+    const acts = await api('GET', `/api/actions?evaluation_id=${currentEvalId}`);
+    const found = acts.find(x => x.id === id);
+    if (found) openActionModal(found, null);
+  }
+}
+
+async function loadEvalActions(evalId) {
+  const acts = await api('GET', `/api/actions?evaluation_id=${evalId}`);
+  const el   = document.getElementById('eval-actions-list');
+  if (!el) return;
+  // Make sure allActions is populated for editAction
+  allActions = [...allActions.filter(a => a.evaluation_id !== evalId), ...acts];
+  if (acts.length === 0) {
+    el.innerHTML = '<p class="text-sm text-gray-400">Aucune action pour cette évaluation.</p>';
+    return;
+  }
+  el.innerHTML = acts.map(actionCard).join('');
+}
+
+function openActionModal(action, evalId) {
+  document.getElementById('action-id-hidden').value   = action ? action.id : '';
+  document.getElementById('action-eval-hidden').value = action ? (action.evaluation_id||'') : (evalId||'');
+  document.getElementById('action-titre').value       = action ? action.titre : '';
+  document.getElementById('action-critere').value     = action ? (action.critere_num||'') : '';
+  document.getElementById('action-resp').value        = action ? (action.responsable||'') : '';
+  document.getElementById('action-echeance').value    = action ? (action.echeance||'') : '';
+  document.getElementById('action-priorite').value    = action ? action.priorite : 'medium';
+  document.getElementById('action-statut').value      = action ? action.statut : 'todo';
+  document.getElementById('action-desc').value        = action ? (action.description||'') : '';
+  document.getElementById('modal-action-title').textContent = action ? "Modifier l'action" : 'Nouvelle action';
+  document.getElementById('modal-action').classList.remove('hidden');
+  document.getElementById('modal-action').style.display = 'flex';
+}
+
+async function saveAction() {
+  const id     = document.getElementById('action-id-hidden').value;
+  const evalId = document.getElementById('action-eval-hidden').value;
+  const payload = {
+    titre:        document.getElementById('action-titre').value.trim(),
+    critere_num:  document.getElementById('action-critere').value.trim(),
+    responsable:  document.getElementById('action-resp').value.trim(),
+    echeance:     document.getElementById('action-echeance').value,
+    priorite:     document.getElementById('action-priorite').value,
+    statut:       document.getElementById('action-statut').value,
+    description:  document.getElementById('action-desc').value.trim(),
+    evaluation_id: evalId || null
+  };
+  if (!payload.titre) { showToast('Le titre est requis', true); return; }
+  if (id) await api('PUT',  `/api/actions/${id}`, payload);
+  else    await api('POST', '/api/actions', payload);
+  closeModal('modal-action');
+  showToast(id ? 'Action mise à jour' : 'Action créée');
+  if (document.getElementById('view-actions')?.style.display !== 'none') loadActions();
+  if (document.getElementById('tab-actions-eval')?.style.display !== 'none') loadEvalActions(currentEvalId);
+}
+
+async function deleteAction(id) {
+  if (!confirm('Supprimer cette action ?')) return;
+  await api('DELETE', `/api/actions/${id}`);
+  showToast('Action supprimée');
+  loadActions();
+  if (currentEvalId) loadEvalActions(currentEvalId);
+}
+
+// ─── New Eval ─────────────────────────────────────────────────────────────────
+function openNewEvalModal() {
+  document.getElementById('new-eval-nom').value = '';
+  const m = document.getElementById('modal-new-eval');
+  m.classList.remove('hidden');
+  m.style.display = 'flex';
+}
 
 async function createEvaluation() {
-  const nom = $('new-nom').value.trim();
-  if (!nom) { $('new-nom').focus(); return; }
-  const result = await POST('/api/evaluations', {
-    nom, methode: $('new-methode').value,
-    etablissement: $('new-etab').value, service: $('new-service').value,
-    date_audit: $('new-date').value, auditeurs: $('new-auditeurs').value,
-    code_calista: $('new-calista').value,
-  });
-  closeNewEvalModal();
-  toast(`Évaluation "${nom}" créée`);
-  openEvaluation(result.id);
+  const nom     = document.getElementById('new-eval-nom').value.trim() || 'Nouvelle évaluation';
+  const methode = document.getElementById('new-eval-methode').value;
+  const res = await api('POST', '/api/evaluations', { nom, methode });
+  closeModal('modal-new-eval');
+  if (res.id) openEvaluation(res.id);
 }
 
-// ── Delete ────────────────────────────────────────────────────────────────────
-async function deleteEvaluation(id) {
-  if (!confirm('Supprimer cette évaluation et toutes ses réponses ?')) return;
-  await DEL(`/api/evaluations/${id}`);
-  toast('Évaluation supprimée');
-  loadDashboard();
+// ─── Import / Export ──────────────────────────────────────────────────────────
+async function importJSON(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const text = await file.text();
+  let data;
+  try { data = JSON.parse(text); } catch { showToast('Fichier JSON invalide', true); return; }
+  if (data.app !== 'GoCertif Web') { showToast('Format non reconnu', true); return; }
+  const res = await api('POST', '/api/evaluations/import', data);
+  if (res.error) { showToast(res.error, true); return; }
+  showToast(res.message);
+  if (res.id) openEvaluation(res.id);
+  input.value = '';
 }
 
-// ── Export ────────────────────────────────────────────────────────────────────
-function exportExcel() {
-  if (currentEvalId) window.location = `/api/evaluations/${currentEvalId}/export/excel`;
-}
-function exportPDF() {
-  if (currentEvalId) window.location = `/api/evaluations/${currentEvalId}/export/pdf`;
+function exportJSON(id)   { if (id) window.open(`/api/evaluations/${id}/export/json`,  '_blank'); }
+function exportExcel(id)  { if (id) window.open(`/api/evaluations/${id}/export/excel`, '_blank'); }
+function exportPDF(id)    { if (id) window.open(`/api/evaluations/${id}/export/pdf`,   '_blank'); }
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function closeModal(id) {
+  const m = document.getElementById(id);
+  if (m) { m.classList.add('hidden'); m.style.display = 'none'; }
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
-async function init() {
-  const meta = await API('/api/criteria/meta');
-  allCriteria = await API('/api/criteria');
-  $('criteria-count').textContent = `${allCriteria.length} critères`;
-  loadDashboard();
+function esc(s) {
+  if (!s) return '';
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeNewEvalModal();
+function showToast(msg, isErr = false) {
+  const t = document.getElementById('toast');
+  t.textContent  = (isErr ? '✗ ' : '✓ ') + msg;
+  t.style.background = isErr ? '#dc2626' : '#1e293b';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+async function api(method, url, body) {
+  const opts = { method, headers:{ 'Content-Type':'application/json' } };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(url, opts);
+  try { return await res.json(); } catch { return {}; }
+}
+
+// Backdrop close
+['modal-new-eval','modal-action'].forEach(id => {
+  const m = document.getElementById(id);
+  if (m) m.addEventListener('click', e => { if (e.target === m) closeModal(id); });
 });
-
-init();
 </script>
 </body>
 </html>
