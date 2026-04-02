@@ -103,6 +103,27 @@ def init_db():
 
 init_db()
 
+# ─── Seed admin ───────────────────────────────────────────────────────────────
+def seed_admin():
+    """Crée le compte admin au démarrage si ADMIN_EMAIL / ADMIN_PASSWORD sont définis
+    et que l'email n'existe pas encore en base."""
+    email = os.environ.get('ADMIN_EMAIL', '').strip().lower()
+    pwd   = os.environ.get('ADMIN_PASSWORD', '').strip()
+    nom   = os.environ.get('ADMIN_NOM', 'Établissement')
+    if not email or not pwd:
+        return
+    conn = get_db()
+    existing = conn.execute('SELECT id FROM users WHERE email=?', (email,)).fetchone()
+    if not existing:
+        ph = hash_password(pwd)
+        conn.execute(
+            'INSERT INTO users (email, password_hash, nom_etablissement, type_structure) VALUES (?,?,?,?)',
+            (email, ph, nom, 'Administration')
+        )
+        conn.commit()
+        print(f'  ✔  Compte admin créé : {email}')
+    conn.close()
+
 # ─── Auth helpers ──────────────────────────────────────────────────────────────
 def hash_password(password: str) -> str:
     salt = secrets.token_hex(16)
@@ -943,6 +964,7 @@ def make_app():
     xsrf_cookies=False)
 
 if __name__ == '__main__':
+    seed_admin()
     app = make_app()
     app.listen(PORT)
     print('=' * 60)
