@@ -931,6 +931,63 @@ class ExportPDFHandler(BaseHandler):
         self.set_header('Content-Disposition', f'attachment; filename="{filename}"')
         self.write(output.read())
 
+# ─── IA — Suggestions plan d'actions ─────────────────────────────────────────
+class AISuggestHandler(BaseHandler):
+    def post(self):
+        user = self.require_auth()
+        if not user: return
+
+        api_key = os.environ.get('ANTHROPIC_API_KEY', '').strip()
+        if not api_key:
+            return self.json({'error': 'Clé API Anthropic non configurée (ANTHROPIC_API_KEY)'}, 503)
+
+        data        = self.body_json()
+        numero      = data.get('numero', '')
+        critere     = data.get('critere', '')
+        chapitre    = data.get('chapitre', '')
+        objectif    = data.get('objectif', '')
+        niveau      = data.get('niveau', '')
+        champ       = data.get('champ', '')
+
+        prompt = f"""Tu es un expert qualité hospitalière spécialisé dans la certification HAS V2025.
+
+Un établissement de santé a coté "Non conforme" le critère suivant :
+- Numéro : {numero}
+- Chapitre : {chapitre}
+- Objectif : {objectif}
+- Critère : {critere}
+- Niveau : {niveau}
+- Champ : {champ}
+
+Propose exactement 3 actions correctives concrètes, réalistes et directement applicables.
+Chaque action doit être en 1 à 2 phrases maximum, avec un vocabulaire professionnel HAS.
+Réponds uniquement avec une liste numérotée (1. 2. 3.), sans introduction ni conclusion."""
+
+        import urllib.request as urlreq
+        payload = json.dumps({
+            "model": "claude-haiku-4-5-20251001",
+            "max_tokens": 400,
+            "messages": [{"role": "user", "content": prompt}]
+        }).encode('utf-8')
+
+        req = urlreq.Request(
+            'https://api.anthropic.com/v1/messages',
+            data=payload,
+            headers={
+                'x-api-key':           api_key,
+                'anthropic-version':   '2023-06-01',
+                'content-type':        'application/json',
+            },
+            method='POST'
+        )
+        try:
+            with urlreq.urlopen(req, timeout=20) as resp:
+                result = json.loads(resp.read().decode('utf-8'))
+                text   = result['content'][0]['text'].strip()
+                return self.json({'suggestions': text})
+        except Exception as e:
+            return self.json({'error': f'Erreur API : {e}'}, 500)
+
 # ─── Application Tornado ───────────────────────────────────────────────────────
 def make_app():
     return tornado.web.Application([
@@ -958,6 +1015,8 @@ def make_app():
         (r'/api/actions/(\d+)',                          ActionHandler),
         # Score history
         (r'/api/score/history',                          ScoreHistoryHandler),
+        # IA
+        (r'/api/ai/suggest',                             AISuggestHandler),
     ],
     cookie_secret=COOKIE_SECRET,
     static_path=os.path.join(BASE_DIR, 'static'),

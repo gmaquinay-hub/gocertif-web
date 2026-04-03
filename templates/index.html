@@ -832,11 +832,13 @@ function renderCritereRow(c) {
           <button onclick="setReponse('${c.numero}','Non')" class="rep-btn rep-non ${rep==='Non'?'active':''}">Non</button>
           <button onclick="setReponse('${c.numero}','NA')"  class="rep-btn rep-na  ${rep==='NA'?'active':''}">NA</button>
           ${isAnomalie ? '<span class="text-xs text-red-600 font-semibold">⚠ Fiche anomalie</span>' : ''}
+          ${rep==='Non' ? `<button onclick="suggestAI('${c.numero}')" id="btn-ai-${c.numero}" class="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full border border-purple-300 text-purple-700 bg-purple-50 hover:bg-purple-100 transition-colors">💡 Suggestions IA</button>` : ''}
         </div>
         <input type="text" placeholder="Note…" class="w-full text-xs border-b border-dashed border-gray-200 bg-transparent outline-none text-gray-600 pb-0.5 mt-1.5 focus:border-blue-400"
           value="${esc(note)}"
           onchange="setNotes('${c.numero}', this.value)"
           onclick="event.stopPropagation()"/>
+        <div id="ai-box-${c.numero}" class="hidden mt-2 p-2 rounded-lg bg-purple-50 border border-purple-200 text-xs text-gray-700 leading-relaxed"></div>
       </div>
     </div>
   </div>`;
@@ -860,6 +862,52 @@ function setNotes(num, val) {
   dirtyReponses[num].notes = val;
   indicateSaving();
   scheduleSave();
+}
+
+async function suggestAI(num) {
+  const btn = document.getElementById('btn-ai-' + num);
+  const box = document.getElementById('ai-box-' + num);
+  if (!btn || !box) return;
+
+  // Si déjà affiché, toggle
+  if (!box.classList.contains('hidden')) {
+    box.classList.add('hidden');
+    btn.textContent = '💡 Suggestions IA';
+    return;
+  }
+
+  const crit = allCriteria.find(c => c.numero === num);
+  if (!crit) return;
+
+  btn.textContent = '⏳ Génération…';
+  btn.disabled = true;
+  box.classList.remove('hidden');
+  box.innerHTML = '<span class="text-purple-400 italic">Consultation de l\'IA…</span>';
+
+  try {
+    const res = await api('POST', '/api/ai/suggest', {
+      numero:   crit.numero,
+      critere:  crit.titre,
+      chapitre: crit.chapitre,
+      objectif: crit.objectif,
+      niveau:   crit.niveau,
+      champ:    crit.champ || ''
+    });
+    if (res.suggestions) {
+      // Format : remplace "1. " "2. " "3. " par items stylés
+      const lines = res.suggestions.split('\n').filter(l => l.trim());
+      box.innerHTML = '<p class="font-semibold text-purple-700 mb-1">💡 Suggestions IA (Claude) :</p>' +
+        lines.map(l => `<p class="mb-1 pl-2 border-l-2 border-purple-300">${l.trim()}</p>`).join('');
+      btn.textContent = '✕ Fermer';
+    } else {
+      box.innerHTML = `<span class="text-red-500">Erreur : ${res.error || 'Réponse inattendue'}</span>`;
+      btn.textContent = '💡 Suggestions IA';
+    }
+  } catch(e) {
+    box.innerHTML = `<span class="text-red-500">Erreur réseau : ${e.message}</span>`;
+    btn.textContent = '💡 Suggestions IA';
+  }
+  btn.disabled = false;
 }
 
 function indicateSaving() {
