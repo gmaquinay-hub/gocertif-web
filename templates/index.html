@@ -576,11 +576,11 @@ const VIEWS = ['dashboard','evaluations','eval-detail','actions','profile'];
 function showView(v) {
   VIEWS.forEach(id => {
     const el = document.getElementById('view-' + id);
-    if (el) el.style.display = 'none';
+    if (el) { el.classList.add('hidden'); el.style.display = ''; }
   });
   const target = document.getElementById('view-' + v);
   if (target) {
-    target.style.display = '';
+    target.classList.remove('hidden');
     if (v === 'eval-detail') target.style.display = 'flex';
   }
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
