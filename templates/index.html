@@ -481,6 +481,8 @@ let meta           = {};
 let allActions     = [];
 let saveTimer      = null;
 let dirtyReponses  = {};
+let savedEE        = {};   // {critere_numero: {ee_index: reponse}}
+let dirtyEE        = {};   // idem — modifications non encore envoyées
 let donutChart     = null;
 let barChart       = null;
 let evolutionChart = null;
@@ -714,6 +716,8 @@ async function deleteEval(id) {
 async function openEvaluation(evalId) {
   currentEvalId = evalId;
   dirtyReponses = {};
+  dirtyEE = {};
+  savedEE = {};
 
   // Show eval-detail view
   VIEWS.forEach(id => {
@@ -725,8 +729,17 @@ async function openEvaluation(evalId) {
   det.style.display = 'flex';
   det.classList.remove('hidden');
 
-  const data = await api('GET', `/api/evaluations/${evalId}`);
+  const [data, eeRows] = await Promise.all([
+    api('GET', `/api/evaluations/${evalId}`),
+    api('GET', `/api/evaluations/${evalId}/reponses/ee`)
+  ]);
   evalData = data;
+  // Indexe les EE sauvegardées
+  savedEE = {};
+  (eeRows || []).forEach(r => {
+    if (!savedEE[r.critere_numero]) savedEE[r.critere_numero] = {};
+    savedEE[r.critere_numero][r.ee_index] = r.reponse;
+  });
 
   document.getElementById('eval-title').textContent    = data.nom;
   document.getElementById('eval-subtitle').textContent = data.methode + (data.service ? ' · ' + data.service : '');
@@ -838,33 +851,54 @@ function renderCritereRow(c) {
           value="${esc(note)}"
           onchange="setNotes('${c.numero}', this.value)"
           onclick="event.stopPropagation()"/>
-        ${(c.elements_evaluation && c.elements_evaluation.length) ? `
+        ${(c.elements_evaluation && c.elements_evaluation.length) ? (() => {
+          // Calcule le badge agrégé EE
+          const ees = c.elements_evaluation;
+          const oui_n = ees.filter((_,i) => getReponseEE(c.numero, i) === 'Oui').length;
+          const non_n = ees.filter((_,i) => getReponseEE(c.numero, i) === 'Non').length;
+          const evaluated = oui_n + non_n;
+          const badgeText = evaluated > 0 ? `${oui_n}/${evaluated} conforme${oui_n>1?'s':''}` : `${ees.length} EE`;
+          const badgeCls  = evaluated === 0 ? 'text-blue-400' :
+                            non_n === 0 ? 'text-green-600' :
+                            oui_n === 0 ? 'text-red-500' : 'text-orange-500';
+          return `
         <button onclick="toggleEE('${c.numero}', event)" class="mt-2 flex items-center gap-1 text-xs text-blue-500 hover:text-blue-700 transition-colors">
           <span id="ee-arrow-${c.numero}">▶</span>
-          <span>Éléments d'évaluation (${c.elements_evaluation.length})</span>
+          <span>Éléments d'évaluation</span>
+          <span class="font-semibold ${badgeCls}">(${badgeText})</span>
         </button>
         <div id="ee-box-${c.numero}" class="hidden mt-1 rounded-lg border border-blue-100 overflow-hidden">
-          ${c.elements_evaluation.map((ee, i) => {
-            const mBg = ee.methode_code === 'PT' ? 'bg-blue-100 text-blue-700' :
+          ${ees.map((ee, i) => {
+            const repEE = getReponseEE(c.numero, i);
+            const mBg = ee.methode_code === 'PT'  ? 'bg-blue-100 text-blue-700' :
                         ee.methode_code === 'OBS' ? 'bg-green-100 text-green-700' :
-                        ee.methode_code === 'PP' ? 'bg-teal-100 text-teal-700' :
+                        ee.methode_code === 'PP'  ? 'bg-teal-100 text-teal-700' :
                         ee.methode_code.startsWith('TC') ? 'bg-orange-100 text-orange-700' :
                         'bg-gray-100 text-gray-600';
-            const cBg = ee.cible_code === 'PAT' ? 'bg-pink-100 text-pink-700' :
-                        ee.cible_code === 'PRO' ? 'bg-indigo-100 text-indigo-700' :
+            const cBg = ee.cible_code === 'PAT'  ? 'bg-pink-100 text-pink-700' :
+                        ee.cible_code === 'PRO'  ? 'bg-indigo-100 text-indigo-700' :
                         ee.cible_code === 'GOUV' ? 'bg-yellow-100 text-yellow-700' :
-                        ee.cible_code === 'RU' ? 'bg-purple-100 text-purple-700' :
+                        ee.cible_code === 'RU'   ? 'bg-purple-100 text-purple-700' :
                         'bg-gray-100 text-gray-600';
-            return `<div class="flex items-start gap-2 p-2 ${i % 2 === 0 ? 'bg-white' : 'bg-blue-50'} text-xs border-b border-blue-50 last:border-0">
-              <span class="flex-shrink-0 font-bold text-blue-300 mt-0.5">${i+1}.</span>
-              <span class="flex-1 text-gray-700 leading-snug">${esc(ee.texte)}</span>
-              <div class="flex-shrink-0 flex flex-col gap-0.5 items-end">
-                <span class="px-1.5 py-0.5 rounded text-xs font-medium ${mBg} whitespace-nowrap">${esc(ee.methode_code)}</span>
-                <span class="px-1.5 py-0.5 rounded text-xs font-medium ${cBg} whitespace-nowrap">${esc(ee.cible_code)}</span>
+            return `<div class="p-2 ${i % 2 === 0 ? 'bg-white' : 'bg-blue-50'} text-xs border-b border-blue-50 last:border-0">
+              <div class="flex items-start gap-2">
+                <span class="flex-shrink-0 font-bold text-blue-300 mt-0.5">${i+1}.</span>
+                <span class="flex-1 text-gray-700 leading-snug">${esc(ee.texte)}</span>
+                <div class="flex-shrink-0 flex flex-col gap-0.5 items-end">
+                  <span class="px-1.5 py-0.5 rounded text-xs font-medium ${mBg} whitespace-nowrap">${esc(ee.methode_code)}</span>
+                  <span class="px-1.5 py-0.5 rounded text-xs font-medium ${cBg} whitespace-nowrap">${esc(ee.cible_code)}</span>
+                </div>
+              </div>
+              <div class="mt-1.5 flex items-center gap-1.5 pl-4">
+                <button onclick="setReponseEE('${c.numero}',${i},'Oui')" class="rep-btn rep-oui ${repEE==='Oui'?'active':''}" style="font-size:0.65rem;padding:0.1rem 0.45rem">Oui</button>
+                <button onclick="setReponseEE('${c.numero}',${i},'Non')" class="rep-btn rep-non ${repEE==='Non'?'active':''}" style="font-size:0.65rem;padding:0.1rem 0.45rem">Non</button>
+                <button onclick="setReponseEE('${c.numero}',${i},'NA')"  class="rep-btn rep-na  ${repEE==='NA' ?'active':''}" style="font-size:0.65rem;padding:0.1rem 0.45rem">NA</button>
+                ${repEE ? `<span class="ml-1 text-gray-400">${repEE === 'Oui' ? '✓' : repEE === 'Non' ? '✗' : '—'}</span>` : ''}
               </div>
             </div>`;
           }).join('')}
-        </div>` : ''}
+        </div>`;
+        })() : ''}
         <div id="ai-box-${c.numero}" class="hidden mt-2 p-2 rounded-lg bg-purple-50 border border-purple-200 text-xs text-gray-700 leading-relaxed"></div>
       </div>
     </div>
@@ -889,6 +923,54 @@ function setNotes(num, val) {
   dirtyReponses[num].notes = val;
   indicateSaving();
   scheduleSave();
+}
+
+function getReponseEE(num, idx) {
+  if (dirtyEE[num] !== undefined && dirtyEE[num][idx] !== undefined) return dirtyEE[num][idx];
+  return (savedEE[num] && savedEE[num][idx]) ? savedEE[num][idx] : '';
+}
+
+function setReponseEE(num, idx, rep) {
+  if (!dirtyEE[num]) dirtyEE[num] = {};
+  const prev = getReponseEE(num, idx);
+  dirtyEE[num][idx] = (rep === prev) ? '' : rep;
+  // Re-render la ligne du critère pour mettre à jour le badge agrégé
+  const crit = allCriteria.find(c => c.numero === num);
+  if (crit) {
+    const row = document.getElementById('row-' + num);
+    if (row) {
+      const wasOpen = document.getElementById('ee-box-' + num) &&
+                      !document.getElementById('ee-box-' + num).classList.contains('hidden');
+      row.outerHTML = renderCritereRow(crit);
+      if (wasOpen) {
+        const box   = document.getElementById('ee-box-' + num);
+        const arrow = document.getElementById('ee-arrow-' + num);
+        if (box)   box.classList.remove('hidden');
+        if (arrow) arrow.textContent = '▼';
+      }
+    }
+  }
+  indicateSaving();
+  scheduleSave();
+}
+
+async function flushReponsesEE() {
+  if (!currentEvalId || Object.keys(dirtyEE).length === 0) return;
+  const items = [];
+  for (const [num, idxMap] of Object.entries(dirtyEE)) {
+    for (const [idx, rep] of Object.entries(idxMap)) {
+      items.push({ critere_numero: num, ee_index: parseInt(idx), reponse: rep });
+    }
+  }
+  if (!items.length) return;
+  await api('POST', `/api/evaluations/${currentEvalId}/reponses/ee`, items);
+  for (const [num, idxMap] of Object.entries(dirtyEE)) {
+    if (!savedEE[num]) savedEE[num] = {};
+    for (const [idx, rep] of Object.entries(idxMap)) {
+      savedEE[num][idx] = rep;
+    }
+  }
+  dirtyEE = {};
 }
 
 function toggleEE(num, event) {
@@ -965,7 +1047,8 @@ function scheduleSave() {
 }
 
 async function flushReponses() {
-  if (!currentEvalId || Object.keys(dirtyReponses).length === 0) return;
+  await flushReponsesEE();
+  if (!currentEvalId || Object.keys(dirtyReponses).length === 0) { indicateSaved(); return; }
   const reponses = Object.entries(dirtyReponses).map(([num, v]) => ({
     critere_numero: num,
     reponse:    v.reponse    !== undefined ? v.reponse    : getReponse(num),

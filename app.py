@@ -83,6 +83,17 @@ def init_db():
             UNIQUE(evaluation_id, critere_numero)
         );
 
+        CREATE TABLE IF NOT EXISTS reponses_ee (
+            id             INTEGER PRIMARY KEY AUTOINCREMENT,
+            evaluation_id  INTEGER NOT NULL,
+            critere_numero TEXT NOT NULL,
+            ee_index       INTEGER NOT NULL,
+            reponse        TEXT DEFAULT '' CHECK(reponse IN ('Oui','Non','NA','')),
+            updated_at     TEXT DEFAULT (datetime('now')),
+            FOREIGN KEY (evaluation_id) REFERENCES evaluations(id) ON DELETE CASCADE,
+            UNIQUE(evaluation_id, critere_numero, ee_index)
+        );
+
         CREATE TABLE IF NOT EXISTS actions (
             id            INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id       INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -145,14 +156,36 @@ def calculate_score(evaluation_id):
         'SELECT critere_numero, reponse FROM reponses WHERE evaluation_id = ?',
         (evaluation_id,)
     ).fetchall()
+    ee_rows = conn.execute(
+        'SELECT critere_numero, ee_index, reponse FROM reponses_ee WHERE evaluation_id = ?',
+        (evaluation_id,)
+    ).fetchall()
     conn.close()
 
     rep = {r['critere_numero']: r['reponse'] for r in rows}
+
+    # Agrège les réponses EE par critère → déduit la réponse critère
+    ee_by_crit = {}
+    for r in ee_rows:
+        ee_by_crit.setdefault(r['critere_numero'], []).append(r['reponse'])
+
+    def aggregate_ee(ee_list):
+        oui_c = ee_list.count('Oui')
+        non_c = ee_list.count('Non')
+        na_c  = ee_list.count('NA')
+        evaluated = oui_c + non_c
+        if evaluated == 0:
+            return 'NA' if na_c == len(ee_list) else ''
+        return 'Oui' if non_c == 0 else 'Non'
+
     oui = non = na = nr = 0
     fiches_anomalie = []
 
     for c in CRITERIA:
-        r = rep.get(c['numero'], '')
+        if c['numero'] in ee_by_crit:
+            r = aggregate_ee(ee_by_crit[c['numero']])
+        else:
+            r = rep.get(c['numero'], '')
         if r == 'Oui':   oui += 1
         elif r == 'Non':
             non += 1
@@ -931,6 +964,54 @@ class ExportPDFHandler(BaseHandler):
         self.set_header('Content-Disposition', f'attachment; filename="{filename}"')
         self.write(output.read())
 
+# ─── Réponses EE ──────────────────────────────────────────────────────────────
+class ReponsesEEHandler(BaseHandler):
+    def get(self, eval_id):
+        user = self.require_auth()
+        if not user: return
+        conn = get_db()
+        e = conn.execute('SELECT id FROM evaluations WHERE id=? AND user_id=?',
+                         (eval_id, user['id'])).fetchone()
+        if not e:
+            conn.close()
+            return self.json({'error': 'Non trouvé'}, 404)
+        rows = conn.execute(
+            'SELECT critere_numero, ee_index, reponse FROM reponses_ee WHERE evaluation_id=?',
+            (eval_id,)
+        ).fetchall()
+        conn.close()
+        self.json([dict(r) for r in rows])
+
+    def post(self, eval_id):
+        """Bulk upsert : [{critere_numero, ee_index, reponse}, ...]"""
+        user = self.require_auth()
+        if not user: return
+        conn = get_db()
+        e = conn.execute('SELECT id FROM evaluations WHERE id=? AND user_id=?',
+                         (eval_id, user['id'])).fetchone()
+        if not e:
+            conn.close()
+            return self.json({'error': 'Non trouvé'}, 404)
+        items = self.body_json()
+        if not isinstance(items, list):
+            conn.close()
+            return self.json({'error': 'Liste attendue'}, 400)
+        for item in items:
+            num = item.get('critere_numero', '')
+            idx = item.get('ee_index', 0)
+            rep = item.get('reponse', '')
+            if rep not in ('Oui', 'Non', 'NA', ''):
+                continue
+            conn.execute('''
+                INSERT INTO reponses_ee (evaluation_id, critere_numero, ee_index, reponse, updated_at)
+                VALUES (?,?,?,?,datetime('now'))
+                ON CONFLICT(evaluation_id, critere_numero, ee_index)
+                DO UPDATE SET reponse=excluded.reponse, updated_at=excluded.updated_at
+            ''', (eval_id, num, idx, rep))
+        conn.commit()
+        conn.close()
+        self.json({'ok': True})
+
 # ─── IA — Suggestions plan d'actions ─────────────────────────────────────────
 class AISuggestHandler(BaseHandler):
     def post(self):
@@ -1006,6 +1087,7 @@ def make_app():
         (r'/api/evaluations/(\d+)',                      EvaluationHandler),
         (r'/api/evaluations/(\d+)/reponses',             ReponsesHandler),
         (r'/api/evaluations/(\d+)/reponses/bulk',        BulkReponsesHandler),
+        (r'/api/evaluations/(\d+)/reponses/ee',          ReponsesEEHandler),
         (r'/api/evaluations/(\d+)/score',                ScoreHandler),
         (r'/api/evaluations/(\d+)/export/excel',         ExportExcelHandler),
         (r'/api/evaluations/(\d+)/export/pdf',           ExportPDFHandler),
